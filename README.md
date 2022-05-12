@@ -24,10 +24,7 @@ Find more details in the [docs folder](_docs).
 - [FontAwesome 5](https://fontawesome.com/) icons used in the admin 
 - [Metronic](https://keenthemes.com/metronic/) Theme home et back.
 - [htmx](https://htmx.org/) provides AJAX form handling, and more.
-- [Tatter/Handlers](https://github.com/tattersoftware/handlers) CodeIgniter library for simple handler. 
-- [Tatter/relations](https://github.com/tattersoftware/relations) CodeIgniter library for simple relation (orm). 
-- [Tatter/Schemas](https://github.com/tattersoftware/schemas) CodeIgniter library for simple schemas (orm). 
-- [Myth/Auth](https://github.com/lonnieezell/myth-auth/tree/develop/docs) CodeIgniter library for simple schemas (orm). 
+- [Codeigniter4/shield](https://github.com/codeigniter4/shield) CodeIgniter library for simple Acces (orm). 
 
 
 ## Install
