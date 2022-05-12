@@ -1,8 +1,8 @@
 {
-    "name": "codeigniter4/appstarter",
+    "name": "adnduweb/amauchar",
     "type": "project",
-    "description": "CodeIgniter4 starter app",
-    "homepage": "https://codeigniter.com",
+    "description": "A project adnduweb/amauchar area for CodeIgniter 4 projects",
+    "homepage": "https://github.com/adnduweb/amauchar",
     "license": "MIT",
     "require": {
         "php": "^7.3 || ^8.0",
