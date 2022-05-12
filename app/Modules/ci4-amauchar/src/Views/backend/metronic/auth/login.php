@@ -22,12 +22,12 @@
 				<!--begin::Heading-->
 				<div class="text-center mb-10">
 					<!--begin::Title-->
-					<h1 class="text-dark mb-3"><?= lang("Core.signIn"); ?></h1>
+					<h1 class="text-dark mb-3"><?= ucfirst(lang("Core.signIn")); ?></h1>
 					<!--end::Title-->
 					<?php if (setting('Auth.allowRegistration')) : ?>
 					<!--begin::Link-->
-					<div class="text-gray-400 fw-bold fs-4"><?= lang('Auth.New Here?') ?>
-					<a href="<?= route_to('action.register'); ?>" class="link-primary fw-bolder"><?= lang('Auth.createAnAccount') ?></a></div>
+					<div class="text-gray-400 fw-bold fs-4"><?= ucfirst(lang('Auth.newHere')) ?>
+					<a href="<?= route_to('action.register'); ?>" class="link-primary fw-bolder"><?= ucfirst(lang('Auth.createAnAccount')) ?></a></div>
 					<!--end::Link-->
 					<?php endif; ?>
 				</div>
@@ -36,10 +36,10 @@
 				<!--begin::Input group-->
 				<div class="fv-row mb-10">
 					<!--begin::Label-->
-					<label class="form-label fs-6 fw-bolder text-dark"><?= lang("Core.yourEmail"); ?></label>
+					<label class="form-label fs-6 fw-bolder text-dark"><?= ucfirst(lang("Core.yourEmail")); ?></label>
 					<!--end::Label-->
 					<!--begin::Input-->
-					<input class="form-control form-control-lg form-control-solid" required type="text"  placeholder="<?= lang('Auth.emailOrUsername') ?>" name="email" inputmode="email" autocomplete="email" autocomplete="off" value="" />
+					<input class="form-control form-control-lg form-control-solid" required type="text"  placeholder="<?= ucfirst(lang('Auth.emailOrUsername')) ?>" name="email" inputmode="email" autocomplete="email" autocomplete="off" value="" />
 					<!--end::Input-->
 				</div>
 				<!--end::Input group-->
@@ -48,7 +48,7 @@
 					<!--begin::Wrapper-->
 					<div class="d-flex flex-stack mb-2">
 						<!--begin::Label-->
-						<label class="form-label fw-bolder text-dark fs-6 mb-0"><?= lang("Core.yourPassword"); ?></label>
+						<label class="form-label fw-bolder text-dark fs-6 mb-0"><?= ucfirst(lang("Core.yourPassword")); ?></label>
 						<!--end::Label-->
                         <?php if (setting('Auth.allowMagicLinkLogin')) : ?>
 						<!--begin::Link-->

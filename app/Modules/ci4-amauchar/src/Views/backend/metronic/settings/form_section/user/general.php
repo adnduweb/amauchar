@@ -38,7 +38,7 @@
             <div  x-show="show" style="display:none" class="row mb-6">
                 <label for="nameApp" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.adresseIp')); ?>* : </label>
                 <div class="col-lg-8">
-                <?= $adresseIpUnlock = (service('settings')->get('App.adresseIpUnlock', 'user:' . Auth()->user()->id)) ?   implode(';', service('settings')->get('App.adresseIpUnlock', 'user:' . Auth()->user()->id)) : ''; ?>
+                     <?= $adresseIpUnlock = (service('settings')->get('App.adresseIpUnlock', 'user:' . Auth()->user()->id)) ?   implode(';', service('settings')->get('App.adresseIpUnlock', 'user:' . Auth()->user()->id)) : ''; ?>
                     <input class="form-control form-control-solid" required type="text" value="<?= old('adresseIpUnlock') ? old('adresseIpUnlock') : $adresseIpUnlock ?>" name="adresseIpUnlock" id="adresseIpUnlock">
                     <div class="invalid-feedback"><?= lang('Core.this_field_is_requis'); ?> </div>
                     <p class="text-muted"> vous devez les </p>

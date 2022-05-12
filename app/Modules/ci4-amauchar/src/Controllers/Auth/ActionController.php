@@ -18,7 +18,7 @@ class ActionController extends BaseController
      */
     protected $action;
 
-    protected $helpers = ['auth', 'setting', 'assets', 'form', 'alerts'];
+    protected $helpers = ['auth', 'setting', 'assets', 'form', 'alerts',  'themes'];
 
     /**
      * Perform an initial check if we have a valid action or not.

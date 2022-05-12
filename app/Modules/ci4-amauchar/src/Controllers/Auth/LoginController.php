@@ -11,7 +11,7 @@ class LoginController extends ShieldLogin
 {
     use ResponseTrait;
 
-    protected $helpers = ['auth', 'setting', 'assets', 'form'];
+    protected $helpers = ['auth', 'setting', 'assets', 'form',  'themes'];
 
     protected $theme = 'Auth';
 

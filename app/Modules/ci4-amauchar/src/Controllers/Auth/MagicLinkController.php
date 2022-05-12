@@ -11,7 +11,7 @@ class MagicLinkController extends ShieldMagicLinkController
 {
     use ResponseTrait;
 
-    protected $helpers = ['auth', 'setting', 'assets', 'form', 'alerts'];
+    protected $helpers = ['auth', 'setting', 'assets', 'form', 'alerts',  'themes'];
 
     protected $theme = 'Auth';
 

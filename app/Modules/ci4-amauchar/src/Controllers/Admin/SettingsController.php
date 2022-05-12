@@ -64,7 +64,7 @@ class SettingsController extends AdminController
 
         $this->viewData['getThemesAdmin']  = $this->getThemesAdmin();
         $this->viewData['getThemesFront']  = $this->getThemesFront();
-        $this->viewData['languages']       = Config('language')->supportedLocales;
+        $this->viewData['languages']       = Config('Language')->supportedLocales;
         $this->viewData['timezones']       = $timezoneAreas;
         $this->viewData['currentTZArea']   = $currentTZArea;
         $this->viewData['timezoneOptions'] = $this->getTimezones($currentTZArea);

@@ -2,7 +2,7 @@
 
 namespace Amauchar\Core\Controllers\Admin;
 
-use Amauchar\Core\Libraries\language;
+use Amauchar\Core\Libraries\Language;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;

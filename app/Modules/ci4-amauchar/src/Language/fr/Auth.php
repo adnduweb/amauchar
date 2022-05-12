@@ -25,6 +25,8 @@ return [
     'forgotYourPassword' => 'mot de passe oublié ?',
     'enterYourPassword' => 'entrer votre mot de passe',
     'createAnAccount' => 'créer un compte',
+    'emailOrUsername' => 'email ou identifiant',
+    'newHere' => 'nouveau ?',
 
     // Enregistrement
     'register' => "Register",
