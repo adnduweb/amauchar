@@ -127,6 +127,5 @@ app/Modules/ci4-vassorts/*
 /phpunit*.xml
 /.phpunit.*.cache
 tests/
-admin/
 resources/frontend/*
 resources/backend/*

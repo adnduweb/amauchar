@@ -46,16 +46,24 @@ class Amauchar
      */
     public function boot()
     {
+        if (! file_exists(ROOTPATH . '.env')) {
+            return false;
+        }
+
+        // echo 'dfgsdgdf'; exit;
+        
         helper('filesystem', 'themes');
        
         $this->saveInAdmin();
 
         if ($this->inAdmin) {
+
+            BootstrapDemo1::run();
             $this->setupMenus();
         }
         $this->discoverCoreModules();
         $this->initModules();
-        BootstrapDemo1::run();
+       
     }
 
     /**

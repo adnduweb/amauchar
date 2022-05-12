@@ -24,6 +24,7 @@ return [
     'confirm' => "Confirm",
     'forgotYourPassword' => 'mot de passe oublié ?',
     'enterYourPassword' => 'entrer votre mot de passe',
+    'createAnAccount' => 'créer un compte',
 
     // Enregistrement
     'register' => "Register",
