@@ -171,6 +171,9 @@ class AdminController extends BaseController
 
         $this->display = service('router')->methodName();
         switch ($this->display) {
+            case'indexView':
+                $this->pageTitleDefault = lang('Core.List: %s', [$this->name]);
+            break;
             case 'index':   
                     $this->pageTitleDefault = lang('Core.List: %s', [$this->name]);
                     $this->pageHeaderToolbarBtn['create'] = [

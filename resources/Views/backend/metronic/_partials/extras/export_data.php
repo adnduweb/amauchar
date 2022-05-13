@@ -14,7 +14,7 @@
             <!--begin::Modal header-->
             <div class="modal-header">
                 <!--begin::Modal title-->
-                <h2 class="fw-bolder text-gray-800 mb-1"><?= lang('Core.Exporter: %s', [singular($name)]); ?></h2>
+                <h2 class="fw-bolder text-gray-800 mb-1"><?= lang('Core.Exporter: %s', [ucfirst(singular($name))]); ?></h2> 
                 <!--end::Modal title-->
                 <!--begin::Close-->
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -30,10 +30,10 @@
                     <!--begin::Input group-->
                     <div class="fv-row mb-10">
                         <!--begin::Label-->
-                        <label class="required fs-6 fw-bold form-label mb-2"><?= lang('Core.Select Export Format:'); ?> </label>
+                        <label class="required fs-6 fw-bold form-label mb-2"><?= ucfirst(lang('Core.selectExportFormat')); ?> : </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <select name="format"required data-control="select2" data-placeholder="Select a format" data-hide-search="true" class="form-select form-select-solid fw-bolder">
+                        <select name="format"required data-control="select2" data-placeholder="<?= ucfirst(lang('Core.chooseOneOfTheFollowing')); ?>" data-hide-search="true" class="form-select form-select-solid fw-bolder">
                             <option></option>
                             <?php foreach($type_export as $export){ ?>
                                 <option value="<?= $export; ?>"><?= ucfirst($export); ?></option>
@@ -46,7 +46,7 @@
                     <div class="text-center">
                         <button type="reset" id="kt_modal_export_datatable_cancel" class="btn btn-light me-3" data-bs-dismiss="modal"><?= ucfirst(lang('Core.discard')); ?></button>
                         <button type="submit" id="kt_modal_export_datatable_submit" class="btn btn-primary">
-                        <span class="indicator-label"> <?= ucfirst(lang('Core.save_form')); ?></span>
+                        <span class="indicator-label"> <?= ucfirst(lang('Core.saveForm')); ?></span>
                         <span class="indicator-progress"><?= ucfirst(lang('Core.please_wait...')); ?> 
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>
