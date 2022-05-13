@@ -666,27 +666,27 @@ class UsersController extends AdminController
         return new User();
     }
 
-     /**
-     * Set breadcrumbs array for the controller page.
-     *
-     * @param int|null $tab_id
-     * @param array|null $tabs
-     */
-    public function initBreadcrumbs(){
+    //  /**
+    //  * Set breadcrumbs array for the controller page.
+    //  *
+    //  * @param int|null $tab_id
+    //  * @param array|null $tabs
+    //  */
+    // public function initBreadcrumbs(){
 
-        parent::initBreadcrumbs();
+    //     parent::initBreadcrumbs();
         
-        if(service('router')->methodName() == 'edit'){
-            $this->getUserCurrentProvider();
-            $addBreadcrumb[] = array(
-                'title' => ($this->object) ? $this->object->getFullName() : null,
-                'path' => null,
-                'active' => false
-            );
+    //     if(service('router')->methodName() == 'edit'){
+    //         $this->getUserCurrentProvider();
+    //         $addBreadcrumb[] = array(
+    //             'title' => ($this->object) ? $this->object->getFullName() : null,
+    //             'path' => null,
+    //             'active' => false
+    //         );
             
-            $this->breadcrumbs = array_merge($this->breadcrumbs, $addBreadcrumb);
-        }
-    }
+    //         $this->breadcrumbs = array_merge($this->breadcrumbs, $addBreadcrumb);
+    //     }
+    // }
 
     /**
      * Displays the form the settings user to the site.

@@ -50,6 +50,7 @@ class LoginController extends ShieldLogin
             return redirect()->route('dashboard.index');
         }
 
+        $this->viewData['boutGoogleClient'] = '#';
         if ( (setting('App.activeGoogle') == true)) {
             $this->viewData['boutGoogleClient'] = $this->googleClient->createAuthUrl();
         }

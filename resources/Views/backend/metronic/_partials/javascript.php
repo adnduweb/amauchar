@@ -38,7 +38,7 @@
 <!--end::Page Scripts -->
 <?= asset_link('backend/themes/metronic/assets/js/app.js', 'js'); ?>
 
-<?= asset_link('backend/themes/metronic/assets/js/Imagemanger.js', 'js'); ?>
+<?= '' //asset_link('backend/themes/metronic/assets/js/Imagemanger.js', 'js'); ?>
 <?php if(file_exists(env('DOCUMENT_ROOT') . '/backend/themes/' . service('settings')->get('App.themebo') . '/assets/js/custom.js')){ ?>
     <?= asset_link('backend/themes/metronic/assets/js/custom.js', 'js'); ?>
 <?php } ?>
