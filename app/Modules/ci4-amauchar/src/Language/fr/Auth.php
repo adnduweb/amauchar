@@ -83,4 +83,8 @@ return [
 
     // Too many requests
     'tooManyRequests'           => 'Trop de requêtes. Veuillez attendre {0, number} secondes.',
+
+    'continueWithGoogle' => 'se connecter avec Google',
+    'continueWithFacebook' => 'se connecter avec Facebook',
+    'continueWithApple' => 'se connecter avec Apple',
 ];

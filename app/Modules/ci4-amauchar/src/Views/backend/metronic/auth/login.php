@@ -87,18 +87,24 @@
 						<!--begin::Separator-->
 						<div class="text-center text-muted text-uppercase fw-bolder mb-5"><?= lang('Core.or') ?></div>
 						<!--end::Separator-->
+						<?php if (setting('App.activeGoogle') == true){ ?>
 						<!--begin::Google link-->
-						<a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
-						<img src="<?= theme()->getMediaUrl('svg/brand-logos/google-icon.svg'); ?>" class="h-20px me-3" /><?=lang('Auth.Continue with Google')?></a>
+						<a href="<?= $boutGoogleClient; ?>" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
+						<img src="<?= theme()->getMediaUrl('svg/brand-logos/google-icon.svg'); ?>" class="h-20px me-3" /><?=lang('Auth.continueWithGoogle')?></a>
 						<!--end::Google link-->
+						<?php } ?>
+						<?php if (setting('App.activeFacebook') == true){ ?>
 						<!--begin::Google link-->
 						<a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
 						<img src="<?= theme()->getMediaUrl('svg/brand-logos/facebook-4.svg'); ?>" class="h-20px me-3" /><?=lang('Auth.Continue with Facebook')?></a>
 						<!--end::Google link-->
+						<?php } ?>
+						<?php if (setting('App.activeApple') == true){ ?>
 						<!--begin::Google link-->
 						<a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100">
 						<img src="<?= theme()->getMediaUrl('svg/brand-logos/apple-black.svg'); ?>" class="h-20px me-3" /><?=lang('Auth.Continue with Apple')?></a>
 						<!--end::Google link-->
+						<?php } ?>
                     <?php endif ?>
 				</div>
 				<!--end::Actions-->

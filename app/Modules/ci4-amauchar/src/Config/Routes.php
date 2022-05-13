@@ -176,6 +176,7 @@ $routes->group(ADMIN_AREA, $options, static function ($routes) {
 
 $routes->get('login', '\Amauchar\Core\Controllers\Auth\LoginController::loginViewOverride', ['as' => 'action.login']);
 $routes->post('login', '\Amauchar\Core\Controllers\Auth\LoginController::loginActionAjax');
+$routes->get('login/gauth', '\Amauchar\Core\Controllers\Auth\LoginController::gauth', ['as' => 'action.login.gauth']);
 $routes->get('sign-up', '\Amauchar\Core\Controllers\Auth\RegisterController::registerView', ['as' => 'action.register']);
 $routes->post('sign-up', '\Amauchar\Core\Controllers\Auth\RegisterController::registerActionAjax');
 $routes->get('login/magic-link', '\Amauchar\Core\Controllers\Auth\MagicLinkController::loginView', ['as' => 'magic-link']);

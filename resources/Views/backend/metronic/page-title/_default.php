@@ -36,46 +36,91 @@
 
 
 
-<?php  if (theme()->getOption('layout', 'page-title/breadcrumb') === true  & isset($breadcrumbs)) { ?>
+<?php  if (theme()->getOption('layout', 'page-title/breadcrumb') === true ) { ?>
     <?php  if (theme()->getOption('layout', 'page-title/direction') === 'row') { ?>
         <!--begin::Separator-->
             <span class="h-20px border-gray-200 border-start mx-4"></span>
             <!--end::Separator-->
     <?php } ?>
 
-    <!--begin::Breadcrumb-->
+    <!--begin::Breadcrumb--> 
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
              <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
-           <?php foreach($breadcrumbs as $item ){ ?>
-                <!--begin::Item-->
-                    <?php if ( $item['active'] === true ){ ?>
-                        <li class="breadcrumb-item text-dark">
-                            <a href="<?= $item['path']; ?>" class="text-muted text-hover-primary">
-                                <?= ucfirst($item['title']); ?>
-                            </a>
-                        </li>
-                   <?php }else{ ?>
-                        <li class="breadcrumb-item text-muted">
-                            <?php if ( ! empty($item['path']) ){ ?>
-                                <a href="<?= $item['path']; ?>" class="text-muted text-hover-primary">
-                                    <?= ucfirst($item['title']); ?>
-                                </a>
-                           <?php }else{ ?>
-                            <?= ucfirst($item['title']); ?>
-                            <?php } ?>
-                        </li>
-                    <?php } ?>
-                <!--end::Item-->
-                    <?php if (@next($breadcrumbs)){ ?>
-                    <!--begin::Item-->
+            <li class="breadcrumb-item text-muted">
+                <a href="<?= route_to('dashboard.index'); ?>">
+                    <?= ucfirst(lang('Core.home')); ?>     
+                </a>     
+            </li>
+           
+        <?php $menu2 = service('menus')->menu('sidebar'); $uri = service('uri')->getSegments(); ?>
+            <?php foreach ($menu2->collections() as $collection) : ?>
+            
+                <?php if ($collection->isCollapsible()) : ?>
+                    <?php if(in_array($collection->title, $uri)): ?>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-200 w-5px h-2px"></span>
                         </li>
-                        <!--end::Item-->
-                    <?php } ?>
-                <?php } ?>
-            </ul>
+                        <li class="breadcrumb-item text-muted">
+                            <?= ucfirst($collection->title); ?>          
+                        </li>
+                    <?php endif ?>
+                <?php endif ?>
+                
+
+                <?php foreach ($collection->items() as $item) : ?>
+                    <?php if ($item->userCanSee()):  ?>
+
+                        <?php if ($item->group()):  ?>
+                     
+                            <?php if(in_array(lang($item->title), $uri)): ?>
+                                <li class="breadcrumb-item">
+                                    <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                                </li>
+                                <li class="breadcrumb-item text-muted">
+                                    <?= ucfirst(lang($item->title)); ?>          
+                                </li>
+                               
+                            <?php endif ?>
+
+                            <?php if ($item->children()):  ?>
+                                <?php foreach ($item->children() as $children) : ?>
+                                    <?php if(in_array(lang($children->title), $uri)): ?>
+                                        <li class="breadcrumb-item">
+                                            <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                                        </li>
+                                        <li class="breadcrumb-item text-muted">
+                                            <?= ucfirst(lang($children->title)); ?>          
+                                        </li>
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                            <?php endif ?>
+                        <?php else: ?>
+                            <?php if(in_array(lang($item->title), $uri)): ?>
+                                <li class="breadcrumb-item">
+                                    <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                                </li>
+                                <li class="breadcrumb-item text-muted">
+                                    <?= ucfirst(lang($item->title)); ?>          
+                                </li>
+                            <?php endif ?>
+                        <?php endif ?>
+
+                    <?php endif ?>
+                <?php endforeach ?>
+
+
+            <?php endforeach ?>
+
+            <?php if(isset($formItem)){  ?>
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                </li>
+                <li class="breadcrumb-item text-muted">
+                    <?= ucfirst(lang($formItem->getName())); ?>          
+                </li>
+            <?php } ?>
+        
         </ul>
         <!--end::Breadcrumb-->
     <?php } ?>

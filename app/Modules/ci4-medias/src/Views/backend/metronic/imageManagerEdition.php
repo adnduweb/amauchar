@@ -41,15 +41,15 @@
                            
                             <div class="kt-portlet__body">
                                 <div class="form-group">
-                                    <label><?= lang('Core.titre'); ?></label>
+                                    <label><?= ucfirst(lang('Core.titre')); ?></label>
                                     <input type="text" class="form-control form-control-solid" placeholder="" value="<?= old('titre') ? old('titre') : $mediaLang->titre; ?>" name="lang[<?= service('request')->getLocale(); ?>][titre]" kl_vkbd_parsed="true">
                                 </div>
                                 <div class="form-group">
-                                    <label><?= lang('Core.legende'); ?></label>
+                                    <label><?= ucfirst(lang('Core.legende')); ?></label>
                                     <input type="text" class="form-control form-control-solid" placeholder="" value="<?= old('legende') ? old('legende') : $mediaLang->legende; ?>" name="lang[<?= service('request')->getLocale(); ?>][legende]" kl_vkbd_parsed="true">
                                 </div>
                                 <div class="form-group">
-                                    <label><?= lang('Core.description'); ?> (Alt) </label>
+                                    <label><?= ucfirst(lang('Core.descriptionAlt')); ?> </label>
                                     <input type="text" class="form-control form-control-solid" placeholder="" value="<?= old('description') ? old('description') : $mediaLang->description; ?>" name="lang[<?= service('request')->getLocale(); ?>][description]" kl_vkbd_parsed="true">
                                 </div>
                                 <?= form_input(['type'  => 'hidden', 'name'  => 'uuid_media', 'id'    => 'uuid_media', 'value' => $media->getUuid(), 'class' => 'id_media']); ?>
@@ -57,8 +57,8 @@
                             </div>
                             <div class="kt-portlet__foot">
                                 <div class="kt-form__actions mt-5">
-                                    <button type="submit" class="btn btn-sm btn-light font-weight-bolder kt_apps_edition_manager_media_submit"><?= lang('Core.save'); ?></button>
-                                    <button data-imagemanager="reload" data-uuid="<?= $media->getUuid(); ?>" type="button" class="btn btn-sm btn-light btn-danger deleteFileMedia"><?= lang('Medias.supprimer file'); ?></button>
+                                    <button type="submit" class="btn btn-sm btn-light font-weight-bolder kt_apps_edition_manager_media_submit"><?= ucfirst(lang('Core.save')); ?></button>
+                                    <button data-imagemanager="reload" data-uuid="<?= $media->getUuid(); ?>" type="button" class="btn btn-sm btn-light btn-danger deleteFileMedia"><?= ucfirst(lang('Core.deleteFile')); ?></button>
                                     <?php if (preg_match('/^image/',  $media->getType()) && $media->extension  != 'svg') { ?>
                                         <button data-crop="true" data-uuid="<?= $media->getUuid(); ?>" type="button" class="btn btn-sm btn-light btn-dark croppedFile"><?= lang('Medias.cropped file'); ?></button>
                                     <?php } ?>

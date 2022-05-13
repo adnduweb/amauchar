@@ -4,6 +4,9 @@ namespace Amauchar\Core\Controllers\Auth;
 
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Events\Events;
+use Amauchar\Core\Entities\User;
+use Amauchar\Core\Models\UserModel;
+use Amauchar\Core\Models\UserIdentityModel;
 use CodeIgniter\Shield\Controllers\LoginController as ShieldLogin;
 use CodeIgniter\HTTP\RedirectResponse;
 
@@ -11,9 +14,26 @@ class LoginController extends ShieldLogin
 {
     use ResponseTrait;
 
-    protected $helpers = ['auth', 'setting', 'assets', 'form',  'themes'];
+    protected $helpers = ['auth', 'setting', 'assets', 'form',  'themes', 'alerts'];
 
     protected $theme = 'Auth';
+
+    public $googleClient=NULL;
+
+    public function __construct(){
+
+        // echo 'faba';
+        // var_dump(service('settings')->get('App.activeGoogle')); exit;
+        if ( (service('settings')->get('App.activeGoogle') == true)) {
+            $this->googleClient = new \Google_Client();
+            $this->googleClient->setClientId(service('settings')->get('App.gclientID'));
+            $this->googleClient->setClientSecret(service('settings')->get('App.gsecretID'));
+            $this->googleClient->setRedirectUri(site_url(route_to('action.login.gauth')));
+            $this->googleClient->setAccessType('online');
+            $this->googleClient->addScope('email');
+            $this->googleClient->addScope('profile');
+        }
+    }
 
     /**
      * Display the login view
@@ -30,9 +50,14 @@ class LoginController extends ShieldLogin
             return redirect()->route('dashboard.index');
         }
 
+        if ( (setting('App.activeGoogle') == true)) {
+            $this->viewData['boutGoogleClient'] = $this->googleClient->createAuthUrl();
+        }
+
 
         return view(config('Auth')->views['login'], [
             'allowRemember' => setting('Auth.sessionConfig')['allowRemembering'],
+            'boutGoogleClient' => $this->viewData['boutGoogleClient']
         ]);
     }
 
@@ -134,5 +159,70 @@ class LoginController extends ShieldLogin
         auth()->logout();
 
         return redirect()->to(config('Auth')->logoutRedirect());
+    }
+
+    public function gauth()
+    {
+        // $session = session();
+        //var_dump($this->googleClient); exit;
+
+        $token = $this->googleClient->fetchAccessTokenWithAuthCode($this->request->getGet('code'));
+
+        if (!isset($token['error']))
+        {
+            $this->googleClient->setAccessToken($token['access_token']);
+            session()->set("AccessToken", $token['access_token']);
+
+            $googleService = new \Google_Service_Oauth2($this->googleClient);
+            $data = $googleService->userinfo->get();
+            $currentDateTime = date("Y-m-d H:i:s");
+
+            $userdata = array();
+            if ($user = model(UserIdentityModel::class)->where('secret', $data['email'])->first())
+            {
+
+                if($user->active == '0'){
+                    alert('error', lang('Auth.resourceNotFound', ['user']));
+                    return redirect()->to(route_to('action.login'));
+                }
+
+                //User ALready Login and want to Login Again
+                $userdata = ['verification_code' => $data['id'], 'first_name' => $data['given_name'], 'last_name' => $data['family_name'], 'email' => $data['email'], 'profile_pic' => $data['picture'], 'last_modified' => $currentDateTime];
+                //$this->loginModel->updateGoogleUser($userdata, $data['id']);
+                session()->set("idProvider", $userdata['verification_code']);
+                session()->set("provider", 'google');
+                session()->set(setting('Auth.sessionConfig')['field'], $user->id);
+                Events::trigger('connectSucccesGoogle', $userdata);
+
+            }
+            else
+            {
+                // //new User want to Login
+                $userdata = ['social_provider' => 'Google', 'status' => 'active', 'verification_code' => $data['id'], 'first_name' => $data['given_name'], 'last_name' => $data['family_name'], 'email' => $data['email'], 'profile_pic' => $data['picture'], 'created_at' => $currentDateTime];
+                // $this->loginModel->createGoogleUser($userdata);
+                alert('error', lang('Auth.resourceNotFound', ['user']));
+                return redirect()->to(route_to('action.login'));
+            }
+
+            session()->set("logged_user", $userdata['verification_code']);
+        }
+        else
+        {
+            alert('error', lang('Auth.resourceNotFound', ['user']));
+            return redirect()->to(route_to('action.login'));
+        }
+
+        $redirect = '';
+
+        if(session()->get('redirect_url')){
+            $redirect = session()->get('redirect_url');
+        }
+        else{
+            $redirect = config('Auth')->loginRedirect();
+        }
+
+        //Successfull Login
+        alert('success', lang('Auth.loginSuccess'));
+        return redirect() ->to($redirect);
     }
 }

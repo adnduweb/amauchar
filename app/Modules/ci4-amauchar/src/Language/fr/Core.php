@@ -1,6 +1,7 @@
 <?php
 
  return [
+	 'home' => 'accueil',
 	'dashboard' => 'Tableau de bord',
 	'account' => 'compte',
 	'settings' => 'réglages',
@@ -20,6 +21,7 @@
 	'noHandlers' => '{0} doit fournir au moins un Handler.',
 	'resourcesSaved' => 'Vos modifications ont été prises en compte',
 	'resourcesSavedFailed' => 'Une erreur est survenue, vos informations n\'ont pas pu être mises à jour',
+	'Edit' => 'Modification',
 	'Edit: %s' => 'Modification : {0}.',
 	'List: %s' => 'Liste des {0}.',
 	'search' => 'rechercher',
@@ -27,6 +29,7 @@
 	'actions' => 'actions',
 	'import' => 'importer',
 	'export' => 'exporter',
+	'action' => 'action',
 	'addItem' => 'Ajouter un élément',
 	'choisirLangue' => 'choisir une langue',
 	'searchInDirLang' => 'rechercher le fichier',
@@ -132,8 +135,11 @@
 	'type' => 'type',
 	'blocnoteType' => 'Type de bloc note', 
 	'company' => 'entreprises',
-	'pageCompany' => 'gestion entrepise'
-	
+	'pageCompany' => 'gestion entreprise',
+	'save' => 'enregistrer',
+	'legende' => 'legende',
+	'descriptionAlt' => 'description (Alt)',
+	'deleteFile' => 'supprimer le fichier'
 
 ];
 

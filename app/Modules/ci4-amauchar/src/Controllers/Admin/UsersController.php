@@ -758,6 +758,17 @@ class UsersController extends AdminController
         setting('Users.gravatarDefault', $this->request->getPost('gravatarDefault'));
         setting('Users.avatarNameBasis', $this->request->getPost('avatarNameBasis'));
 
+         // Connexion GAFAM
+         setting('App.activeGoogle', $this->request->getPost('activeGoogle') ?? false);
+         setting('App.gclientID', $this->request->getPost('gclientID'));
+         setting('App.gsecretID', $this->request->getPost('gsecretID'));
+         setting('App.activeFacebook', $this->request->getPost('activeFacebook') ?? false);
+         setting('App.fclientID', $this->request->getPost('fclientID'));
+         setting('App.fsecretID', $this->request->getPost('fsecretID'));
+         setting('App.activeApple', $this->request->getPost('activeApple') ?? false);
+         setting('App.aclientID', $this->request->getPost('aclientID'));
+         setting('App.asecretID', $this->request->getPost('asecretID'));
+
         $response = [
             'error'    => null,
             'messages' => [

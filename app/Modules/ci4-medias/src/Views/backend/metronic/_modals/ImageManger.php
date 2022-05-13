@@ -1,4 +1,4 @@
-<div class="modal fade" id="kt_modal_image_manager" data-kt-filemanager-modal="template" tabindex="-1" role="dialog" aria-labelledby="kt_modal_image_managerLabel" aria-hidden="true">
+<div class="modal fade" id="kt_modal_image_manager" data-kt-filemanager-modal="template" tabindex="-1" role="dialog"  data-bs-backdrop="static" data-bs-keyboard="false"  aria-labelledby="kt_modal_image_managerLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -40,9 +40,9 @@
                
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal"><?= ucfirst(lang('Core.discard')); ?></button>
                 <button type="button" class="btn btn-sm btn-primary" disabled="disabled" kt-filemanager-modal="inserer">Insérer</button>
             </div>
         </div>
     </div>
-</div>
+</div> 

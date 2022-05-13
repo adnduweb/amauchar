@@ -134,14 +134,14 @@ class BootstrapDemo1 extends BootstrapBase {
     }
 
     private static function initAsideMenu() {
-        self::$asideMenu = new MenuAdmin( Config('AdminMenu')->vertical, Theme::getPagePath() );
+        // self::$asideMenu = new MenuAdmin( Config('AdminMenu')->vertical, Theme::getPagePath() );
        
 
-        if (Theme::getOption('layout', 'aside/menu-icons-display') === false) {
-            self::$asideMenu->displayIcons(false);
-        }
+        // if (Theme::getOption('layout', 'aside/menu-icons-display') === false) {
+        //     self::$asideMenu->displayIcons(false);
+        // }
 
-        self::$asideMenu->setIconType(Theme::getOption('layout', 'aside/menu-icon'));
+        // self::$asideMenu->setIconType(Theme::getOption('layout', 'aside/menu-icon'));
     }
 
     private static function initHorizontalMenu() {
@@ -179,11 +179,12 @@ class BootstrapDemo1 extends BootstrapBase {
     }
 
     public static function getBreadcrumb() {
-        self::initAsideMenu();
-        $options = array(
-            'skip-active' => false
-        );
+        // return service('menus')->menu('sidebar');
+        // self::initAsideMenu();
+        // $options = array(
+        //     'skip-active' => false
+        // );
 
-        return self::$asideMenu->getBreadcrumb($options);
+        // return self::$asideMenu->getBreadcrumb($options);
     }
 }

@@ -380,4 +380,109 @@
     </div>
 
 </div>
+
+
+<div class="card mb-5 mb-xl-10"  x-data="{remember: <?= old('allowRemember', setting('Auth.sessionConfig')['allowRemembering']) ? 1 : 0 ?>}">
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bolder m-0"><?= ucfirst(lang('Core.compteSociaux')); ?></h3>
+        </div>
+        <!--end::Card title-->
+    </div>
+    <div class="card-body border-top p-9">
+
+        <div  x-data="{ show: <?= (service('settings')->get('App.activeGoogle') == true) ? 'true' : 'false'; ?> }" >
+            <div class="form-group form-group-sm row mb-6 ">
+                <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.activeGoogle')); ?></label>
+                <div class="col-lg-8">
+                    <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                        <input @click="show = !show" :aria-expanded="show ? 'true' : 'false'" :class="{ 'active': show }" class="form-check-input" type="checkbox" <?= ( service('settings')->get('App.activeGoogle') == true) ? 'checked="checked"' : ''; ?> name="activeGoogle" value="1"> 
+                        <label class="form-check-label" for="flexCheckDefault"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div  x-show="show" style="display:none" class="row mb-6">
+                <label for="gclientID" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.gclientID')); ?>* : </label>
+                <div class="col-lg-8">
+                    <input class="form-control form-control-solid" required type="text" value="<?= old('gclientID') ? old('gclientID') : service('settings')->get('App.gclientID'); ?>" name="gclientID" id="gclientID">
+                    <div class="invalid-feedback"><?= lang('Core.this_field_is_requis'); ?> </div>
+                </div>
+            </div>
+
+            <div  x-show="show" style="display:none" class="row mb-6">
+                <label for="gclientID" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.gsecretID')); ?>* : </label>
+                <div class="col-lg-8">
+                    <input class="form-control form-control-solid" required type="text" value="<?= old('gsecretID') ? old('gsecretID') : service('settings')->get('App.gsecretID'); ?>" name="gsecretID" id="gsecretID">
+                    <div class="invalid-feedback"><?= lang('Core.this_field_is_requis'); ?> </div>
+                </div>
+            </div>
+        </div>
+
+        <div  x-data="{ show: <?= (service('settings')->get('App.activeFacebook') == true) ? 'true' : 'false'; ?> }" >
+            <div class="form-group form-group-sm row mb-6 ">
+                <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.activeFacebook')); ?></label>
+                <div class="col-lg-8">
+                    <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                        <input @click="show = !show" :aria-expanded="show ? 'true' : 'false'" :class="{ 'active': show }" class="form-check-input" type="checkbox" <?= ( service('settings')->get('App.activeFacebook') == true) ? 'checked="checked"' : ''; ?> name="activeFacebook" value="1"> 
+                        <label class="form-check-label" for="flexCheckDefault"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div  x-show="show" style="display:none" class="row mb-6">
+                <label for="gclientID" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.fclientID')); ?>* : </label>
+                <div class="col-lg-8">
+                    <input class="form-control form-control-solid" required type="text" value="<?= old('fclientID') ? old('fclientID') : service('settings')->get('App.fclientID'); ?>" name="fclientID" id="fclientID">
+                    <div class="invalid-feedback"><?= lang('Core.this_field_is_requis'); ?> </div>
+                </div>
+            </div>
+
+            <div  x-show="show" style="display:none" class="row mb-6">
+                <label for="gclientID" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.fsecretID')); ?>* : </label>
+                <div class="col-lg-8">
+                    <input class="form-control form-control-solid" required type="text" value="<?= old('fsecretID') ? old('fsecretID') : service('settings')->get('App.fsecretID'); ?>" name="fsecretID" id="fsecretID">
+                    <div class="invalid-feedback"><?= lang('Core.this_field_is_requis'); ?> </div>
+                </div>
+            </div>
+        </div>
+
+        <div  x-data="{ show: <?= (service('settings')->get('App.activeApple') == true) ? 'true' : 'false'; ?> }" >
+            <div class="form-group form-group-sm row mb-6 ">
+                <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.activeApple')); ?></label>
+                <div class="col-lg-8">
+                    <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                        <input @click="show = !show" :aria-expanded="show ? 'true' : 'false'" :class="{ 'active': show }" class="form-check-input" type="checkbox" <?= ( service('settings')->get('App.activeApple') == true) ? 'checked="checked"' : ''; ?> name="activeApple" value="1"> 
+                        <label class="form-check-label" for="flexCheckDefault"></label>
+                    </div>
+                </div>
+            </div>
+
+            <div  x-show="show" style="display:none" class="row mb-6">
+                <label for="gclientID" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.aclientID')); ?>* : </label>
+                <div class="col-lg-8">
+                    <input class="form-control form-control-solid" required type="text" value="<?= old('aclientID') ? old('aclientID') : service('settings')->get('App.aclientID'); ?>" name="aclientID" id="aclientID">
+                    <div class="invalid-feedback"><?= lang('Core.this_field_is_requis'); ?> </div>
+                </div>
+            </div>
+
+            <div  x-show="show" style="display:none" class="row mb-6">
+                <label for="gclientID" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.asecretID')); ?>* : </label>
+                <div class="col-lg-8">
+                    <input class="form-control form-control-solid" required type="text" value="<?= old('asecretID') ? old('asecretID') : service('settings')->get('App.asecretID'); ?>" name="asecretID" id="asecretID">
+                    <div class="invalid-feedback"><?= lang('Core.this_field_is_requis'); ?> </div>
+                </div>
+            </div>
+        </div>
+        <?php if (!empty($form->id)) { ?> <?= form_hidden('_id', $form->_id); ?> <?php } ?>
+
+
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+            <x-form-action-footer type="<?= strtolower($name); ?>"></x-form-action-footer>
+        </div>
+    </div>
+
+</div>
+
 <?= form_close(); ?>
