@@ -2,7 +2,7 @@
 <?php $dismiss = $dismiss ?? ''; ?> 
 <?php if($dismiss == false){ ?>
  <!--begin::Button-->
-<button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Discard</button>
+<button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal"> <?= ucfirst(lang('Core.discard')); ?></button>
 <!--end::Button-->
 <?php } ?>
 <!--begin::Button-->

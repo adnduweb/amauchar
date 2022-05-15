@@ -21,6 +21,7 @@
 	'noHandlers' => '{0} doit fournir au moins un Handler.',
 	'resourcesSaved' => 'Vos modifications ont été prises en compte',
 	'resourcesSavedFailed' => 'Une erreur est survenue, vos informations n\'ont pas pu être mises à jour',
+	'resourcesDeleted' => 'Les éléments ont bien été supprimés',	
 	'Edit' => 'Modification',
 	'Edit: %s' => 'Modification : {0}',
 	'List: %s' => 'Liste des {0}',
@@ -28,6 +29,7 @@
 	'selectExportFormat' => 'format',
 	'chooseOneOfTheFollowing' => 'choisissez un élémént',
 	'search' => 'rechercher',
+	'delete' => 'supprimer',
 	'backToList' => 'retour',
 	'actions' => 'actions',
 	'import' => 'importer',
@@ -142,7 +144,14 @@
 	'save' => 'enregistrer',
 	'legende' => 'legende',
 	'descriptionAlt' => 'description (Alt)',
-	'deleteFile' => 'supprimer le fichier'
+	'deleteFile' => 'supprimer le fichier',
+	'generateNewToken' => 'générer un nouveau token',
+	'revokeAll' => 'tout révoquer',
+	'personalAccessTokens' => 'accés personnel Tokens',
+	'enterName' => 'entrer un nom',
+	'saveData' => 'sauvegarder',
+	'yourToken' => 'Votre token',
+	'yourTokenKeep' => 'Si vous perdez le jeton, vous ne pourrez plus voir la version brute, mais vous pouvez générer un nouveau jeton à utiliser.',
 
 ];
 

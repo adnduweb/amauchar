@@ -901,4 +901,71 @@ class UsersController extends AdminController
         return $this->respond($response, ResponseInterface::HTTP_OK);
     }
 
+    public function createToken(){
+
+        $request = $this->request->getPost();
+
+        $rules = [
+            'name' => 'required'
+        ];
+
+        if (! $this->validate($rules)) {
+            $response = ['errors' => $this->validator->getErrors()];
+            return $this->respond($response, ResponseInterface::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $device_id = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+
+        $token = Auth()->user()->generateAccessToken( $request['name']  . '-' . $device_id,  $request['permissions'] ?? []);
+
+        $response = [
+            'messages' => 
+            ['sucess' => lang('Core.resourcesSaved')], 
+            'ok' => true, 
+            'display_kt_user_createToken' => view('Amauchar\Core\Views\backend\metronic\settings\form_section\user\modals\_return_token', ['raw_token' =>  $token->raw_token]),
+            'listtokens' => view('Amauchar\Core\Views\backend\metronic\settings\form_section\user\tokens', ['tokens' => Auth()->user()->accessTokens()]),
+            'raw_token' => $token->raw_token
+        ];
+        return $this->respond($response, ResponseInterface::HTTP_OK);
+
+    }
+    public function deleteAllToken(){
+
+        Auth()->user()->revokeAllAccessTokens();
+        // return redirect()->back()->withInput()->with('success', lang('Core.resourcesDeleted'));
+        $response = [
+            'messages' => ['sucess' => lang('Core.resourcesDeleted')], 
+            'ok' => true,
+            'listtokens' => view('Amauchar\Core\Views\backend\metronic\settings\form_section\user\tokens', ['tokens' => Auth()->user()->accessTokens()])
+        ];
+        return $this->respond($response, ResponseInterface::HTTP_OK);
+        //8a074e5802a460a5f909ba9648c733840556edece2e1e786e461c31c7cc1ab8f
+
+    }
+
+    public function deleteToken(){
+
+        $request = json_decode($this->request->getBody());
+//c4afd9076e60917f8bee8a039de744b50a975913ebdee71fc0141ebea964ff09
+
+        $rules = [
+            'jeton' => 'required'
+        ];
+
+        if (! $this->validate($rules)) {
+            $response = ['errors' => $this->validator->getErrors()];
+            return $this->respond($response, ResponseInterface::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        Auth()->user()->revokeAccessToken($request->jeton);
+        //return redirect()->back()->withInput()->with('success', lang('Core.resourcesDeleted'));
+        $response = [
+            'messages' => ['sucess' => lang('Core.resourcesDeleted')], 
+            'ok' => true,
+            'listtokens' => view('Amauchar\Core\Views\backend\metronic\settings\form_section\user\tokens', ['tokens' => Auth()->user()->accessTokens()])
+        ];
+        return $this->respond($response, ResponseInterface::HTTP_OK);
+
+    }
+    
 }

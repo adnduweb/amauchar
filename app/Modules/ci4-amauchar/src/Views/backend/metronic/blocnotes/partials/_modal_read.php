@@ -17,7 +17,7 @@
                   
             </div>
             <div class="modal-footer border-top-0">
-                <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"><?= ucfirst(lang('Core.discard')); ?></button>
             </div>
         </div>     
     </div>

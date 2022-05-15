@@ -49246,6 +49246,12 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th.dtr-control:before
   padding-right: 25px !important;
 }
 
+.table.table-p-0 tr:first-child,
+.table.table-p-0 th:first-child,
+.table.table-p-0 td:first-child {
+  padding-left: 0px !important;
+}
+
 .dataTables_wrapper > .row {
   padding: 25px !important;
 }

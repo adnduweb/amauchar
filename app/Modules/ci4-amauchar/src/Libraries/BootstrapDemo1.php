@@ -50,6 +50,11 @@ class BootstrapDemo1 extends BootstrapBase {
             Theme::addHtmlClass('body', 'toolbar-tablet-and-mobile-fixed');
         }
 
+        $handle = explode('\\', service('router')->controllerName());
+        $controller = end($handle);
+        $name = strtolower(str_replace('Controller', '', $controller));
+        Theme::addHtmlClass('body', strtolower(service('router')->methodName()) . ' ' . $name);
+
         // Height setup
         $type = Theme::getOption('layout', 'toolbar/layout');
         $typeOptions = Theme::getOption('layout', 'toolbar/layouts/' . $type);

@@ -68,6 +68,13 @@ $routes->group(ADMIN_AREA, $options, static function ($routes) {
         $routes->post('users/en-tant-que', 'UsersController::confirmEnTantQue', ['as' => 'users.entantque.comfirm']);
         $routes->get('users/return-compte-principale/(:any)', 'UsersController::returnCompteUser/$1', ['as' => 'user.return.compte']);
         $routes->post('users/verif-mdp', 'UsersController::verifMdp', ['as' => 'users.verif.mdp']);
+        $routes->post('users/create-user-token', 'UsersController::createToken',  ['as' => 'create.user.token']);
+        $routes->delete('users/delete-all-key-token', 'UsersController::deleteAllToken',  ['as' => 'deleteall.key.token']);
+        $routes->get('users/delete-key-token/(:any)', 'UsersController::deleteToken/$1',  ['as' => 'delete.key.token']);
+        $routes->post('users/users-delete-token', 'UsersController::deleteToken',  ['as' => 'users.delete.token']);
+        
+       
+
 
         $routes->get('companies', 'CompaniesController::index', ['as' => 'companies.index']);
         $routes->get('companies/datatable', 'CompaniesController::ajaxDatatable', ['as' => 'companies.listajax']);
@@ -102,6 +109,7 @@ $routes->group(ADMIN_AREA, $options, static function ($routes) {
     $routes->post('settings/consent', 'SettingsController::saveConsent',  ['as' => 'settings.consent.save']);
     $routes->get('settings', 'SettingsController::userCurrent',  ['as' => 'settings.user.current']);
     $routes->post('settings', 'SettingsController::userCurrent',  ['as' => 'settings.user.current']);
+    
     
 
          // Logs

@@ -349,7 +349,8 @@ class SettingsController extends AdminController
 
         if($this->request->getMethod() == "post"){
 
-        $context = 'user:' . user_id();
+            $context = 'user:' . user_id();
+
 
             service('settings')->set('App.forceUnlockMdp', $this->request->getPost('forceUnlockMdp') === '1', $context ); 
             service('settings')->set('App.lockLoginIp', $this->request->getPost('lockLoginIp') === '1', $context ); 
@@ -375,6 +376,14 @@ class SettingsController extends AdminController
             ];
             return $this->respond($response, 200);
         }
+
+        $permissions = setting('AuthGroups.permissions');
+        if (is_array($permissions)) {
+            ksort($permissions);
+        }
+        $this->viewData['permissions'] = $permissions;
+        // Retrieve all access tokens as an array of AccessToken instances.
+        $this->viewData['tokens'] = Auth()->user()->accessTokens();
         return $this->render($this->viewPrefix . 'index_user', $this->viewData);
     }
 }
