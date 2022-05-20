@@ -1471,12 +1471,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/shield.git",
-                "reference": "e92712645e19ca6ce9db54bc4065d51fbebdb7f2"
+                "reference": "0cd72f8cce31611e4b8adffa129a4485aeaa3f2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/e92712645e19ca6ce9db54bc4065d51fbebdb7f2",
-                "reference": "e92712645e19ca6ce9db54bc4065d51fbebdb7f2",
+                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/0cd72f8cce31611e4b8adffa129a4485aeaa3f2c",
+                "reference": "0cd72f8cce31611e4b8adffa129a4485aeaa3f2c",
                 "shasum": ""
             },
             "require": {
@@ -1525,7 +1525,7 @@
                 "issues": "https://github.com/codeigniter4/shield/issues",
                 "source": "https://github.com/codeigniter4/shield/tree/develop"
             },
-            "time": "2022-05-20T03:50:36+00:00"
+            "time": "2022-05-20T11:17:58+00:00"
         },
         {
             "name": "maennchen/zipstream-php",

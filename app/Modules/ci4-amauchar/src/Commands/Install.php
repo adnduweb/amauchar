@@ -98,6 +98,7 @@ class Install extends BaseCommand
         } elseif (CLI::getOption('continue')) {
             $this->migrate();
             $this->setSettings();
+            $this->createCompany();
             $this->createUser();
         } elseif (CLI::getOption('create-company')) {
             $this->migrate();
@@ -306,16 +307,7 @@ class Install extends BaseCommand
         }
 
 
-        // $companies = model(CompanyModel::class);
-
-        // $company = new Company([
-        //     'uuid'       => service('uuid')->uuid4()->toString(),
-        //     'first_name' => $firstName,
-        //     'last_name'  => $lastName,
-        //     'username'   => $username,
-        // ]);
-        // $companies->save($company);
-
+        $companies = model(CompanyModel::class);
 
         CLI::write('Done.', 'green');
     }

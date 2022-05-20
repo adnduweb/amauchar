@@ -7369,6 +7369,8 @@ var KTmanagerAccount = function() {
     var initDevis = function() {
 
         var bouttonManagerDevis = document.querySelector('#askForQuoteBtn');
+        if (!bouttonManagerDevis)
+            return false;
 
         bouttonManagerDevis.addEventListener('click', function(e) {
             var typeMsg = 'quote';
