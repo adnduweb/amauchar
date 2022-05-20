@@ -75,6 +75,8 @@ var KTSettingsDetails = function () {
     var createTokenForm = function () {
 
         const modalLinkToken = document.getElementById('kt_modal_create_api_key');
+        if(!modalLinkToken)
+            return false;
         const modalToken = new bootstrap.Modal(modalLinkToken);
         const submitFormToken = document.getElementById('kt_api_key_create_submit');
         const formToken = document.getElementById('kt_modal_form_api_key');
@@ -179,6 +181,8 @@ var KTSettingsDetails = function () {
 
     var revokeAllToken = function () {
         revokeAllToken = document.querySelector('.revokeAllToken');
+        if(!revokeAllToken)
+            return false;
         revokeAllToken.addEventListener('click', function (e) {
             e.preventDefault();
 

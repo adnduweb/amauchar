@@ -16,7 +16,7 @@ class CreateTableCustomers extends Migration
         $fields = [
             'id'                => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
             'uuid'              => ['type' => 'BINARY', 'constraint' => 16],
-            'user_id'           => ['type' => 'BINARY', 'constraint' => 16],
+            'user_id'           => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true],
             'customer_group_id' => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true],
             'company'           => ['type' => 'VARCHAR', 'constraint' => 255],
             'siret'             => ['type' => 'VARCHAR', 'constraint' => 255],
