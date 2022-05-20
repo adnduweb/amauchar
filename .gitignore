@@ -121,6 +121,7 @@ nb-configuration.xml
 /api/
 node_modules/*
 app/Modules/ci4-vassorts/*
+app/Modules/ci4-customers/*
 
 # Visual Studio Code
 .vscode/
