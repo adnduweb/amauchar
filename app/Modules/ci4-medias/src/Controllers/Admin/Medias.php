@@ -155,7 +155,7 @@ class Medias extends AdminController
 	 */
 	public function list(){
 
-		if(setting('Medias.format') == 'thumbnail'){
+		if(setting('Medias.formatThumbnail') == ''){
 			return redirect()->to(route_to('medias.settings'));
 		}
 

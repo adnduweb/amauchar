@@ -20,10 +20,26 @@ class ExpressRules{
                 return false;
             }
         }
+
+        if(isset($data['contact']['phone_mobile']) && !empty($data['contact']['phone_mobile'])){
+
+            $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+
+            try {
+                $swissNumberProto = $phoneUtil->parse($data['contact']['phone_mobile'],  $data['contact']['country']);
+                if (!$phoneUtil->isValidNumber($swissNumberProto)) {
+                    return false;
+                }
+            } catch (\libphonenumber\NumberParseException $e) {
+                return false;
+            }
+        }
     }
 
       // Rule is to validate mobile number digits
       public function phoneValidation(string $str, string $fields, array $data){
+
+       // print_r($data); exit;
         
         if(isset($data['phone']) && !empty($data['phone'])){
 
@@ -31,6 +47,34 @@ class ExpressRules{
 
             try {
                 $swissNumberProto = $phoneUtil->parse($data['phone'],  $data['country']);
+                if (!$phoneUtil->isValidNumber($swissNumberProto)) {
+                    return false;
+                }
+            } catch (\libphonenumber\NumberParseException $e) {
+                return false;
+            }
+        }
+
+        if(isset($data['address']['phone']) && !empty($data['address']['phone'])){
+
+            $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+
+            try {
+                $swissNumberProto = $phoneUtil->parse($data['address']['phone'],  $data['address']['country']);
+                if (!$phoneUtil->isValidNumber($swissNumberProto)) {
+                    return false;
+                }
+            } catch (\libphonenumber\NumberParseException $e) {
+                return false;
+            }
+        }
+
+        if(isset($data['contact']['phone']) && !empty($data['contact']['phone'])){
+
+            $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+
+            try {
+                $swissNumberProto = $phoneUtil->parse($data['contact']['phone'],  $data['contact']['country']);
                 if (!$phoneUtil->isValidNumber($swissNumberProto)) {
                     return false;
                 }

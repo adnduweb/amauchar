@@ -29,7 +29,7 @@ class CreateTableCompanies extends Migration
 		// Company
 		$fields = [
 			'id'              => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-			'uuid'    => ['type' => 'BINARY', 'constraint' => 16],
+			'uuid'            => ['type' => 'BINARY', 'constraint' => 16],
 			'company_type_id' => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true],
 			'country'         => ['type' => 'VARCHAR', 'constraint' => 24],
 			'raison_social'   => ['type' => 'VARCHAR', 'constraint' => 255],

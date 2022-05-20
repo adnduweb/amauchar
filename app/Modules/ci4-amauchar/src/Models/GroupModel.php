@@ -4,6 +4,7 @@ namespace Amauchar\Core\Models;
 
 use CodeIgniter\Model;
 use CodeIgniter\Shield\Entities\Group;
+use Amauchar\Core\Entities\User;
 
 class GroupModel extends Model
 {
@@ -51,4 +52,72 @@ class GroupModel extends Model
 
     public static $orderable = ['name', 'description', 'login_destination'];
 
+    public function getForUser(User $user): array
+    {
+        $rows = $this->builder()
+            ->select('group')
+            ->where('user_id', $user->getAuthId())
+            ->get()
+            ->getResultArray();
+
+        return array_column($rows, 'group');
+    }
+
+    /**
+     * @param int|string $userId
+     */
+    public function deleteAll($userId): void
+    {
+        $this->builder()
+            ->where('user_id', $userId)
+            ->delete();
+    }
+
+    /**
+     * @param int|string $userId
+     * @param mixed      $cache
+     */
+    public function deleteNotIn($userId, $cache): void
+    {
+        $this->builder()
+            ->where('user_id', $userId)
+            ->whereNotIn('group', $cache)
+            ->delete();
+    }
+ 
+    //   /**
+    //  * @param int|string $userId
+    //  */
+    // public function getByUserId($userId): array
+    // {
+    //     $groups = $this->builder()
+    //         ->select('group')
+    //         ->where('user_id', $userId)
+    //         ->get()
+    //         ->getResultArray();
+
+    //     return array_column($groups, 'group');
+    // }
+
+    // /**
+    //  * @param int|string $userId
+    //  */
+    // public function deleteAll($userId): void
+    // {
+    //     $this->builder()
+    //         ->where('user_id', $userId)
+    //         ->delete();
+    // }
+
+    // /**
+    //  * @param int|string $userId
+    //  * @param mixed      $cache
+    //  */
+    // public function deleteNotIn($userId, $cache): void
+    // {
+    //     $this->builder()
+    //         ->where('user_id', $userId)
+    //         ->whereNotIn('group', $cache)
+    //         ->delete();
+    // }
 }

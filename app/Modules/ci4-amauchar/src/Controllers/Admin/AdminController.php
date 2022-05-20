@@ -172,10 +172,10 @@ class AdminController extends BaseController
         $this->display = service('router')->methodName();
         switch ($this->display) {
             case'indexView':
-                $this->pageTitleDefault = lang('Core.List: %s', [$this->name]);
+                $this->pageTitleDefault = ucfirst(lang('Core.list: %s', [lang(ucfirst(singular($this->name)) . '.' . $this->name)]));
             break;
             case 'index':   
-                    $this->pageTitleDefault = lang('Core.List: %s', [$this->name]);
+                    $this->pageTitleDefault = ucfirst(lang('Core.list: %s', [lang(ucfirst(singular($this->name)) . '.' . $this->name)]));
                     $this->pageHeaderToolbarBtn['create'] = [
                         'color' => 'primary',
                         'href'  => site_url(route_to(singular($this->name) . '.create')),
@@ -187,7 +187,7 @@ class AdminController extends BaseController
             case 'update':
                 break;
             case 'edit':
-                $this->pageTitleDefault = lang('Core.Edit');
+                $this->pageTitleDefault = ucfirst(lang('Core.edit'));
                      $this->pageHeaderToolbarBtn['back'] = [
                         'color' => 'secondary',
                         'href'  => site_url(route_to($this->name . '.index')),

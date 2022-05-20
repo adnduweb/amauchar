@@ -42,29 +42,47 @@ class SessionAuthOverride implements FilterInterface
             auth('session')->recordActive();
         }
 
-        /** @var UserIdentityModel $identityModel */
-        $identityModel = model(UserIdentityModel::class);
+         /** @var Session $authenticator */
+         $authenticator = auth('session')->getAuthenticator();
 
-        // If user is in middle of an action flow
-        // ensure they must finish it first.
-        $identities = $identityModel->getIdentitiesByTypes(
-            auth('session')->id(),
-            ['email_2fa', 'email_activate']
-        );
+         if ($authenticator->loggedIn()) {
+             if (setting('Auth.recordActiveDate')) {
+                 $authenticator->recordActiveDate();
+             }
+ 
+             return;
+         }
+ 
+         if ($authenticator->isPending()) {
+             return redirect()->route('auth-action-show')
+                 ->with('error', $authenticator->getPendingMessage());
+         }
+ 
+         return redirect()->route('login');
 
-        foreach ($identities as $identity) {
-            if (! $identity instanceof UserIdentity) {
-                continue;
-            }
+        // /** @var UserIdentityModel $identityModel */
+        // $identityModel = model(UserIdentityModel::class);
 
-            $action = setting('Auth.actions')[$identity->name];
+        // // If user is in middle of an action flow
+        // // ensure they must finish it first.
+        // $identities = $identityModel->getIdentitiesByTypes(
+        //     auth('session')->id(),
+        //     ['email_2fa', 'email_activate']
+        // );
 
-            if ($action) {
-                session()->set('auth_action', $action);
+        // foreach ($identities as $identity) {
+        //     if (! $identity instanceof UserIdentity) {
+        //         continue;
+        //     }
 
-                return redirect()->route('auth-action-show')->with('error', $identity->extra);
-            }
-        }
+        //     $action = setting('Auth.actions')[$identity->name];
+
+        //     if ($action) {
+        //         session()->set('auth_action', $action);
+
+        //         return redirect()->route('auth-action-show')->with('error', $identity->extra);
+        //     }
+        // }
     }
 
     /**

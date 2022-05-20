@@ -100,7 +100,7 @@ class GroupsController extends AdminController
 
         $this->viewData['alias'] = $alias;
         $this->viewData['group'] = setting('AuthGroups.groups')[$alias];
-        $this->viewData['pageTitleDefault'] = lang('Core.EditGroupsAndPermission') . ' : ' . ucfirst($alias) ;
+        $this->viewData['pageTitleDefault'] = ucfirst(lang('Core.EditGroupsAndPermission') . ' : ' . ucfirst($alias)) ;
 
         if (empty($this->viewData['group'])) {
             return redirect()->back()->with('error', lang('Bonfire.resourceNotFound', ['user group']));
@@ -225,7 +225,7 @@ class GroupsController extends AdminController
                 'color' => 'secondary',
                 'href'  => site_url(route_to('groups.index')),
                 'svg'   => theme()->getSVG("icons/duotone/Navigation/Arrow-from-right.svg", "svg-icon-5 svg-icon-gray-500 me-1"),
-                'desc'  => lang('Core.BackToList'),
+                'desc'  => ucfirst(lang('Core.backToList')),
              ];
         }
     }

@@ -18,8 +18,8 @@
         <div class="fv-row mb-15">
                 <!--begin::Label-->
             <label for="titre" class="fs-6 fw-bold mb-2"><?= ucfirst(lang('Core.type')); ?>*</label>
-            <select class="form-select mb-2" required id="blocnote_type_id" name="blocnote_type_id" data-control="select2" data-placeholder="Select an option" data-allow-clear="true"  data-hide-search="false" data-placeholder="Select an option" id="kt_vassorts_designations_select">
-                <option></option>
+            <select class="form-select mb-2" required id="blocnote_type_id" name="blocnote_type_id" data-control="select2" data-placeholder="<?= ucfirst(lang('Core.selectOption')); ?>" data-allow-clear="true"  data-hide-search="false" data-placeholder="<?= ucfirst(lang('Core.selectOption')); ?>" id="kt_vassorts_designations_select">
+                <option></option> 
                 <?php if(!empty($blocsType)){ ?>
                     <?php foreach($blocsType as $blocType){ ?>
                         <option <?= old('blocnote_type_id') ==  $form->blocnote_type_id || $form->blocnote_type_id ==  $blocType->id_type_blocnote ?  'selected' : '' ?>  value="<?= $blocType->id_type_blocnote; ?>"><?= $blocType->titre ?></option>

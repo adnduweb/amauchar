@@ -27,7 +27,7 @@
                     </a>
                 </div>
             </div>
-            <!--end::Title-->
+            <!--end::Title--> 
         </div>
     </div>
     <!--end::Card header-->

@@ -643,16 +643,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.248.0",
+            "version": "v0.249.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "5967583706b1b09c49d04e3c1c3c05e459b0767e"
+                "reference": "95df14183356e45291e1c686cea57850281101db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/5967583706b1b09c49d04e3c1c3c05e459b0767e",
-                "reference": "5967583706b1b09c49d04e3c1c3c05e459b0767e",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/95df14183356e45291e1c686cea57850281101db",
+                "reference": "95df14183356e45291e1c686cea57850281101db",
                 "shasum": ""
             },
             "require": {
@@ -681,9 +681,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.248.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.249.0"
             },
-            "time": "2022-05-09T01:06:12+00:00"
+            "time": "2022-05-16T01:10:12+00:00"
         },
         {
             "name": "google/auth",
@@ -1471,12 +1471,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/shield.git",
-                "reference": "9555b4507b7aa35eeef327284304f1027e2d4c84"
+                "reference": "e92712645e19ca6ce9db54bc4065d51fbebdb7f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/9555b4507b7aa35eeef327284304f1027e2d4c84",
-                "reference": "9555b4507b7aa35eeef327284304f1027e2d4c84",
+                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/e92712645e19ca6ce9db54bc4065d51fbebdb7f2",
+                "reference": "e92712645e19ca6ce9db54bc4065d51fbebdb7f2",
                 "shasum": ""
             },
             "require": {
@@ -1487,16 +1487,9 @@
                 "codeigniter4/authentication-implementation": "1.0"
             },
             "require-dev": {
-                "codeigniter/coding-standard": "^1.1",
+                "codeigniter4/devkit": "^1.0",
                 "codeigniter4/framework": "^4.1",
-                "fakerphp/faker": "^1.9",
-                "friendsofphp/php-cs-fixer": "^3.0",
                 "mockery/mockery": "^1.0",
-                "nexusphp/cs-config": "^3.1",
-                "nexusphp/tachycardia": "^1.0",
-                "php-coveralls/php-coveralls": "^2.4",
-                "phpstan/phpstan": "^1.0",
-                "phpunit/phpunit": "^9.1",
                 "vimeo/psalm": "^4.22"
             },
             "default-branch": true,
@@ -1532,33 +1525,35 @@
                 "issues": "https://github.com/codeigniter4/shield/issues",
                 "source": "https://github.com/codeigniter4/shield/tree/develop"
             },
-            "time": "2022-05-15T07:36:05+00:00"
+            "time": "2022-05-20T03:50:36+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
-            "version": "2.1.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maennchen/ZipStream-PHP.git",
-                "reference": "c4c5803cc1f93df3d2448478ef79394a5981cc58"
+                "reference": "211e9ba1530ea5260b45d90c9ea252f56ec52729"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/c4c5803cc1f93df3d2448478ef79394a5981cc58",
-                "reference": "c4c5803cc1f93df3d2448478ef79394a5981cc58",
+                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/211e9ba1530ea5260b45d90c9ea252f56ec52729",
+                "reference": "211e9ba1530ea5260b45d90c9ea252f56ec52729",
                 "shasum": ""
             },
             "require": {
                 "myclabs/php-enum": "^1.5",
-                "php": ">= 7.1",
+                "php": "^7.4 || ^8.0",
                 "psr/http-message": "^1.0",
                 "symfony/polyfill-mbstring": "^1.0"
             },
             "require-dev": {
                 "ext-zip": "*",
-                "guzzlehttp/guzzle": ">= 6.3",
+                "guzzlehttp/guzzle": "^6.5.3 || ^7.2.0",
                 "mikey179/vfsstream": "^1.6",
-                "phpunit/phpunit": ">= 7.5"
+                "php-coveralls/php-coveralls": "^2.4",
+                "phpunit/phpunit": "^8.5.8 || ^9.4.2",
+                "vimeo/psalm": "^4.1"
             },
             "type": "library",
             "autoload": {
@@ -1595,7 +1590,7 @@
             ],
             "support": {
                 "issues": "https://github.com/maennchen/ZipStream-PHP/issues",
-                "source": "https://github.com/maennchen/ZipStream-PHP/tree/master"
+                "source": "https://github.com/maennchen/ZipStream-PHP/tree/2.2.1"
             },
             "funding": [
                 {
@@ -1603,7 +1598,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2020-05-30T13:11:16+00:00"
+            "time": "2022-05-18T15:52:06+00:00"
         },
         {
             "name": "markbaker/complex",

@@ -84,9 +84,11 @@
 					</button>
 					<!--end::Submit button-->
 					<?php if (setting('Auth.allowRegistration')) : ?>
+						<?php if (setting('App.activeGoogle') == true || setting('App.activeFacebook') == true || setting('App.activeApple') == true){ ?>
 						<!--begin::Separator-->
 						<div class="text-center text-muted text-uppercase fw-bolder mb-5"><?= lang('Core.or') ?></div>
 						<!--end::Separator-->
+						<?php } ?>
 						<?php if (setting('App.activeGoogle') == true){ ?>
 						<!--begin::Google link-->
 						<a href="<?= $boutGoogleClient; ?>" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">

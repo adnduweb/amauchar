@@ -4,10 +4,17 @@ namespace Amauchar\Core\Models;
 
 use CodeIgniter\Model;
 use Faker\Generator;
+use Amauchar\Core\Traits\AuditsTrait;
 use Amauchar\Core\Entities\UserIdentity;
 
 class UserIdentityModel extends Model
 {
+
+    use AuditsTrait;
+	protected $afterInsert = ['auditInsert'];
+	protected $afterUpdate = ['auditUpdate'];
+    protected $afterDelete = ['auditDelete'];
+
     protected $table          = 'auth_identities';
     protected $primaryKey     = 'id';
     protected $returnType     = UserIdentity::class;

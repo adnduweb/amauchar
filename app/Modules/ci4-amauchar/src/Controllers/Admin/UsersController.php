@@ -211,7 +211,7 @@ class UsersController extends AdminController
 
         /** @var LoginModel $loginModel */
         $loginModel = model(LoginModel::class);
-        $this->viewData['logins'] = $loginModel->where('email', $this->object->email)->orderBy('date', 'desc')->limit(10)->find();
+        $this->viewData['logins'] = $loginModel->where('identifier', $this->object->email)->orderBy('date', 'desc')->limit(10)->find();
 
         /** @var SessionModel $sessionModel */
         $sessionModel = model(SessionModel::class);
@@ -739,11 +739,11 @@ class UsersController extends AdminController
         setting('Auth.passwordValidators', $this->request->getPost('validators'));
         setting('AuthGroups.defaultGroup', $this->request->getPost('defaultGroup'));
 
-        // Actions
-        $actions             = setting('Auth.actions');
-        $actions['login']    = $this->request->getPost('email2FA') ?? false;
-        $actions['register'] = $this->request->getPost('emailActivation') ?? false;
-        setting('Auth.actions', $actions);
+        // // Actions
+        // $actions             = setting('Auth.actions');
+        // $actions['login']    = $this->request->getPost('email2FA') ?? false;
+        // $actions['register'] = $this->request->getPost('emailActivation') ?? false;
+        // setting('Auth.actions', $actions);
         setting('Auth.allowMagicLinkLogin', (bool) $this->request->getPost('allowMagicLinkLogin'));
         
 
@@ -946,7 +946,6 @@ class UsersController extends AdminController
     public function deleteToken(){
 
         $request = json_decode($this->request->getBody());
-//c4afd9076e60917f8bee8a039de744b50a975913ebdee71fc0141ebea964ff09
 
         $rules = [
             'jeton' => 'required'

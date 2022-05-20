@@ -3,6 +3,10 @@
 <?= $this->section('title') ?><?= lang('Auth.login') ?> <?= $this->endSection() ?>
 
 <?= $this->section('main') ?>
+<?php
+$authenticator = auth('session')->getAuthenticator();
+$user = $authenticator->getPendingUser();
+?>
 
 <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(<?= theme()->getMediaUrl('illustrations/sketchy-1/14.png'); ?>">
     <!--begin::Content-->
@@ -14,10 +18,6 @@
         <!--end::Logo-->
         <!--begin::Wrapper-->
         <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
-        <?php if (session('error')) : ?>
-                <div class="alert alert-danger"><?= session('error') ?></div>
-            <?php endif ?>
-
             <form class="form w-100 mb-10" action="<?= site_url(route_to('auth.action.verify')) ?>" method="post">
                 <?= csrf_field() ?>
 
@@ -33,7 +33,7 @@
                     <div class="text-muted fw-bold fs-5 mb-5">Enter the verification code we sent to</div>
                     <!--end::Sub-title-->
                     <!--begin::Mobile no-->
-                    <div class="fw-bolder text-dark fs-3"><?= \Amauchar\Core\Libraries\Util::secret_mail(auth()->user()->getEmail()); ?></div>
+                    <div class="fw-bolder text-dark fs-3"><?= \Amauchar\Core\Libraries\Util::secret_mail($user->getAuthEmail()); ?></div>
                     <!--end::Mobile no-->
                 </div>
                             
