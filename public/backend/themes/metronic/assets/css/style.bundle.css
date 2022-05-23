@@ -49817,3 +49817,9 @@ div.dataTables_wrapper div.dataTables_processing .loaderContainer .textProcessin
   font-size: 1.3rem;
   padding: 10px;
 }
+
+.table .thead-light th {
+  color: #595d6e;
+  background-color: #ebedf2;
+  border-color: #ebedf2;
+}

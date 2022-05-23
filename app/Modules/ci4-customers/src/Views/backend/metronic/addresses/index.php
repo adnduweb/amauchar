@@ -5,7 +5,7 @@
 
 <div class="card ">
     <!--begin::Card header-->
-    <div class="card-header border-0 pt-6">
+    <div class="card-header border-0 pt-6 pb-6">
         <!--begin::Card title-->
             <?= $this->include('\Themes\backend\metronic\_partials\extras\search') ?> 
         <!--begin::Card title-->
@@ -44,9 +44,9 @@
         <!--begin::Table-->
        
      <!--begin::Table-->
-     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_customers_addresses">
+     <table class="table align-middle table-row-dashed fs-6 gy-5 table-bordered table-hover table-checkable dataTable no-footer dtr-inline datatableIdentifier" id="kt_table_customers_addresses">
             <!--begin::Table head-->
-            <thead>
+            <thead class="thead-light">
                 <!--begin::Table row-->
                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                     <th class="w-10px pe-2">

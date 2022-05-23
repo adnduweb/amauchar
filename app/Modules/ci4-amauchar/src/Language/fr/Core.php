@@ -164,7 +164,31 @@
 	'phonePhoneMobile' => 'n° téléphone',
 	'EditGroupsAndPermission' => 'editer les goupes et permissions',
 	'noContent' => 'pas de contenu',
-	'colComposition' => 'identité'
+	'colComposition' => 'identité',
+	'username' => 'username',
+	'lastUsedAt' => 'dernière connexion',
+	'twoStep' => '2 facteurs',
+	'details' => 'details',
+	'companies' => 'societé',
+	'raisonSocial' => 'raison social',
+	'adresse' => 'adresse',
+	'userCount' => 'nbre utilisateurs(s)',
+	'source' => 'source',
+	'event' => 'event',
+	'summary' => 'summary',
+	'date' => 'date',
+	'Files' => 'fichiers',
+	'system' => 'système',
+	'Connexions' => 'connexions',
+	'serverInformation' => 'informations serveurs',
+	'Filesystem' => 'fichiers systèmes',
+	'filter' => 'filtres',
+	'forceUnlockMdp' => 'dévérouiller les mots de passe',
+	'lockLoginIp' => 'bloquer la connexion par ip',
+	'activeGoogle' => 'activer la connexion Google',
+	'activeFacebook' => 'activer la connexion Facebook',
+	'activeApple' => 'activer la connexion Apple',
+	'compteSociaux' => 'connexion avec les réseaux sociaux'
 
 ];
 

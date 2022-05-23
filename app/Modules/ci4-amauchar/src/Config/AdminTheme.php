@@ -120,7 +120,7 @@ class AdminTheme extends BaseConfig
     
             // Content
             'content'    => array(
-                'width'  => 'fixed', // Set content width(fixed|fluid)
+                'width'  => 'fluid', // Set content width(fixed|fluid)
                 'layout' => 'default'  // Set content layout(default|documentation)
             ),
     

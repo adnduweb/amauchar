@@ -198,6 +198,7 @@ class CustomerModel extends BaseModel
                         'phone'        => $faker->phoneNumber,
                         'phone_mobile' => $faker->phoneNumber,
                         'active'       => 1,
+                        'defaut'       => 1,
                         'created_at'   => Time::createFromTimestamp($faker->unixTime()),
                         'updated_at'   => Time::now(),
                     ];

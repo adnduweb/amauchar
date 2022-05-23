@@ -2,8 +2,8 @@
 
 return [
 	// Exceptions
-	'medias'							=> 'medias',
-	'fileManager' => 'liste des médias',
+	'medias'                             => 'medias',
+	'fileManager'                        => 'liste des médias',
 	'noAuth'                             => 'Missing dependency: authentication function user_id()',
 	'dirFail'                            => 'Unable to create storage directory: {0}',
 	'chunkDirFail'                       => 'Unable to create directory for chunk uploads: {0}',
@@ -32,5 +32,15 @@ return [
 	'Drop files here or click to upload' => "Déposez les fichiers ici ou cliquez pour télécharger",
 	'Drop files here or click to upload' => "Déposez les fichiers ici ou cliquez pour télécharger",
 	'title_search'                       => 'Les médias',
+	'preferences'                        => 'Préférences',
+	'formatThumbnail'                    => 'format vignette',
+	'formatSmall'                        => 'format petit',
+	'formatMedium'                       => 'format medium',
+	'formatLarge'                        => 'format large',
+	'displayTheWatermark'                => 'activer le watermark',
+	'textWatermark'                      => 'texte du watermark',
+	'deleteTheFiles'                     => 'supprimer les fichiers',
+	'settingseMedias'                    => 'réglages des médias',
+	'uploadFile'                         => 'télécharger les fichiers'
 
 ];

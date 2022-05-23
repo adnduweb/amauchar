@@ -6,9 +6,9 @@
     <!--end::Card header-->
     <div class="card-body p-0">
         <!--begin::Table-->
-        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_<?= $name; ?>">
+        <table class="table align-middle table-row-dashed fs-6 gy-5 table-bordered table-hover table-checkable no-footer dtr-inline" id="kt_table_<?= $name; ?>">
             <!--begin::Table head-->
-            <thead>
+            <thead class="thead-light">
                 <!--begin::Table row-->
                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                     <th class="min-w-125px" title="Name"><?= lang('Core.name'); ?></th>

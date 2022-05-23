@@ -1273,5 +1273,15 @@ class Medias extends AdminController
 		];
 		return $this->respond($response, ResponseInterface::HTTP_OK);
 	}
+
+	public function initPageHeaderToolbar()
+    {
+			parent::initPageHeaderToolbar();
+			
+			if( 'settings' == service('router')->methodName()){
+				$this->pageTitleDefault = ucfirst(lang('Medias.settingseMedias'));
+			}
+           
+    }
 	
 }

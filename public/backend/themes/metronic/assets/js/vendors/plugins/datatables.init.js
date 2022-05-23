@@ -27,7 +27,7 @@ var defaults = {
         $(this).closest('.dataTables_wrapper').find('.custom-select').addClass('form-select form-select-sm form-select-solid');
     },
     "headerCallback": function(thead, data, start, end, display) {
-        $(thead).find('th').addClass('text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0');
+        $(thead).find('th').addClass('text-start text-gray-600 fw-bolder fs-7 text-uppercase gs-0');
     },
     error: function() {
         Swal.fire({

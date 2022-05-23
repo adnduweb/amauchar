@@ -10,7 +10,7 @@
         <div class="card-header pt-8">
             <!--begin::Card title-->
             <div class="card-title">
-                <h2>Preferences</h2>
+                <h2><?= ucfirst(lang('Medias.preferences')); ?></h2>
             </div>
             <!--end::Card title-->
         </div>
@@ -25,7 +25,7 @@
                     <!--begin::Col-->
                     <div class="col-md-3 d-flex align-items-center">
                         <!--begin::Label-->
-                        <label class="fs-6 fw-bold"> acceptedFiles</label>
+                        <label class="fs-6 fw-bold"><?= ucfirst(lang('Medias.acceptedFiles')); ?></label>
                         <!--end::Label-->
                     </div>
                     <!--end::Col-->
@@ -42,7 +42,7 @@
                     <!--begin::Col-->
                     <div class="col-md-3 d-flex align-items-center">
                         <!--begin::Label-->
-                        <label class="fs-6 fw-bold">Format vignette</label>
+                        <label class="fs-6 fw-bold"><?= ucfirst(lang('Medias.formatThumbnail')); ?></label>
                         <!--end::Label-->
                     </div>
                     <!--end::Col-->
@@ -58,7 +58,7 @@
                     <!--begin::Col-->
                     <div class="col-md-3 d-flex align-items-center">
                         <!--begin::Label-->
-                        <label class="fs-6 fw-bold">Format Small</label>
+                        <label class="fs-6 fw-bold"><?= ucfirst(lang('Medias.formatSmall')); ?></label>
                         <!--end::Label-->
                     </div>
                     <!--end::Col-->
@@ -74,7 +74,7 @@
                     <!--begin::Col-->
                     <div class="col-md-3 d-flex align-items-center">
                         <!--begin::Label-->
-                        <label class="fs-6 fw-bold">Format formatMedium</label>
+                        <label class="fs-6 fw-bold"><?= ucfirst(lang('Medias.formatMedium')); ?></label>
                         <!--end::Label-->
                     </div>
                     <!--end::Col-->
@@ -90,7 +90,7 @@
                     <!--begin::Col-->
                     <div class="col-md-3 d-flex align-items-center">
                         <!--begin::Label-->
-                        <label class="fs-6 fw-bold">Format formatLarge</label>
+                        <label class="fs-6 fw-bold"><?= ucfirst(lang('Medias.formatLarge')); ?></label>
                         <!--end::Label-->
                     </div>
                     <!--end::Col-->
@@ -105,7 +105,7 @@
                 <div class="fv-row row mb-15">
                     <div class="d-flex justify-content-between">
                         <div class="col-md-3 d-flex align-items-center">
-                            <label class="fs-6 fw-bold">activer le Watermark</label>
+                            <label class="fs-6 fw-bold"><?= ucfirst(lang('Medias.displayTheWatermark')); ?></label>
                         </div>
                     
                         <div class="col-md-9">
@@ -122,7 +122,7 @@
                     <!--begin::Col-->
                     <div class="col-md-3 d-flex align-items-center">
                         <!--begin::Label-->
-                        <label class="fs-6 fw-bold"> Texte Watermark</label>
+                        <label class="fs-6 fw-bold"><?= ucfirst(lang('Medias.textWatermark')); ?></label>
                         <!--end::Label-->
                     </div>
                     <!--end::Col-->
@@ -138,7 +138,7 @@
                 <div class="fv-row row mb-15">
                     <div class="d-flex justify-content-between">
                         <div class="col-md-3 d-flex align-items-center">
-                            <label class="fs-6 fw-bold">Supprimer les fichiers</label>
+                            <label class="fs-6 fw-bold"><?= ucfirst(lang('Medias.deleteTheFiles')); ?></label>
                         </div>
                     
                         <div class="col-md-9">
@@ -156,7 +156,7 @@
                         <!--begin::Title-->
                         <div class="d-flex flex-row-fluid flex-wrap align-items-center">
                             <div class="flex-grow-1 me-2">
-                                <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6"> medias not writable:</a>
+                                <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6"> <?= ucfirst(lang('Medias.mediasNotWritable')); ?> : </a>
                             </div>
                             <span class="badge badge-light-success fs-8 fw-bolder my-2"><?= ROOTPATH . 'writable/medias/'; ?></span>
                         </div>
@@ -165,8 +165,7 @@
                 <?php  } ?>
 
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="reset" class="btn btn-white btn-active-light-primary me-2"> <?= ucfirst(lang('Core.cancel')); ?></button>
-                    <button type="submit"  id="btnGroupDrop1" type="submit" name="submithandler" value="save_continue" class="btn btn-light-primary font-weight-bolder btn-sm kt_form_submit kt_form_submit_<?= strtolower($controller); ?>"> <?= ucfirst(lang('Core.saves_changes')); ?></button>
+                    <x-form-action-footer type="<?= strtolower($name); ?>"></x-form-action-footer>
                 </div>
             <?= form_close(); ?>
             <!--end::Form-->

@@ -1,8 +1,8 @@
 <?= view('Amauchar\Medias\Views\backend\metronic\partials\breadcrumb') ?>
 <!--begin::Table-->
-<table id="kt_file_manager_list" data-kt-filemanager-table="files" class="table align-middle table-row-dashed fs-6 gy-5">
+<table id="kt_file_manager_list" data-kt-filemanager-table="files" class="table align-middle table-row-dashed mt-6 fs-6 gy-5 table-bordered table-hover table-checkable dataTable no-footer dtr-inline datatableIdentifier">
     <!--begin::Table head-->
-    <thead>
+    <thead class="thead-light">
         <!--begin::Table row-->
         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
             <th class="w-10px pe-2">

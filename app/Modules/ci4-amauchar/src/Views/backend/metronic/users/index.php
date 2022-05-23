@@ -2,7 +2,7 @@
 <?= $this->section('main') ?>
 <div class="card ">
     <!--begin::Card header-->
-    <div class="card-header border-0 pt-6">
+    <div class="card-header border-0 pt-6 pb-6">
         <!--begin::Card title-->
             <?= $this->include('\Themes\backend\metronic\_partials\extras\search') ?> 
         <!--begin::Card title-->
@@ -33,9 +33,9 @@
     <!--end::Card header-->
     <div class="card-body p-0">
         <!--begin::Table-->
-        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_<?= $name; ?>">
+        <table class="table align-middle table-row-dashed fs-6 gy-5 table-bordered table-hover table-checkable dataTable no-footer dtr-inline datatableIdentifier" id="kt_table_<?= $name; ?>">
             <!--begin::Table head-->
-            <thead>
+            <thead class="thead-light">
                 <!--begin::Table row-->
                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                     <th class="w-10px pe-2">
@@ -43,11 +43,11 @@
                             <input class="form-check-input allCheck" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1" />
                         </div>
                     </th>
-                    <th class="min-w-125px" title="Name Lastname"><?= lang('Core.last_first_name'); ?></th>
+                    <th class="min-w-125px" title="Name Lastname"><?= lang('Core.colComposition'); ?></th> 
                     <th class="min-w-125px" title="Username"><?= lang('Core.username'); ?></th>
-                    <th class="min-w-125px" title="last_used_at"><?= lang('Core.last_used_at'); ?></th>
-                    <th class="min-w-125px" title="two_step"><?= lang('Core.two_step'); ?></th>
-                    <th class="min-w-125px" title="Active"><?= lang('Core.affichee'); ?></th>
+                    <th class="min-w-125px" title="last_used_at"><?= lang('Core.lastUsedAt'); ?></th>
+                    <th class="min-w-125px" title="two_step"><?= lang('Core.twoStep'); ?></th>
+                    <th class="min-w-125px" title="Active"><?= lang('Core.active'); ?></th>
                     <th class="min-w-125px" title="created_at"><?= lang('Core.created_at'); ?></th>
                     <th class="text-end min-w-70px" title="Action"><?= lang('Core.actions'); ?></th>
 

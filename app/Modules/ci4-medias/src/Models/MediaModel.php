@@ -360,7 +360,7 @@ class MediaModel extends BaseModel
             ? $builder
             : $builder->groupStart()
                 ->like('titre', $search)
-                ->orLike('medias.created_at', $search)
+                ->orLike('created_at', $search)
 			->groupEnd();
 			
 
