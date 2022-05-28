@@ -18,24 +18,39 @@
         <input type="hidden" name="action" value="edit_user_notification" />
         <input type="hidden" name="uuid" value="<?= $form->uuid; ?>" />
    
-            <div class="separator separator-dashed my-5"></div>
-            <!--begin::Item-->
-            <div class="d-flex">
-                <!--begin::Checkbox-->
-                <div class="form-check form-check-custom form-check-solid">
-                    <!--begin::Input-->
-                    <input class="form-check-input me-3" <?=  (service('settings')->get('App.connexionUnique', 'user:' . user_id()) == '1') ? 'checked="checked"' : ''; ?> name="connexionUnique" type="checkbox" value="1" id="connexionUnique">
-                    <!--end::Input-->
-                    <!--begin::Label-->
-                    <label class="form-check-label" for="kt_modal_update_email_notification_2">
-                        <div class="fw-bolder"><?= lang('Core.connexionUnique'); ?></div>
-                        <div class="text-gray-600"><?= lang('Core.connexion avec une seule adresse ip'); ?></div>
-                    </label>
-                    <!--end::Label-->
+        <div class="form-group form-group-sm row mb-6 ">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"><?= ucfirst(lang('Core.forceUnlockMdp')); ?></label>
+            <div class="col-lg-8">
+                <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                    <input class="form-check-input" type="checkbox" <?= ( service('settings')->get('App.forceUnlockMdp', 'user:' . Auth()->user()->id) == true) ? 'checked="checked"' : ''; ?> name="forceUnlockMdp" value="1"> 
+                    <label class="form-check-label" for="flexCheckDefault"></label>
                 </div>
-                <!--end::Checkbox-->
             </div>
-            <!--end::Item-->
+        </div>
+
+        <div  x-data="{ show: <?= (service('settings')->get('App.lockLoginIp', 'user:' . Auth()->user()->id) == true) ? 'true' : 'false'; ?> }" >
+            <div class="form-group form-group-sm row mb-6 ">
+                <label class="col-lg-4 col-form-label fw-bold fs-6"><?= ucfirst(lang('Core.lockLoginIp')); ?></label>
+                <div class="col-lg-8">
+                    <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                        <input @click="show = !show" :aria-expanded="show ? 'true' : 'false'" :class="{ 'active': show }" class="form-check-input" type="checkbox" <?= ( service('settings')->get('App.lockLoginIp', 'user:' . Auth()->user()->id) == true) ? 'checked="checked"' : ''; ?> name="lockLoginIp" value="1"> 
+                        <label class="form-check-label" for="flexCheckDefault"></label>
+                    </div>
+                </div>
+            </div>
+
+        
+
+            <div  x-show="show" style="display:none" class="row mb-6">
+                <label for="nameApp" class="col-lg-4 col-form-label fw-bold fs-6"><?= ucfirst(lang('Core.adresseIp')); ?> : </label>
+                <div class="col-lg-8">
+                     <?php $adresseIpUnlock = (service('settings')->get('App.adresseIpUnlock', 'user:' . Auth()->user()->id)) ?   implode(';', service('settings')->get('App.adresseIpUnlock', 'user:' . Auth()->user()->id)) : ''; ?>
+                    <input class="form-control form-control-solid" required type="text" value="<?= old('adresseIpUnlock') ? old('adresseIpUnlock') : $adresseIpUnlock ?>" name="adresseIpUnlock" id="adresseIpUnlock">
+                    <div class="invalid-feedback"><?= lang('Core.this_field_is_requis'); ?> </div>
+                    <p class="text-muted"> <?= ucfirst(lang('Core.ipAutoriseText')); ?> </p>
+                </div>
+            </div>
+        </div>
             <!--begin::Action buttons-->
             <div class="d-flex justify-content-end align-items-center mt-12">
                 <x-modal-action-footer type="<?= $name; ?>" submitaction="settings" dismiss="false" ></x-modal-action-footer>
@@ -45,7 +60,7 @@
         <!--end::Form-->
     </div>
     <!--end::Card body-->
-</div>
+</div> 
 <!--end::Card-->
 
 <?= $this->section('pageAdminScripts') ?>
@@ -79,7 +94,8 @@ var KTUsersUpdateNotification = function () {
                 submitButtonNotification.disabled = false; // hide the submit
                 modal.hide(); // hide the modal
             })
-            .catch(error => {}); 
+            .catch(error => { submitButtonNotification.disabled = false; // hide the submit
+            }); 
         });
     }
 

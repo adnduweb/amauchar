@@ -6,7 +6,7 @@
         <div class="modal-content">
             <!--begin::Modal header-->
             <div class="modal-header">
-                <x-modal-action-header>Update User Role</x-modal-action-header>
+                <x-modal-action-header><?= ucfirst(lang('Core.updateUserRole')); ?></x-modal-action-header>
             </div>
             <!--end::Modal header-->
             <!--begin::Modal body-->
@@ -25,7 +25,7 @@
                         <div class="d-flex flex-stack flex-grow-1">
                             <!--begin::Content-->
                             <div class="fw-bold">
-                                <div class="fs-6 text-gray-700">Please note that reducing a user role rank, that user will lose all priviledges that was assigned to the previous role.</div>
+                                <div class="fs-6 text-gray-700"><?= ucfirst(lang('Core.PleaseNoteThatReducingAUserRoleRankThatUserWillLoseAllPriviledgesThatWasAssignedToThePreviousRole')); ?>.</div>
                             </div>
                             <!--end::Content-->
                         </div>
@@ -37,7 +37,7 @@
                     <div class="fv-row mb-7">
                         <!--begin::Label-->
                         <label class="fs-6 fw-bold form-label mb-5">
-                            <span class="required">Select a user role</span>
+                            <span class="required"><?= ucfirst(lang('Core.selectAUserRole')); ?></span>
                         </label>
                         <!--end::Label-->
                         <?php $i = 0; foreach($groups as $k => $group){ ?>
@@ -47,7 +47,7 @@
                                 <div class="form-check form-check-custom form-check-solid">
 
                                     <!--begin::Input-->
-                                    <input <?= ($form->isSuperHero() == false && $form->isSuperCaptain() == false) ? 'disabled' : ''; ?> class="form-check-input me-3" <?= $form->inGroup($k) ? "checked='checked'" : ''; ?> name="groups[]" type="radio" value="<?= $k; ?>" id="kt_modal_update_role_option_<?= $k; ?>"  />
+                                    <input <?= ($form->isSuperHero() == false && $form->isSuperCaptain() == false) ? 'disabled' : ''; ?> class="form-check-input me-3" <?= $form->inGroup($k) ? "checked='checked'" : ''; ?> name="groups[]" type="checkbox" value="<?= $k; ?>" id="kt_modal_update_role_option_<?= $k; ?>"  />
                                     <!--end::Input-->
                                     <!--begin::Label-->
                                     <label class="form-check-label" for="kt_modal_update_role_option_<?= $k; ?>">

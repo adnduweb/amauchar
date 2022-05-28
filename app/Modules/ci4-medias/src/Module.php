@@ -29,7 +29,7 @@ class Module extends BaseModule
         $item    = new MenuItem([
             'title'      => 'Medias.medias',
             'namedRoute' => 'medias.index',
-            'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
+            'IconSvg'    => ["icons/duotune/files/fil025.svg", "svg-icon"],
             'permission' => 'admin.settings',
         ]);
        

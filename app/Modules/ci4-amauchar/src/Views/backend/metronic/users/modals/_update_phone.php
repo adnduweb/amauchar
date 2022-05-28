@@ -6,7 +6,7 @@
         <div class="modal-content">
             <!--begin::Modal header-->
             <div class="modal-header">
-                <x-modal-action-header>Update Email Address</x-modal-action-header>
+                <x-modal-action-header><?= ucfirst(lang('Core.updatePhone')); ?></x-modal-action-header>
             </div>
             <!--end::Modal header-->
             <!--begin::Modal body-->
@@ -28,7 +28,7 @@
                         <div class="d-flex flex-stack flex-grow-1">
                             <!--begin::Content-->
                             <div class="fw-bold">
-                                <div class="fs-6 text-gray-700">Please note that a valid phone  is required to complete the phone verification.</div>
+                                <div class="fs-6 text-gray-700"><?= ucfirst(lang('Core.PleaseNoteThatAValidPhoneIsRequiredToCompleteThePhoneVerification')); ?></div>
                             </div>
                             <!--end::Content-->
                         </div>

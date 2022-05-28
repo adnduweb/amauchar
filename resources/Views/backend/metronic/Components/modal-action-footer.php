@@ -7,8 +7,8 @@
 <?php } ?>
 <!--begin::Button-->
  <button type="button" class="btn btn-primary  btn-sm" id="kt_<?= $type ?? '' ?>_<?= $submitaction ?? '' ?>_submit" data-kt-submit-action="<?= $type ?? '' ?>-<?= $submitaction ?? '' ?>">
-    <span class="indicator-label"><?=lang('Core.saveData'); ?></span>
-    <span class="indicator-progress"><?=lang('Core.loading'); ?>
+    <span class="indicator-label"><?=lang('Core.saveForm'); ?></span>
+    <span class="indicator-progress"><?=lang('Core.pleaseWait'); ?>
     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 </button>
 <!--end::Button-->

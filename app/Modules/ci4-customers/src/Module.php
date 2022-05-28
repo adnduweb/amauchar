@@ -29,7 +29,7 @@ class Module extends BaseModule
         $item    = new MenuItem([
             'title'      => 'Customer.customers',
             'namedRoute' => 'customers.index',
-            'IconSvg'    => ["icons/duotune/finance/fin006.svg", "svg-icon"],
+            'IconSvg'    => ["icons/duotune/general/gen002.svg", "svg-icon"],
             'permission' => 'admin.settings',
         ]);
        

@@ -3,7 +3,7 @@
 "use strict";
 
 // Class definition
-var KTAppVassortsCreations = function () {
+var KTAppFormCustomers = function () {
 
     // Category status handler
     const handleStatus = () => {
@@ -13,6 +13,11 @@ var KTAppVassortsCreations = function () {
 
         var options = {
             dir: document.body.getAttribute('direction'),
+            language: {
+                noResults: function (params) {
+                    return _LANG_.NoDataFound;
+                }
+            }
         };
 
         $(select).select2(options).on('change', function (e) {
@@ -157,7 +162,7 @@ var KTAppVassortsCreations = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTAppVassortsCreations.init();
+    KTAppFormCustomers.init();
     KTAppsAdnduWeb.init();   
     KTImageManager.init();
 });

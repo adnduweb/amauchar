@@ -31,7 +31,7 @@ class Module extends BaseModule
             'title'      => 'Core.account',
             'group'      => 'account',
             'namedRoute' => '#',
-            'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
+            'IconSvg'    => ["icons/duotune/general/gen051.svg", "svg-icon"],
             'permission' => 'admin.settings',
             'children'   => [
                 [
@@ -70,7 +70,7 @@ class Module extends BaseModule
         $itemSettings    = new MenuItem([
             'title'      => 'Core.settings',
             'namedRoute' => 'settings.index',
-            'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
+            'IconSvg'    => ["icons/duotune/coding/cod003.svg", "svg-icon"],
             'permission' => 'admin.settings',
         ]);
        
@@ -80,7 +80,7 @@ class Module extends BaseModule
             'title'      => 'Core.tools',
             'group'      => 'tools',
             'namedRoute' => '#',
-            'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
+            'IconSvg'    => ["icons/duotune/general/gen019.svg", "svg-icon"],
             'permission' => 'admin.settings',
             'children'   => [
                 [

@@ -22,6 +22,7 @@ return [
     'notesList' => 'notes',
     'newLastname' => 'nom',
     'newFirstname' => 'prenom',
-    'newCompany' => 'nom de l\'entreprise'
+    'newCompany' => 'nom de l\'entreprise',
+    'addNote' => 'ajouter une note'
 
 ];

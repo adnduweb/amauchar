@@ -54,7 +54,7 @@ class Customer extends UUid
     public function getName(){
         $lastname = isset($this->attributes['lastname']) ? ucfirst($this->attributes['lastname']) : '';
         $firstname = isset($this->attributes['firstname']) ? ucfirst($this->attributes['firstname']) : '';
-        return $firstname .  ' ' . $lastname;
+        return $firstname .  ' ' . $lastname === null;
     }
     
     public function getDescription(){

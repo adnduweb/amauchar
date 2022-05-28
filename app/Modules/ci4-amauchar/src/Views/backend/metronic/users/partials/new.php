@@ -20,7 +20,7 @@
     <div class="fv-row row mb-6">
         <!--begin::Label-->
         <label for="first_name" class="col-lg-4 col-form-label required fw-bold fs-6"> 
-            <span><?= ucfirst(lang('Core.first_name')); ?></span>
+            <span><?= ucfirst(lang('Core.firstname')); ?></span>
         </label>
         <!--end::Label-->
         <!--begin::Col-->
@@ -33,7 +33,7 @@
 
     <div class="fv-row row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-4 col-form-label required fw-bold fs-6"> <span><?= ucfirst(lang('Core.last_name')); ?></span>
+        <label class="col-lg-4 col-form-label required fw-bold fs-6"> <span><?= ucfirst(lang('Core.lastname')); ?></span>
         </label>
         <!--end::Label-->
         <!--begin::Col-->
@@ -84,7 +84,7 @@
                 <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
             </div>
             <!--end::Meter-->
-            <div class="text-muted">Use <?= setting('Auth.minimumPasswordLength'); ?> or more characters with a mix of letters, numbers &amp; symbols.</div>
+            <div class="text-muted"><?= ucfirst(lang('Core.useOrMoreCharactersWithAMixOfLetters %s', [setting('Auth.minimumPasswordLength')])); ?></div>
         </div>
     </div>
 
@@ -111,7 +111,7 @@
         <!--begin::Col-->
         <div class="col-lg-8">
             <!--begin::Input-->
-            <select name="groups[]" required multiple aria-label="Select a <?= ucfirst(lang('Core.groupes')); ?>" data-control="select2" data-placeholder="Select a <?= ucfirst(lang('Core.groupes')); ?>..." class="form-select form-control form-select-solid">
+            <select name="groups[]" required multiple aria-label="Select a <?= ucfirst(lang('Core.groupes')); ?>" data-control="select2" data-placeholder="<?= ucfirst(lang('Core.selectOption')); ?>" class="form-select form-control form-select-solid">
                 <option></option>
                 <?php foreach ($groups as $k => $group) { ?>
                     <option value="<?= $k; ?>" <?= old('group') ? 'selected' : ''; ?> ><?= ucfirst($group['title']); ?></option>

@@ -6,7 +6,7 @@ use Amauchar\Core\Controllers\Admin\AdminController;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use Amauchar\Core\Entities\Group;
-use Amauchar\Core\Models\GroupModel;
+use Amauchar\Core\Models\GroupOverrideModel;
 use CodeIgniter\Shield\Authorization\Groups;
 use CodeIgniter\API\ResponseTrait;
 
@@ -19,7 +19,7 @@ class GroupsController extends AdminController
     protected $viewPrefix = '\Amauchar\Core\Views\backend\\'.ADMIN_THEME.'\groups\\';
 
     /**  @var object  */
-    public $tableModel = GroupModel::class;
+    public $tableModel = GroupOverrideModel::class;
 
     public $filterDatabase = true;
 

@@ -169,6 +169,7 @@ class DatabaseHandler extends BaseHandler
 
         if ($this->rowExists === false) {
 
+            //var_dump(auth()->user()); exit;
             if (function_exists('auth')) {
 				$user_id = (!empty(auth()->user()->id)) ? auth()->user()->id : null;
 			} else {

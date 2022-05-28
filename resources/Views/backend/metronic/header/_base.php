@@ -6,7 +6,7 @@
 		<?php  if (theme()->getOption('layout', 'aside/display') == true){ ?>
 			<div class="d-flex align-items-center d-lg-none ms-n3 me-1" data-bs-toggle="tooltip" title="Show aside menu">
 				<div class="btn btn-icon btn-active-light-primary" id="kt_aside_mobile_toggle">
-					<?= service('theme')->getSVG("icons/duotone/Text/Menu.svg", "svg-icon-2x mt-1"); ?>
+					<?= theme()->getSVG("icons/duotune/abstract/abs015.svg", "svg-icon-2x mt-1"); ?>
 				</div>
 			</div>
 		<?php } ?>
@@ -24,7 +24,7 @@
 			<!--begin::Mobile logo-->
 			<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
 				<a href="<?= site_url(); ?>" class="d-lg-none">
-					<img alt="Logo" src="<?=theme()->getMediaUrl('logos/logo-2-dark.svg'); ?>" class="h-15px"/>
+					<img alt="Logo" src="<?=theme()->getMediaUrl('logos/logo-2.svg'); ?>" class="h-30px"/>
 				</a>
 			</div>
 			<!--end::Mobile logo-->

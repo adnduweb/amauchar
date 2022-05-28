@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 use CodeIgniter\Shield\Entities\Group;
 use Amauchar\Core\Entities\User;
 
-class GroupModel extends Model
+class GroupOverrideModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'auth_groups_users';
@@ -56,9 +56,9 @@ class GroupModel extends Model
     {
         $rows = $this->builder()
             ->select('group')
-            ->where('user_id', $user->getAuthId())
+            ->where('user_id', $user->id)
             ->get()
-            ->getResultArray();
+            ->getResultArray(); 
 
         return array_column($rows, 'group');
     }
@@ -85,39 +85,14 @@ class GroupModel extends Model
             ->delete();
     }
  
-    //   /**
-    //  * @param int|string $userId
-    //  */
-    // public function getByUserId($userId): array
-    // {
-    //     $groups = $this->builder()
-    //         ->select('group')
-    //         ->where('user_id', $userId)
-    //         ->get()
-    //         ->getResultArray();
-
-    //     return array_column($groups, 'group');
-    // }
-
-    // /**
-    //  * @param int|string $userId
-    //  */
-    // public function deleteAll($userId): void
-    // {
-    //     $this->builder()
-    //         ->where('user_id', $userId)
-    //         ->delete();
-    // }
-
-    // /**
-    //  * @param int|string $userId
-    //  * @param mixed      $cache
-    //  */
-    // public function deleteNotIn($userId, $cache): void
-    // {
-    //     $this->builder()
-    //         ->where('user_id', $userId)
-    //         ->whereNotIn('group', $cache)
-    //         ->delete();
-    // }
+    public function getAllGroups(User $user): array
+    {
+        //print_r(model('GroupModel'));exit;
+        return $this->asObject()
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->findAll();
+            
+    }
+    
 }

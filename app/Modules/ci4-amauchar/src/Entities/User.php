@@ -3,6 +3,7 @@
 namespace Amauchar\Core\Entities;
 
 use Amauchar\Core\Models\UserAdresseModel;
+use Amauchar\Core\Models\GroupOverrideModel;
 
 class User extends \CodeIgniter\Shield\Entities\User
 {
@@ -252,11 +253,14 @@ class User extends \CodeIgniter\Shield\Entities\User
     public function getAuthGroupsUsers(): array
     {
         //print_r(model('GroupModel'));exit;
-        $this->attributes['groups'] = model('GroupModel')
-            ->where('user_id', $this->attributes['id'])
-            ->orderBy('created_at', 'desc')
-            ->findAll();
-            return $this->attributes['groups'];
+        // $this->attributes['groupss'] = model('\Amauchar\Core\Models\GroupOverrideModel')->getAllGroups($this);
+        // return $this->attributes['groupss'];
+          //print_r(model('GroupModel'));exit;
+          $this->attributes['groups'] = model('GroupOverrideModel')
+          ->where('user_id', $this->attributes['id'])
+          ->orderBy('created_at', 'desc')
+          ->findAll();
+          return $this->attributes['groups'];
            
     }
 

@@ -18,34 +18,34 @@ var KTCreateUser = function() {
                     'first_name': {
                         validators: {
                             notEmpty: {
-                                message: 'First Name is required'
+                                message: _LANG_.firstname_is_required
                             }
                         }
                     },
                     'last_name': {
                         validators: {
                             notEmpty: {
-                                message: 'Last Name is required'
+                                message: _LANG_.lastname_is_required
                             }
                         }
                     },
                     'email': {
                         validators: {
                             notEmpty: {
-                                message: 'Email address is required'
+                                message: _LANG_.email_is_required
                             },
                             emailAddress: {
-                                message: 'The value is not a valid email address'
+                                message: _LANG_.the_value_is_not_address_valid
                             }
                         }
                     },
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: _LANG_.PasswordIsRequired
                             },
                             callback: {
-                                message: 'Please enter valid password',
+                                message: _LANG_.PleaseEnterValidPassword,
                                 callback: function(input) {
                                     if (input.value.length > 0) {
                                         return validatePassword();
@@ -57,20 +57,20 @@ var KTCreateUser = function() {
                     'pass_confirm': {
                         validators: {
                             notEmpty: {
-                                message: 'The password confirmation is required'
+                                message: _LANG_.PleaseConfirmationIsRequired
                             },
                             identical: {
                                 compare: function() {
                                     return form.querySelector('[name="password"]').value;
                                 },
-                                message: 'The password and its confirm are not the same'
+                                message: _LANG_.PasswordAndItsConfirmAreNotTheSame
                             }
                         }
                     },
                     'group': {
                         validators: {
                             notEmpty: {
-                                message: 'Group is required'
+                                message: _LANG_.GroupIsRequired
                             }
                         }
                     },
@@ -133,7 +133,7 @@ var KTCreateUser = function() {
                                     text: dataMessage,
                                     icon: "error",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: _LANG_.Ok,
                                     customClass: {
                                         confirmButton: "btn btn-primary"
                                     }
@@ -151,10 +151,10 @@ var KTCreateUser = function() {
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        text: _LANG_.sorryLooksLikeThereArSomeErrorsDetectedPleaseTryAgain,
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: _LANG_.Ok,
                         customClass: {
                             confirmButton: "btn btn-primary"
                         }

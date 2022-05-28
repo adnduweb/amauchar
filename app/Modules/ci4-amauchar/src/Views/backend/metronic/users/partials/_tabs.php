@@ -7,18 +7,18 @@
     <!--end:::Tab item-->
     <!--begin:::Tab item-->
     <li class="nav-item">
-        <a class="nav-link text-active-primary pb-4 active" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#kt_user_view_overview_security">Security</a>
+        <a class="nav-link text-active-primary pb-4 active" data-kt-countup-tabs="true" data-bs-toggle="tab" href="#kt_user_view_overview_security"><?= ucfirst(lang('Core.security')); ?></a>
     </li>
     <!--end:::Tab item-->
     <!--begin:::Tab item-->
     <li class="nav-item">
-        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_user_view_overview_events_and_logs_tab">Events &amp; Logs</a>
+        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_user_view_overview_events_and_logs_tab"><?= ucfirst(lang('Core.eventsAndLogs')); ?></a>
     </li>
     <!--end:::Tab item-->
 
      <!--begin:::Tab item-->
      <li class="nav-item">
-        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_user_view_overview_permissions_tab">Permissions</a>
+        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_user_view_overview_permissions_tab"><?= ucfirst(lang('Core.permissions')); ?></a>
     </li>
     <!--end:::Tab item-->
 </ul>

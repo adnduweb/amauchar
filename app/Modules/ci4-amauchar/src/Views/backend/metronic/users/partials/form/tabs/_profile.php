@@ -11,7 +11,7 @@
     <div class="card-header border-0">
         <!--begin::Card title-->
         <div class="card-title">
-            <h2><?= lang('Core.Profile'); ?></h2>
+            <h2><?= ucfirst(lang('Core.profile')); ?></h2>
         </div>
         <!--end::Card title-->
     </div>

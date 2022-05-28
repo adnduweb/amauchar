@@ -26,8 +26,8 @@
         <!--end::Summary-->
         <!--begin::Details toggle-->
         <div class="d-flex flex-stack fs-4 py-3">
-            <div class="fw-bolder rotate collapsible collapsed"><?= lang('Core.details'); ?> </div>
-            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="" data-bs-original-title="<?= lang('Core.edit_customer_details'); ?>">
+            <div class="fw-bolder rotate collapsible collapsed"><?= ucfirst(lang('Core.details')); ?> </div>
+            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="" data-bs-original-title="<?= lang('Core.editCustomerDetails'); ?>">
                 <a href="<?= current_url(); ?>" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_update_details"><?= lang('Core.edit'); ?></a>
             </span>
         </div>

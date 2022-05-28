@@ -3,9 +3,9 @@
    $breadcrumb = [];
 
     if (theme()->getOption('layout', 'page-title/direction') === 'column') {
-        $baseClass = 'flex-column align-items-start me-3';
+        $baseClass = 'page-title align-items-center flex-wrap me-3 mb-5 mb-lg-0';
     } else {
-        $baseClass = 'align-items-center me-3';
+        $baseClass = 'page-title align-items-center flex-wrap me-3 mb-5 mb-lg-0';
     }
 
     $attr = array();
@@ -18,7 +18,7 @@
 <div  <?= service('theme')->printHtmlAttributes('page-title'); ?> class="d-flex <?= $baseClass; ?>">
     <!--begin::Title-->
     <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-4 lh-1">
-    <?= isset($pageTitleDefault) ? $pageTitleDefault : ''; ?>
+    <?= isset($pageTitleDefault) ? ucfirst($pageTitleDefault) : ''; ?>
 
         <?php  if (theme()->getOption('layout', 'page/description') && theme()->getOption('layout', 'page-title/description')  === true ) { ?>
         <!--begin::Separator-->
@@ -112,7 +112,7 @@
 
             <?php endforeach ?>
 
-            <?php if(isset($formItem)){  ?>
+            <?php if(isset($formItem) && !empty($formItem->getName())){ ?>
                 <li class="breadcrumb-item">
                     <span class="bullet bg-gray-200 w-5px h-2px"></span>
                 </li>

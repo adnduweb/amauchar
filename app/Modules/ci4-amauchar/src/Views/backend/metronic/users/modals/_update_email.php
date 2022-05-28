@@ -6,7 +6,7 @@
         <div class="modal-content">
             <!--begin::Modal header-->
             <div class="modal-header">
-                <x-modal-action-header>Update Email Address</x-modal-action-header>
+                <x-modal-action-header><?= ucfirst(lang('Core.updateEmailAddress')); ?></x-modal-action-header>
             </div>
             <!--end::Modal header-->
             <!--begin::Modal body-->
@@ -27,7 +27,7 @@
                         <div class="d-flex flex-stack flex-grow-1">
                             <!--begin::Content-->
                             <div class="fw-bold">
-                                <div class="fs-6 text-gray-700">Please note that a valid email address is required to complete the email verification.</div>
+                                <div class="fs-6 text-gray-700"><?= ucfirst(lang('Core.pleaseNoteThatAValidEmailAddressIsRequiredToCompleteTheEmailVerification')); ?></div>
                             </div>
                             <!--end::Content-->
                         </div>
@@ -39,7 +39,7 @@
                     <div class="fv-row mb-7">
                         <!--begin::Label-->
                         <label class="fs-6 fw-bold form-label mb-2">
-                            <span class="required">Email Address</span>
+                            <span class="required"><?= ucfirst(lang('Core.email')); ?></span>
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->

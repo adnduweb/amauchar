@@ -37,7 +37,7 @@
             <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold flex-nowrap">
                 <!--begin::Nav item-->
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary me-6 <?= $active; ?> <?= $active == 'customers' ? 'active' : ''; ?>" href="<?= route_to('customer.edit', $formItem->uuid ?? null); ?>"><?= ucfirst(lang('Core.general')); ?></a>
+                    <a class="nav-link text-active-primary me-6 <?= $active; ?> <?= $active == 'customers' ? 'active' : ''; ?>" href="<?= (empty($formItem->uuid)) ? current_url() :route_to('customer.edit', $formItem->uuid ?? null); ?>"><?= ucfirst(lang('Core.general')); ?></a>
                 </li>
                 <!--end::Nav item-->
                 <?php if(!empty($formItem->uuid)){ ?>

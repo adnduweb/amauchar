@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <!--begin::Modal header-->
                 <div class="modal-header">
-                    <x-modal-action-header>Update Password</x-modal-action-header>
+                    <x-modal-action-header><?= ucfirst(lang('Core.updatePassword')); ?></x-modal-action-header>
                 </div>
                 <!--end::Modal header-->
                 <!--begin::Modal body-->
@@ -18,7 +18,7 @@
                         <input type="hidden" name="username" value="<?= $form->username; ?>" />
                         <!--begin::Input group=-->
                         <div class="fv-row mb-10">
-                            <label class="required form-label fs-6 mb-2">Current Password</label>
+                            <label class="required form-label fs-6 mb-2"><?= ucfirst(lang('Core.currentPassword')); ?></label>
                             <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="current_password" autocomplete="off" />
                         </div>
                         <!--end::Input group=-->
@@ -27,7 +27,7 @@
                             <!--begin::Wrapper-->
                             <div class="mb-1">
                                 <!--begin::Label-->
-                                <label class="form-label fw-bold fs-6 mb-2">New Password</label>
+                                <label class="form-label fw-bold fs-6 mb-2"><?= ucfirst(lang('Core.newPassword')); ?></label>
                                 <!--end::Label-->
                                 <!--begin::Input wrapper-->
                                 <div class="position-relative mb-3">
@@ -49,13 +49,13 @@
                             </div>
                             <!--end::Wrapper-->
                             <!--begin::Hint-->
-                            <div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+                            <div class="text-muted"><?= ucfirst(lang('Core.useOrMoreCharactersWithAMixOfLetters %s', [setting('Auth.minimumPasswordLength')])); ?></div>
                             <!--end::Hint-->
                         </div>
                         <!--end::Input group=-->
                         <!--begin::Input group=-->
                         <div class="fv-row mb-10">
-                            <label class="form-label fw-bold fs-6 mb-2">Confirm New Password</label>
+                            <label class="form-label fw-bold fs-6 mb-2"><?= ucfirst(lang('Core.confirmNewPassword')); ?></label>
                             <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm_password" autocomplete="off" />
                         </div>
                         <!--end::Input group=-->

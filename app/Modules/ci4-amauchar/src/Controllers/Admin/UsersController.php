@@ -436,7 +436,7 @@ class UsersController extends AdminController
                             'sucess' => lang('Core.resourcesSaved')
                         ],
                         'display_kt_table_users_profile' => view('Amauchar\Core\backend\metronic\users\partials\_kt_table_users_profile', [
-                            'form' =>  $this->viewData['form'],
+                            'form' =>  $this->object,
                             'adresseDefault' => $this->viewData['adresseDefault'], 
                             ]
                         )
@@ -447,10 +447,22 @@ class UsersController extends AdminController
 
                 case 'edit_user_notification':
 
-                    $connexionUnique = ($this->request->getPost('connexionUnique') ? 1 : 0);
-
                     $context = 'user:' . user_id();
-                    service('settings')->set('App.connexionUnique', $connexionUnique, $context);
+
+
+                    service('settings')->set('App.forceUnlockMdp', $this->request->getPost('forceUnlockMdp') === '1', $context ); 
+                    service('settings')->set('App.lockLoginIp', $this->request->getPost('lockLoginIp') === '1', $context ); 
+                    $adresseIpUnlock = $this->request->getPost('adresseIpUnlock');
+                    if($adresseIpUnlock){
+                        if(!preg_match("/;/i", $adresseIpUnlock)) {
+                            $response = ['errors' => [lang('Core.notConformeFormat')]];
+                            return $this->respond($response, ResponseInterface::HTTP_BAD_REQUEST);
+                        }
+        
+                        $adresseIpUnlock = explode(';', $this->request->getPost('adresseIpUnlock'));
+                        service('settings')->set('App.adresseIpUnlock', $adresseIpUnlock, $context ); 
+                        
+                    }
 
                      // Success!
                      $response = [
@@ -600,7 +612,6 @@ class UsersController extends AdminController
                 return $this->respond(['error' => model(UserAdresseModel::class)->errors()], ResponseInterface::HTTP_INTERNAL_SERVER_ERROR);
             }
         }
-
         
     }
 
@@ -634,8 +645,6 @@ class UsersController extends AdminController
                 ->countAllResults(true);
         }
         $this->viewData['groups'] = $groups;
-
-        //print_r( $this->viewData['groups']); exit;
     }
 
     /**
@@ -665,28 +674,6 @@ class UsersController extends AdminController
     {
         return new User();
     }
-
-    //  /**
-    //  * Set breadcrumbs array for the controller page.
-    //  *
-    //  * @param int|null $tab_id
-    //  * @param array|null $tabs
-    //  */
-    // public function initBreadcrumbs(){
-
-    //     parent::initBreadcrumbs();
-        
-    //     if(service('router')->methodName() == 'edit'){
-    //         $this->getUserCurrentProvider();
-    //         $addBreadcrumb[] = array(
-    //             'title' => ($this->object) ? $this->object->getFullName() : null,
-    //             'path' => null,
-    //             'active' => false
-    //         );
-            
-    //         $this->breadcrumbs = array_merge($this->breadcrumbs, $addBreadcrumb);
-    //     }
-    // }
 
     /**
      * Displays the form the settings user to the site.
@@ -740,10 +727,10 @@ class UsersController extends AdminController
         setting('AuthGroups.defaultGroup', $this->request->getPost('defaultGroup'));
 
         // // Actions
-        // $actions             = setting('Auth.actions');
-        // $actions['login']    = $this->request->getPost('email2FA') ?? false;
-        // $actions['register'] = $this->request->getPost('emailActivation') ?? false;
-        // setting('Auth.actions', $actions);
+        $actions             = setting('Auth.actions');
+        $actions['login']    = $this->request->getPost('email2FA') ?? null;
+        $actions['register'] = $this->request->getPost('emailActivation') ?? null;
+        setting('Auth.actions', $actions);
         setting('Auth.allowMagicLinkLogin', (bool) $this->request->getPost('allowMagicLinkLogin'));
         
 

@@ -249,6 +249,8 @@ class CustomersController extends AdminController
                   return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
             }
 
+            //Create type customer
+
 
             setting('Customer.delayNew', $this->request->getPost('delayNew'));
 

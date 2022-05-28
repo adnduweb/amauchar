@@ -6,7 +6,7 @@
         <div class="card-header border-0">
             <!--begin::Card title-->
             <div class="card-title">
-                <h2>Login Sessions</h2>
+                <h2><?= ucfirst(lang('Core.loginSessions')); ?></h2>
             </div>
             <!--end::Card title-->
             <!--begin::Card toolbar-->
@@ -14,7 +14,7 @@
                 <!--begin::Filter-->
                 <a href="<?= route_to('user-delete-sessions', $form->uuid); ?>"  type="button" class="btn btn-sm btn-flex btn-light-primary" id="kt_modal_sign_out_sesions">
                     <?= service('theme')->getSVG('icons/duotune/arrows/arr077.svg', "svg-icon svg-icon-3"); ?>
-                    Sign out all sessions
+                    <?= ucfirst(lang('Core.signOutAllSessions')); ?>
                 </a>
                 <!--end::Filter-->
             </div>
@@ -42,19 +42,9 @@
         <div class="card-header border-0">
             <!--begin::Card title-->
             <div class="card-title">
-                <h2>Last connexions</h2>
+                <h2><?= ucfirst(lang('Core.lastLogin')); ?></h2>
             </div>
             <!--end::Card title-->
-            <!--begin::Card toolbar-->
-            <div class="card-toolbar">
-                <!--begin::Button-->
-                <button type="button" class="btn btn-sm btn-light-primary">
-                    <?= service('theme')->getSVG('icons/duotune/files/fil021.svg', "svg-icon svg-icon-3"); ?>
-                    Download Report
-                </button>
-                <!--end::Button-->
-            </div>
-            <!--end::Card toolbar-->
         </div>
         <!--end::Card header-->
         <!--begin::Card body-->
@@ -81,16 +71,6 @@
                 <h2>Events & Logs</h2>
             </div>
             <!--end::Card title-->
-            <!--begin::Card toolbar-->
-            <div class="card-toolbar">
-                <!--begin::Button-->
-                <button type="button" class="btn btn-sm btn-light-primary">
-                    <?= service('theme')->getSVG('icons/duotune/files/fil021.svg', "svg-icon svg-icon-3"); ?>
-                    Download Report
-                </button>
-                <!--end::Button-->
-            </div>
-            <!--end::Card toolbar-->
         </div>
         <!--end::Card header-->
         <!--begin::Card body-->

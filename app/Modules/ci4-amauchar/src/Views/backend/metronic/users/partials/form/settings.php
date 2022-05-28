@@ -31,8 +31,8 @@
         <label class="form-check form-check-custom form-check-solid align-items-start">
             <!--begin::Input-->
             <input class="form-check-input me-3" type="checkbox" name="emailActivation" 
-                    value='CodeIgniter\Shield\Authentication\Actions\EmailActivate' id="email-activation"
-                <?php if (old('emailActivation', setting('Auth.actions')['register']) === 'CodeIgniter\Shield\Authentication\Actions\EmailActivate') : ?>
+                    value='CodeIgniter\Shield\Authentication\Actions\EmailActivator' id="email-activation"
+                <?php if (old('emailActivation', setting('Auth.actions')['register']) === 'CodeIgniter\Shield\Authentication\Actions\EmailActivator') : ?>
                     checked
                 <?php endif ?>
             >

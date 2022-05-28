@@ -33,7 +33,7 @@ $user = $authenticator->getPendingUser();
                     <div class="text-muted fw-bold fs-5 mb-5">Enter the verification code we sent to</div>
                     <!--end::Sub-title-->
                     <!--begin::Mobile no-->
-                    <div class="fw-bolder text-dark fs-3"><?= \Amauchar\Core\Libraries\Util::secret_mail($user->getAuthEmail()); ?></div>
+                    <div class="fw-bolder text-dark fs-3"><?= \Amauchar\Core\Libraries\Util::secret_mail($user->getEmail()); ?></div> 
                     <!--end::Mobile no-->
                 </div>
                             

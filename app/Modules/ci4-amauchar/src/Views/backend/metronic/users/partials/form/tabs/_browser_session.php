@@ -10,14 +10,14 @@
                 </td>
                 <td>
                     <?php if($session->id != session_id() ){ ?>
-                        <a href="#" data-kt-users-sign-out="single_user">Sign out</a>
+                        <a href="#" data-kt-users-sign-out="single_user"><?= ucfirst(lang('Core.signOut')); ?></a>
                     <?php }else  if($session->id == session_id() ){ ?>
-                        <span class="badge badge-light-success">Current Session</span>
+                        <span class="badge badge-light-success"><?= ucfirst(lang('Core.currentSession')); ?></span>
                     <?php } ?>
                 </td>
             </tr>
         <?php endforeach ?>
     </tbody>
 <?php else : ?>
-    <div class="alert alert-secondary">No recent login sessions.</div>
+    <div class="alert alert-secondary"><?= ucfirst(lang('Core.NoRecentData')); ?>.</div>
 <?php endif ?>

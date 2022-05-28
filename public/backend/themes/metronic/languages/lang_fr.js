@@ -1,6 +1,8 @@
 var _LANG_ = {
     "an_AJAX_HTTP_error_occurred": "Une erreur HTTP AJAX s'est produite.",
     "error": "erreur",
+    'NoDataAvailableInTable': 'Pas de données récentes',
+    'NoDataFound': 'Pas de données trouvées',
     "error_write_file": "Impossible de sauvegarder les données",
     "Forbidden": "Accès non autorisé",
     "The string supplied did not seem to be a phone number.": "Le champ que vous avez renseigné ne semble pas être un numéro de téléphone.",
@@ -137,6 +139,8 @@ var _LANG_ = {
     "id": "Id",
     "user": "Utilisateur",
     "details": "Détails",
+    "lastname_is_required": "Le nom est requis",
+    "firstname_is_required": "Le prénom est requis",
     "email_is_required": "L'email est requis",
     "champs_is_required": "Le champ est requis",
     "the_value_is_not_address_valid": "la valeur n'est pas une adresse valide",
@@ -158,6 +162,8 @@ var _LANG_ = {
     "to": "de",
     "of": "à",
     "ShowingNoRecords": "pas d'enregistrement",
-    "NoDataAvailableInTable": "Aucune donnée disponible",
+    "sorryLooksLikeThereArSomeErrorsDetectedPleaseTryAgain": "Désolé, il semble qu'il y ait des erreurs détectées, veuillez réessayer.",
+    "Ok": "Ok",
+    "GroupIsRequired": "Le röle est requis"
 
 }

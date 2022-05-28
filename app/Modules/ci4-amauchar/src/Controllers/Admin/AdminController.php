@@ -172,10 +172,10 @@ class AdminController extends BaseController
         $this->display = service('router')->methodName();
         switch ($this->display) {
             case'indexView':
-                $this->pageTitleDefault = ucfirst(lang('Core.list: %s', [lang(ucfirst(singular($this->name)) . '.' . $this->name)]));
+                $this->pageTitleDefault = ucfirst(lang('Core.list: %s', [$this->name]));
             break;
             case 'index':   
-                    $this->pageTitleDefault = ucfirst(lang('Core.list: %s', [lang(ucfirst(singular($this->name)) . '.' . $this->name)]));
+                    $this->pageTitleDefault = ucfirst(lang('Core.list: %s', [$this->name]));
                     $this->pageHeaderToolbarBtn['create'] = [
                         'color' => 'primary',
                         'href'  => site_url(route_to(singular($this->name) . '.create')),
@@ -203,8 +203,16 @@ class AdminController extends BaseController
             
                 break;
             case 'create':
+                $this->pageTitleDefault = ucfirst(lang('Core.newElement'));
+                $this->pageHeaderToolbarBtn['back'] = [
+                    'color' => 'secondary',
+                    'href'  => site_url(route_to($this->name . '.index')),
+                    'svg'   => theme()->getSVG("icons/duotone/Navigation/Arrow-from-right.svg", "svg-icon-5 svg-icon-gray-500 me-1"),
+                    'desc'  => lang('Core.backToList'),
+                ];
             break;
             case 'new':
+                    $this->pageTitleDefault = ucfirst(lang('Core.newElement'));
                     $this->pageHeaderToolbarBtn['back'] = [
                         'color' => 'secondary',
                         'href'  => site_url(route_to($this->name . '.index')),
