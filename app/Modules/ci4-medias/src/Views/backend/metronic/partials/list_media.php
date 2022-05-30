@@ -10,10 +10,10 @@
                     <input class="form-check-input allCheck" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_file_manager_list .form-check-input" value="1" />
                 </div>
             </th>
-            <th class="min-w-250px">Name</th>
-            <th class="min-w-10px">Size</th>
-            <th class="min-w-125px">Last Modified</th>
-            <th class="w-125px"></th>
+            <th class="min-w-250px"><?= ucfirst(lang('Core.name')); ?></th>
+            <th class="min-w-10px"><?= ucfirst(lang('Core.size')); ?></th>
+            <th class="min-w-125px"><?= ucfirst(lang('Core.lastModified')); ?></th>
+            <th class="w-125px"><?= ucfirst(lang('Core.actions')); ?></th>
         </tr>
         <!--end::Table row-->
     </thead>

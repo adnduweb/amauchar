@@ -7528,6 +7528,56 @@ var KTmanagerAccount = function() {
         }
     }
 
+    var handleDarkModeEnabled = () => {
+
+        const darkModeButtons = document.querySelectorAll('[data-darkModeEnabled="change"]');
+        const darkModeCurrent = document.querySelector('[data-darkModeCurrent="true"]');
+        var iconMoon = document.querySelector('.darkModeCurrent .la-moon');
+        var iconSun = document.querySelector('.darkModeCurrent .la-sun');
+
+
+        darkModeButtons.forEach(d => {
+            // Delete button on click
+            d.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                let current = this.getAttribute('data-current');
+                axios.post(this.getAttribute('data-kt-url'), { darkModeEnabled: current })
+                    .then(response => {
+                        window.localStorage.setItem('darkModeEnabled', current);
+
+                        let buttonChangeMode = document.querySelector("#stylebundle-css");
+                        if (buttonChangeMode != undefined) {
+                            if (current == 'light') {
+                                iconSun.classList.remove('d-none');
+                                iconMoon.classList.add('d-none');
+                            } else {
+                                iconSun.classList.add('d-none');
+                                iconMoon.classList.remove('d-none');
+                            }
+                            buttonChangeMode.href = response.data[0].stylebundle_css;
+
+                        }
+
+                        let buttonChangeModeDark = document.querySelector("#styledarkbundle-css");
+                        if (buttonChangeModeDark != undefined) {
+                            if (current == 'light') {
+                                iconSun.classList.remove('d-none');
+                                iconMoon.classList.add('d-none');
+                            } else {
+                                iconSun.classList.add('d-none');
+                                iconMoon.classList.remove('d-none');
+                            }
+                            buttonChangeModeDark.href = response.data[0].stylebundle_css;
+                        }
+                    })
+                    .catch(error => {});
+            });
+        });
+    }
+
+
+
 
     return {
         // public functions
@@ -7535,6 +7585,7 @@ var KTmanagerAccount = function() {
             initApps();
             initDevis();
             initAsideToggle();
+            handleDarkModeEnabled();
         }
     };
 }();

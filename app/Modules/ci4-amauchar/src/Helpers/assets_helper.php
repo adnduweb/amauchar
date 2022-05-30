@@ -1,5 +1,6 @@
 <?php
 
+use Amauchar\Core\Libraries\Util;
 /**
  * This file is part of Bonfire.
  *
@@ -16,30 +17,31 @@ if (! defined('asset_link')) {
      */
     function asset_link(string $location, string $type): string
     {
-        $url = asset_racine($location, $type);
 
-        // if (service('Theme')->isDarkModeEnabled()) {
-            // var_dump(theme()->getCurrentMode()); exit;
+        $url = asset_racine($location, $type);
             
         if (theme()->isDarkModeEnabled()) {
-        
+            
             $darkPath = str_replace('.bundle', '.'.theme()->getCurrentMode().'.bundle', $location);
             if (file_exists(ROOTPATH . 'public/' . $darkPath)) {
-               $url = $darkPath;
+               $url = base_url($darkPath);
             }
         }
 
         // echo $url; exit;
+        $path_parts = pathinfo($url );
+        $identifier = Util::stringCleanUrl($path_parts['filename']);
+   
+        
 
         $tag = '';
 
         switch ($type) {
             case 'css':
-                $tag = "<link href='{$url}' rel='stylesheet' />" . "\n";
+                $tag = "<link id='{$identifier}-css' href='{$url}' rel='stylesheet' />" . "\n";
                 break;
-
             case 'js':
-                $tag = "<script src='{$url}'></script>" . "\n";
+                $tag = "<script id='{$identifier}-js' src='{$url}'></script>" . "\n";
         }
 
         return $tag;
@@ -106,5 +108,41 @@ if (! defined('asset_racine')) {
         $location   = implode('/', $segments);
 
         return base_url($location);
+    }
+}
+
+if (! defined('asset_link_array')) {
+    /**
+     * Generates the URL to serve an asset to the client
+     *
+     * @param string $type css, js
+     */
+    function asset_link_array(string $location, string $type): array
+    {
+
+        $url = asset_racine($location, $type);
+            
+        if (theme()->isDarkModeEnabled()) {
+            
+            $darkPath = str_replace('.bundle', '.'.theme()->getCurrentMode().'.bundle', $location);
+            if (file_exists(ROOTPATH . 'public/' . $darkPath)) {
+               $url = base_url($darkPath);
+            }
+        }
+
+        $path_parts = pathinfo($url );
+        $identifier = Util::stringCleanUrl($path_parts['filename']);
+
+        $tag = '';
+
+        switch ($type) {
+            case 'css':
+                $tag = ['name' => str_replace('dark', '',$identifier) . '-css', 'href' => $url];
+                break;
+            case 'js':
+                $tag = ['name' => $identifier . '-ks', 'href' => $url];
+        }
+
+        return $tag;
     }
 }

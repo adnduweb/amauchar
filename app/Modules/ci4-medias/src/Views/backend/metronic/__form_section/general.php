@@ -5,7 +5,7 @@
         <!--begin::Input group-->
         <div class="fv-row mb-7">
             <!--begin::Label-->
-            <label class="fs-6 fw-bold mb-2"><?= ucfirst(lang('Core.name')); ?>*</label>
+            <label class="fs-6 fw-bold mb-2 required"><?= ucfirst(lang('Core.name')); ?></label>
             <!--end::Label-->
             <!--begin::Input-->
             <input type="text" class="form-control form-control-solid" required placeholder="" name="lang[<?= service('request')->getLocale(); ?>][titre]" type="text" value="<?= old('titre') ? old('titre') : $formlang->titre; ?>" kl_vkbd_parsed="true">
@@ -17,7 +17,7 @@
         <!--begin::Input group-->
         <div class="fv-row mb-7">
             <!--begin::Label-->
-            <label class="fs-6 fw-bold mb-2"><?= ucfirst(lang('Core.description')); ?>*</label>
+            <label class="fs-6 fw-bold mb-2 "><?= ucfirst(lang('Core.description')); ?></label>
             <!--end::Label-->
             <!--begin::Input-->
             <input type="text" class="form-control form-control-solid" placeholder="" value="<?= old('description') ? old('description') : $formlang->description; ?>" name="lang[<?= service('request')->getLocale(); ?>][description]" kl_vkbd_parsed="true">
@@ -28,7 +28,7 @@
          <!--begin::Input group-->
          <div class="fv-row mb-15">
             <!--begin::Label-->
-            <label class="fs-6 fw-bold mb-2"><?= ucfirst(lang('Core.legende')); ?>*</label>
+            <label class="fs-6 fw-bold mb-2"><?= ucfirst(lang('Core.legende')); ?></label>
             <!--end::Label-->
             <!--begin::Input-->
             <input type="text" class="form-control form-control-solid" placeholder="" value="<?= old('legende') ? old('legende') : $formlang->legende; ?>" name="lang[<?= service('request')->getLocale(); ?>][legende]" kl_vkbd_parsed="true">
@@ -40,16 +40,7 @@
 
         <!--begin::Modal footer-->
         <div class="modal-footer flex-center">
-            <!--begin::Button-->
-            <button type="reset" id="kt_modal_update_customer_cancel" class="btn btn-light me-3"> <?= ucfirst(lang('Core.discard')); ?></button>
-            <!--end::Button-->
-            <!--begin::Button-->
-            <button type="submit" id="kt_modal_update_customer_submit" class="btn btn-primary">
-                <span class="indicator-label"> <?= ucfirst(lang('Core.save_form')); ?></span>
-                <span class="indicator-progress"><?= ucfirst(lang('Core.please_wait...')); ?> 
-                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-            </button>
-            <!--end::Button-->
+            <x-form-action-footer type="<?= strtolower($name); ?>"></x-form-action-footer>
         </div>
         <?php if (! empty($form->id)) { ?> <?= form_hidden('id', $form->id); ?> <?php } ?>
 	<!-- end:: Content -->

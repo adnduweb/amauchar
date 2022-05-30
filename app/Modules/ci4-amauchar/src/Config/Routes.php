@@ -109,6 +109,7 @@ $routes->group(ADMIN_AREA, $options, static function ($routes) {
     $routes->post('settings/consent', 'SettingsController::saveConsent',  ['as' => 'settings.consent.save']);
     $routes->get('settings', 'SettingsController::userCurrent',  ['as' => 'settings.user.current']);
     $routes->post('settings', 'SettingsController::userCurrent',  ['as' => 'settings.user.current']);
+    $routes->post('settings/dark-mode', 'SettingsController::darkModeEnabled',  ['as' => 'settings.update.darkmodeenabled']);
     
     
 

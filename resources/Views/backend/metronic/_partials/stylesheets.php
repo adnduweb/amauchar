@@ -12,6 +12,6 @@
 <?php } ?>
 
 <!--begin::Lang Skins(used by all pages) -->
-<script src="<?= base_url('backend/themes/' . service('settings')->get('App.themebo') . '/languages/lang_'. service('request')->getLocale() . '.js'); ?>" type="text/javascript"></script>
+<?= asset_link('backend/themes/' . service('settings')->get('App.themebo') . '/languages/lang_'. service('request')->getLocale() . '.js', 'js'); ?>
 
 <?= theme()->css(); ?>

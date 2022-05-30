@@ -17,7 +17,7 @@
         <?= view('Amauchar\Medias\Views\backend\metronic\_modals\upload') ?>
         <?= view('Amauchar\Medias\Views\backend\metronic\_modals\remove') ?>
 
-
+        </div>
     </div>
 
 

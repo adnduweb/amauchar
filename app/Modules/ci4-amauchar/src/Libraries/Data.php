@@ -679,6 +679,27 @@ class Data {
         );
     }
 
+    public static function getCustomerGroups() {
+        return array(
+            array(
+                'id'         => 1,
+                'name'  => 'Prospect',
+                'handle'   => 'prospect',
+                'active'   => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ),
+            array(
+                'id'         => 1,
+                'name'  => 'Client',
+                'handle'   => 'ckient',
+                'active'   => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            )
+        );
+    }
+
 
     public static function getCompagnies() {
 

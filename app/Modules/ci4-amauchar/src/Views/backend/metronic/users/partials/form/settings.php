@@ -319,7 +319,7 @@
         <!--end::Card title-->
     </div>
 
-    <div class="card-body border-top p-9"  x-data="{useGravatar: <?= old('useGravatar', setting('Users.useGravatar')) ? true : false ?>}">
+    <div class="card-body border-top p-9"  x-data="{useGravatar: <?= old('useGravatar', setting('Users.useGravatar')) ? 'true' : 'false' ?>}">
 
 
         <div class="form-group form-group-sm row mb-6" x-show="remember">

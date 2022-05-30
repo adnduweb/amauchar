@@ -14,7 +14,7 @@
             <!--begin::Add customer-->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_upload">
                 <?= theme()->getSVG('duotune/files/fil018.svg', "svg-icon svg-icon-2"); ?>
-                <span><?= lang('Medias.uploadFile'); ?></span>
+                <span><?= ucfirst(lang('Medias.uploadFile')); ?></span>
             </button>
             <!--end::Add customer-->
         </div>

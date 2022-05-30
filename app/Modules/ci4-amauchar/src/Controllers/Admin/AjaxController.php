@@ -41,5 +41,34 @@ class AjaxController extends AdminController
     }
 
 
+     /**
+     * Displays a list of available.
+     *
+     * @return string
+     */
+    public function update()
+    {
+        if ($this->request->isAJAX()) {
+
+            $response = json_decode($this->request->getBody());        
+            
+            if (empty($response->dataPost)) {
+                $response = ['errors' => lang('Core.selectAtLeastOne')];
+                return $this->respond($response, ResponseInterface::HTTP_FORBIDDEN);
+            }
+            if(service('mail')->sendAdmin(
+                'fabrice@adnduweb.com', 
+                lang('Core.'. $response->type), 
+                $response, 
+                view('Amauchar\Core\emails\backend\sendMailAccountManager', ['response' => $response])
+            ) == true){
+                $response = ['success' => lang('Core.resourcesSaved')];
+                return $this->respond($response, ResponseInterface::HTTP_OK);
+            }
+
+        }
+    }
+
+
 
 }

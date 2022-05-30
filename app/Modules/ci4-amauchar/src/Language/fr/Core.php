@@ -226,6 +226,13 @@
 	'listUsersApps' => 'liste des utilisateurs',
 	'search_by_username_full_name_or_email' => 'rechercher par emal ou par identifiant',
 	'newElement' => 'nouvel élément',
+	'images' => 'images',
+	'redimensionner' => 'redimensionner',
+	'tailles' => 'tailles',
+	'dimensions' => 'dimensions',
+	'redimensionner' => 'redimensionner',
+	'size' => 'size',
+	'lastModified' => 'dernières modifications'
 	
 
 

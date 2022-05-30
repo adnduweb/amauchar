@@ -95,6 +95,7 @@ class CustomersController extends AdminController
         // Try to create the item
         $obj = $this->request->getPost();
         $obj['uuid'] = service('uuid')->uuid4()->toString();
+        $obj['user_id'] = user_id();
         $obj['active'] = 1 ;
         if (! $objId = model(CustomerModel::class)->insert($obj, true)) {
             $response = ['errors' => model(CustomerModel::class)->errors()];
@@ -250,6 +251,11 @@ class CustomersController extends AdminController
             }
 
             //Create type customer
+            foreach(\Amauchar\Core\Libraries\Data::getCustomerGroups() as $customer){
+                if(! model(CustomerGroupModel::class)->find($customer['id'])){
+                    model(CustomerGroupModel::class)->insert($customer);
+                }
+            }
 
 
             setting('Customer.delayNew', $this->request->getPost('delayNew'));

@@ -4,8 +4,8 @@
         <div class="d-flex align-items-center">
             <!--begin::Icon-->
             <div class="symbol symbol-circle me-5">
-                <div class="symbol-label bg-transparent text-primary border border-secondary border-dashed">
-                    <?= theme()->getSVG('duotune/abstract/abs020.svg', "svg-icon svg-icon-2x svg-icon-primary"); ?>
+                <div class="symbol-label bg-transparent text-primary border border-secondary border-dashedsymbol h-80px w-80px symbol-45px symbol-circle">
+                    <span class="symbol-label bg-light-primary text-primary fw-bold">F M</span>
                 </div>
             </div>
             <!--end::Icon-->
