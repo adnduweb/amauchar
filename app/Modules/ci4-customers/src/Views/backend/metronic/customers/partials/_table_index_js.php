@@ -273,7 +273,7 @@ var KTPermissionsList = function () {
                 // Get user name
                 const userName = parent.querySelectorAll('td')[1].querySelectorAll('a')[0].innerText;
 
-                var id = $(this).data('id');
+                var uuid = $(this).data('uuid');
 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
@@ -291,7 +291,7 @@ var KTPermissionsList = function () {
                     if (result.value) {
 
                         const packets = {
-                            id:  [id],
+                            uuid:  [uuid],
                             token: $('meta[name="X-CSRF-TOKEN"]').attr('content'),
                         };
 
@@ -348,7 +348,7 @@ var KTPermissionsList = function () {
         deleteSelected.addEventListener('click', function () {
             const ids = [];
              var dtRow = Ci4DataTables["kt_table_<?= $name; ?>-table"].rows('.selected').data().map(function(t, e) {
-                ids.push(t.id);  
+                ids.push(t.uuid);  
              });
            
             Swal.fire({
@@ -365,7 +365,7 @@ var KTPermissionsList = function () {
             }).then(function (result) {
                 if (result.value) {
                     const packets = {
-                        id:  ids,
+                        uuid:  ids,
                         token: $('meta[name="X-CSRF-TOKEN"]').attr('content'),
                     };
 

@@ -46,23 +46,27 @@ class Amauchar
      */
     public function boot()
     {
-        if (! file_exists(ROOTPATH . '.env')) {
-            return false;
-        }
+        if (!is_cli()) { 
 
-        // echo 'dfgsdgdf'; exit;
+            if (! file_exists(ROOTPATH . '.env')) {
+                return false;
+            }
+
+           
+
+            helper('filesystem', 'themes');
         
-        helper('filesystem', 'themes');
-       
-        $this->saveInAdmin();
+            $this->saveInAdmin();
 
-        if ($this->inAdmin) {
+            if ($this->inAdmin) {
 
-            BootstrapDemo1::run();
-            $this->setupMenus();
+                BootstrapDemo1::run();
+                $this->setupMenus();
+            }
+            $this->discoverCoreModules();
+            $this->initModules();
+
         }
-        $this->discoverCoreModules();
-        $this->initModules();
        
     }
 

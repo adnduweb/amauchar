@@ -24,6 +24,10 @@ class Module extends BaseModule
      */
     public function initAdmin()
     {
+        if(!isset(Config('Autoload')->psr4['Amauchar\Pages'])){
+            return false;
+        }
+
         // Settings menu for sidebar
         $sidebar = service('menus');
         $item    = new MenuItem([

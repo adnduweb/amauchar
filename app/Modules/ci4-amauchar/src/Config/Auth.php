@@ -42,7 +42,32 @@ class Auth extends ShieldAuth
         'logout'   => '/login',
     ];
 
-     /**
+ /**=   
+     * --------------------------------------------------------------------
+     * Authentication Actions
+     * --------------------------------------------------------------------
+     * Specifies the class that represents an action to take after
+     * the user logs in or registers a new account at the site.
+     *
+     * Available actions with Shield:
+     * - login:    CodeIgniter\Shield\Authentication\Actions\Email2FA
+     * - register: CodeIgniter\Shield\Authentication\Actions\EmailActivator
+     *
+     * @var array<string, class-string<ActionInterface>|null>
+     */
+    public array $actions = [
+        'login'    => null,
+        'register' => null,
+    ];
+
+   
+    /**
+     * ////////////////////////////////////////////////////////////////////
+     * OTHER SETTINGS
+     * ////////////////////////////////////////////////////////////////////
+     */
+
+    /**
      * --------------------------------------------------------------------
      * User Provider
      * --------------------------------------------------------------------
@@ -55,6 +80,5 @@ class Auth extends ShieldAuth
      * @var class-string<\CodeIgniter\Shield\Models\UserModel>
      */
     public string $userProvider = 'Amauchar\Core\Models\UserModel';
-
 }
 

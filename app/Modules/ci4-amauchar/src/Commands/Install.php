@@ -181,7 +181,7 @@ class Install extends BaseCommand
         service('settings')->set('App.descApp', 'La meilleur application du monde');
         service('settings')->set('App.languagebo', 'fr');
         service('settings')->set('App.themebo', 'metronic');
-        service('settings')->set('App.themefo', 'defaut');
+        service('settings')->set('App.themefo', 'default');
         service('settings')->set('App.dateFormat', 'd/m/Y');
         service('settings')->set('App.timeFormat', 'H:i');
         service('settings')->set('App.timezoneArea', 'Europe');

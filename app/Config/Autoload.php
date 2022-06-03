@@ -45,9 +45,9 @@ class Autoload extends AutoloadConfig
         'Config'         => APPPATH . 'Config',
         'Amauchar\\Core' => APPPATH . 'Modules/ci4-amauchar/src',
         'Amauchar\\Medias' => APPPATH . 'Modules/ci4-medias/src',
-       // 'Amauchar\\Vassorts' => APPPATH . 'Modules/ci4-vassorts/src',
-       // 'Amauchar\\Customers' => APPPATH . 'Modules/ci4-customers/src',
-       // 'Amauchar\\Pages' => APPPATH . 'Modules/ci4-pages/src',
+        'Amauchar\\Vassorts' => APPPATH . 'Modules/ci4-vassorts/src',
+        'Amauchar\\Customers' => APPPATH . 'Modules/ci4-customers/src',
+        'Amauchar\\Pages' => APPPATH . 'Modules/ci4-pages/src',
         'Themes'         => ROOTPATH .'resources/Views',
     ];
 

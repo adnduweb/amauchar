@@ -50,13 +50,10 @@ class MediaLangModel extends BaseModel
 	protected $afterDelete    = ['auditDelete'];
 
 	public function updatelang($params){
-		//print_r($this->db->table('medias_langs')->insert($params)); exit;
 	
 		if($this->db->table('medias_langs')->select('media_id')->where( ['media_id' => $params['media_id'], 'lang' => $params['lang']])->get()->getRow()){
 
-			// print_r($params); exit;
 			if(!$this->db->table('medias_langs')->update($params, ['media_id' => $params['media_id'], 'lang' => $params['lang']])){
-				//print_r($this->db); exit;
 					return $this->db->errors();
 			}
 		}else{

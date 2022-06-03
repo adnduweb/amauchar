@@ -26,7 +26,7 @@ class CustomerModel extends BaseModel
     protected $returnType       = Customer::class;
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['uuid', 'user_id', 'customer_group_id', 'company', 'siret', 'ape', 'reference', 'firstname', 'lastname', 'email', 'birthday', 'optin', 'active'];
+    protected $allowedFields    = ['uuid', 'user_id', 'media_id', 'customer_group_id', 'company', 'siret', 'ape', 'reference', 'firstname', 'lastname', 'email', 'birthday', 'optin', 'active'];
 
     // Dates
     protected $useTimestamps = true;

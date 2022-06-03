@@ -40,8 +40,8 @@
             <label for="id_group" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.themesAdmin')); ?>* : </label>
             <div class="col-lg-8">
                 <!-- <select required name="user[themeAdmin]" class="form-select form-select-solid form-select-lg fw-bold" aria-label="Select a Country" data-kt-select2="true" data-control="select2" data-placeholder="<?= ucfirst(lang('Core.choose_one_of_the_following')); ?>" id="themeAdmin"> -->
-                <select required name="themebo" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="<?= ucfirst(lang('Core.choose_one_of_the_following')); ?>" data-hide-search="true">
-                    <option value="">Select a Country...</option>
+                <select required name="themebo" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="<?= ucfirst(lang('Core.selectOption')); ?>" data-hide-search="true">
+                    <option value=""><?= ucfirst(lang('Core.selectOption')); ?></option>
                     <?php foreach ($getThemesAdmin as $theme) { ?>
                         <option <?= $theme ==  service('settings')->get('App.themebo') ? 'selected' : ''; ?> value="<?= $theme; ?>"><?= ucfirst($theme); ?></option>
                     <?php } ?>
@@ -53,8 +53,8 @@
             <label for="id_group" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.themesFront')); ?>* : </label>
             <div class="col-lg-8">
                 <!-- <select required name="user[themeAdmin]" class="form-select form-select-solid form-select-lg fw-bold" aria-label="Select a Country" data-kt-select2="true" data-control="select2" data-placeholder="<?= ucfirst(lang('Core.choose_one_of_the_following')); ?>" id="themeAdmin"> -->
-                <select required name="themefo" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="<?= ucfirst(lang('Core.choose_one_of_the_following')); ?>" data-hide-search="true">
-                    <option value="">Select a Country...</option>
+                <select required name="themefo" class="form-select form-select-solid" data-kt-select2="true" data-placeholder="<?= ucfirst(lang('Core.selectOption')); ?>" data-hide-search="true">
+                    <option value=""><?= ucfirst(lang('Core.selectOption')); ?></option>
                     <?php foreach ($getThemesFront as $theme) { ?>
                         <option <?= $theme ==  service('settings')->get('App.themefo') ? 'selected' : ''; ?> value="<?= $theme; ?>"><?= ucfirst($theme); ?></option>
                     <?php } ?>

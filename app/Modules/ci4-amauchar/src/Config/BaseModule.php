@@ -26,6 +26,8 @@ class BaseModule
      */
     public function initAdmin()
     {
+
+        print_r(service('Autoload')->psr4); exit;
     }
 
     /**

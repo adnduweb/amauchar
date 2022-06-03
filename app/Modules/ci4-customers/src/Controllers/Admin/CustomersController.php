@@ -191,16 +191,17 @@ class CustomersController extends AdminController
         if ($this->request->isAJAX()) {
 
            $response = json_decode($this->request->getBody());
-            if(!is_array($response->id))
+            if(!is_array($response->uuid))
                 return false; 
 
                 $error = false;
-                foreach ($response->id as $key => $id) {
-
-                   if(! $this->tableModel->delete(['id' => $id])){
+                foreach ($response->uuid as $key => $uuid) {
+                    $this->uuid = service('uuid')->fromString($uuid)->getBytes();
+                    $customer =  $this->tableModel->where('uuid', $this->uuid)->first();
+                    if(! $this->tableModel->delete($customer->id)){
                         $error = true;
                         break;
-                   }
+                    }
                 }
 
                

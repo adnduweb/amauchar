@@ -49,6 +49,10 @@ class SessionAuthOverride implements FilterInterface
              if (setting('Auth.recordActiveDate')) {
                  $authenticator->recordActiveDate();
              }
+
+            if(setting('Medias.formatThumbnail') == null|| setting('Medias.formatThumbnail') == ''){
+                return redirect()->to(route_to('medias.settings'));
+            }
  
              return;
          }
