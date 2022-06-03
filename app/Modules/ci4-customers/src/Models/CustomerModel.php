@@ -85,66 +85,6 @@ class CustomerModel extends BaseModel
        
     }
 
-            /**
-     * Get resource data.
-     *
-     * @param string $search
-     *
-     * @return \CodeIgniter\Database\BaseBuilder
-     */
-    public function getCountResource(string $search = '')
-    {
-
-        $builder = $this->query("
-        SELECT `".$this->db->prefixTable('creations')."`.id
-        FROM `".$this->db->prefixTable('creations')."` 
-        JOIN `".$this->db->prefixTable('medias')."` ON `".$this->db->prefixTable('medias')."`.`id` = `".$this->db->prefixTable('creations')."`.`media_id` 
-        JOIN `".$this->db->prefixTable('designations')."` ON `".$this->db->prefixTable('designations')."`.`id` = `".$this->db->prefixTable('creations')."`.`designation_id` 
-        JOIN `".$this->db->prefixTable('marques')."` ON `".$this->db->prefixTable('marques')."`.`id` = `".$this->db->prefixTable('creations')."`.`marque_id`
-        JOIN `".$this->db->prefixTable('meubles')."` ON `".$this->db->prefixTable('meubles')."`.`id` = `".$this->db->prefixTable('creations')."`.`meuble_id`
-        WHERE (`".$this->db->prefixTable('designations')."`.`name` LIKE '%".$search."%' OR `".$this->db->prefixTable('marques')."`.`name` LIKE '%".$search."%' OR `".$this->db->prefixTable('meubles')."`.`name` LIKE '%".$search."%' OR `reference` LIKE '%".$search."%') AND
-        ".$this->db->prefixTable('creations').".deleted_at IS NULL");
-        return $builder;
-
-    }
-
-
-
-    public function insert_record($data)
-    {
-        $query = $this->db->table('creations')
-                    ->insertBatch($data);
-        if($query == true){
-            echo "data insert";
-        }
-        else{
-            echo "data fail";
-        }
-
-    }
-
-    public function getExport(){
-        $builder = $this->query("
-        SELECT `".$this->db->prefixTable('creations')."`.id, 
-        `".$this->db->prefixTable('creations')."`.name as creation_name,
-        `".$this->db->prefixTable('designations')."`.name as designation_name,
-        `".$this->db->prefixTable('marques')."`.name as marque_name,
-        `".$this->db->prefixTable('meubles')."`.name as meuble_name,
-        `".$this->db->prefixTable('meubles')."`.created_at as meuble_created_at
-        FROM `".$this->db->prefixTable('creations')."` 
-        JOIN `".$this->db->prefixTable('medias')."` ON `".$this->db->prefixTable('medias')."`.`id` = `".$this->db->prefixTable('creations')."`.`media_id` 
-        JOIN `".$this->db->prefixTable('designations')."` ON `".$this->db->prefixTable('designations')."`.`id` = `".$this->db->prefixTable('creations')."`.`designation_id` 
-        JOIN `".$this->db->prefixTable('marques')."` ON `".$this->db->prefixTable('marques')."`.`id` = `".$this->db->prefixTable('creations')."`.`marque_id`
-        JOIN `".$this->db->prefixTable('meubles')."` ON `".$this->db->prefixTable('meubles')."`.`id` = `".$this->db->prefixTable('creations')."`.`meuble_id`
-        WHERE ".$this->db->prefixTable('creations').".deleted_at IS NULL");
-
-        // print_r($builder->getFieldNames()); exit;
-
-        return ['column' => $builder->getFieldNames(), 'data' => $builder->getResultArray()];
-        //return $builder->getResult();
-
-    }
-
     public function fake(): Customer
     {
 

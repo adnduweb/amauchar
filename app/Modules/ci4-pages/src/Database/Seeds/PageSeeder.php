@@ -1,8 +1,8 @@
 <?php
 
-namespace Adnduweb\Pages\Database\Seeds;
+namespace Amauchar\Pages\Database\Seeds;
 
-use Adnduweb\Pages\Models\PageModel;
+use Amauchar\Pages\Models\PageModel;
 
 class PageSeeder extends \CodeIgniter\Database\Seeder
 {

@@ -49823,3 +49823,92 @@ div.dataTables_wrapper div.dataTables_processing .loaderContainer .textProcessin
   background-color: #ebedf2;
   border-color: #ebedf2;
 }
+
+.input-group-text.input-group-text-lang {
+  line-height: 1.7;
+  color: #ffffff;
+  background-color: #319ef7;
+  border: none;
+  border-radius: 0.475rem 0 0 0.475rem;
+}
+
+.nav-custom-lang li {
+  display: flex;
+  border: 1px solid #cccccc !important;
+}
+
+.nav-custom-lang li a {
+  padding: 8px 15px 5px 15px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.pagebuilder .comp {
+  background: #2a9d8f;
+  color: #fff;
+  height: 50px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagebuilder .actual-comp {
+  position: relative;
+  max-width: 100%;
+}
+
+.pagebuilder .actual-comp-remove {
+  position: absolute;
+  color: red;
+  top: calc(50% - 12px);
+  right: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+/*
+       * These are all the components styled not really important for the actual purpose */
+.pagebuilder .item-widget {
+  background: #264653;
+  margin-bottom: 0.5rem;
+  padding: 0 1rem;
+}
+
+.pagebuilder .item-widgeta {
+  color: #fff;
+}
+
+.editor-view {
+  border: 2px dotted #efefef;
+  min-height: 400px;
+  width: 100%;
+}
+
+.pagebuilder .hidden {
+  display: none;
+}
+
+.pagebuilder .slist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pagebuilder .slist div.item-widget {
+  margin: 10px;
+  padding: 0px;
+  background: #f5f5f5;
+}
+
+/* (B) DRAG-AND-DROP HINT */
+.pagebuilder .slist div.item-widget.hint {
+  border: 1px solid #ffc49a;
+  background: #feffb4;
+}
+
+.pagebuilder .slist div.item-widget.active {
+  border: 1px solid #ffa5a5;
+  background: #ffe7e7;
+}

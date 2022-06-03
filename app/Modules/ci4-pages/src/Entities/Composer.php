@@ -1,8 +1,9 @@
 <?php 
 
-namespace Adnduweb\Pages\Entities;
+namespace Amauchar\Pages\Entities;
 
 use CodeIgniter\Entity\Entity;
+use Adnduweb\Pages\Models\ComposerModel;
 use Adnduweb\Ci4Medias\Models\MediaModel;
 
 class Composer extends Entity
@@ -18,7 +19,45 @@ class Composer extends Entity
      */
     protected $casts = [];
 
+    protected $attributes = [
+        'id_page_composer' => null,
+        'page_id'          => null,   // Represents a username
+        'lang'             => null,
+        'lang'             => null,
+        'items'            => null,
+        'created_at'       => null,
+        'updated_at'       => null,
+    ];
+
+
   
+     /**
+     * Creates a new Adresse for this user
+     */
+    public function getLangAll()
+    {
+        $temp = [];
+        if(!empty( $this->attributes['id_page_composer'])){
+            $langAll = model(ComposerModel::class)->where(['id_page_composer' => $this->attributes['id_page_composer']])->findAll();
+          
+            if(!empty($langAll)){
+                foreach($langAll as $lang){
+                    $temp[$lang->lang] = $lang;
+                }
+            }
+        }else{
+            $language = new language();
+            $supportedLocales = $language->supportedLocales();
+
+            if(!empty($supportedLocales)){
+                foreach($supportedLocales as $k => $v) {
+                    $temp[$k] = new ComposerModel();
+                }
+            }                    
+        }
+        return $temp;
+    }
+
     public function getItems(){
         if(isset($this->attributes['id_page_composer'])){
             return unserialize($this->attributes['items']);

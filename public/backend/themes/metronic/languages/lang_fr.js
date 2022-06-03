@@ -149,7 +149,7 @@ var _LANG_ = {
     "password_cannot_be_the_same_as_username": "The password cannot be the same as username",
     "password_not_ecal_pass_confirm": "Le mot de passe et la confirmation ne sont pas les mêmes",
     "EmailAddressIsRequired": "Votre adresse mail est requise",
-    "PasswordIsRequired": "Votre mot de passe est requise",
+    "PasswordIsRequired": "Votre mot de passe est requis",
     "PleaseConfirmationIsRequired": "Votre confirmation est requise",
     "PleaseEnterValidPassword": "Entrer un mot de passe valide",
     "PasswordAndItsConfirmAreNotTheSame": "Votre mot de passe et confirmation ne concorde pas",
@@ -164,6 +164,7 @@ var _LANG_ = {
     "ShowingNoRecords": "pas d'enregistrement",
     "sorryLooksLikeThereArSomeErrorsDetectedPleaseTryAgain": "Désolé, il semble qu'il y ait des erreurs détectées, veuillez réessayer.",
     "Ok": "Ok",
-    "GroupIsRequired": "Le röle est requis"
+    "GroupIsRequired": "Le röle est requis",
+    "close": "fermer"
 
 }

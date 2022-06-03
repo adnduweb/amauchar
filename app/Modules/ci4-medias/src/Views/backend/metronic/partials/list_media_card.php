@@ -1,6 +1,6 @@
 
 	<?php  if (empty($medias)): ?>
-	<p><?= lang('Medias.No medias to display'); ?></p>
+	<p><?= ucfirst(lang('Medias.NoMediasToDisplay')); ?></p>
 	<?php else: ?>
 	<div id="card-deck" class="card-deck d-flex row">
 

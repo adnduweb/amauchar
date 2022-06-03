@@ -1,4 +1,4 @@
-<?= $this->extend(config('Core')->views['layout']) ?>
+<?= $this->extend(config('Amauchar')->views['layout']) ?>
 <?= $this->section('main') ?>
 
 <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">

@@ -252,10 +252,6 @@ class User extends \CodeIgniter\Shield\Entities\User
 
     public function getAuthGroupsUsers(): array
     {
-        //print_r(model('GroupModel'));exit;
-        // $this->attributes['groupss'] = model('\Amauchar\Core\Models\GroupOverrideModel')->getAllGroups($this);
-        // return $this->attributes['groupss'];
-          //print_r(model('GroupModel'));exit;
           $this->attributes['groups'] = model('GroupOverrideModel')
           ->where('user_id', $this->attributes['id'])
           ->orderBy('created_at', 'desc')

@@ -1,4 +1,4 @@
-<?= $this->extend(config('Core')->views['layout']) ?>
+<?= $this->extend(config('Amauchar')->views['layout']) ?>
 <?= $this->section('main') ?>
 
     <?= view('Amauchar\Medias\Views\backend\metronic\partials\cartd_top', ['medias' => $medias, 'active' => $active]) ?>

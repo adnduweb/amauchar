@@ -15,7 +15,7 @@
     <div class="card-body border-top p-9">
 
         <div class="row fv-row mb-6">
-            <label for="raison_social" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.raison_social')); ?>* : </label>
+            <label for="raison_social" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.raisonSocial')); ?>* : </label>
             <div class="col-lg-8">
                 <input class="form-control form-control-solid" required type="text" value="<?= old('raison_social') ? old('raison_social') : $form->raison_social; ?>" name="raison_social" id="raison_social">
                 <div class="invalid-feedback"><?= lang('Core.this_field_is_requis'); ?> </div>
@@ -26,7 +26,7 @@
         <div class="row fv-row mb-6">
             <label for="email" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.typeRaison')); ?>* : </label>
             <div class="col-lg-8">
-                <select name="company_type_id" class="form-control" data-kt-select2="true" data-placeholder="<?= ucfirst(lang('Core.choose_one_of_the_following')); ?>">
+                <select name="company_type_id" class="form-control form-control-solid" data-kt-select2="true" data-placeholder="<?= ucfirst(lang('Core.choose_one_of_the_following')); ?>">
                     <?php foreach (\Amauchar\Core\Libraries\Data::getCompagniesType() as $k => $type) : ?>
                         <option value="<?= $type['id']  ?>" <?php if ($form->company_type_id == $type['id']) : ?> selected <?php endif ?>>
                             <?= $type['nom_long'] ?> (<?= $type['nom_court']; ?>)
@@ -46,9 +46,9 @@
         </div>
 
         <div class="row fv-row mb-6">
-            <label for="email" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.pays')); ?>* : </label>
+            <label for="email" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.country')); ?>* : </label>
             <div class="col-lg-8">
-                <select name="country" class="form-control" data-kt-select2="true" data-placeholder="<?= ucfirst(lang('Core.choose_one_of_the_following')); ?>">
+                <select name="country" class="form-control form-control-solid" data-kt-select2="true" data-placeholder="<?= ucfirst(lang('Core.choose_one_of_the_following')); ?>">
                     <?php foreach (\Amauchar\Core\Libraries\Data::getCountriesList() as $k => $country) : ?>
                         <option value="<?= $k  ?>" <?php if ($form->country == $k) : ?> selected <?php endif ?>>
                             <?= $country['name'] ?>

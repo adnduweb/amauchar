@@ -232,7 +232,20 @@
 	'dimensions' => 'dimensions',
 	'redimensionner' => 'redimensionner',
 	'size' => 'size',
-	'lastModified' => 'dernières modifications'
+	'lastModified' => 'dernières modifications',
+	'typeRaison' => 'type de raison social',
+	'emaiContact' => 'email de contact',
+	'phoneMobile' => 'téléphone mobile',
+	'codePostal' => 'code postal',
+	'ville' => 'ville',
+	'adresse' => 'adresse',
+	'societe&Taxes' => 'société & taxes',
+	'siret' => 'siret',
+	'ape' => 'ape',
+	'displayTTC' => 'afficher les prix en TTC',
+	'notDeletePermNatif' => 'impossible de supprimer les éléments natifs',
+	'sousTitre' => 'sous titre',
+	'selectLangues' => 'selectionner votre langue'
 	
 
 

@@ -27,7 +27,7 @@
                             <?php } ?>
                             <div> <strong><?= lang('Medias.url du fichier'); ?></strong> :  <?= $media->getUrlMedia('original'); ?> </div>
                             <hr>
-                            <?php if (setting('Core.settingActiverMultilangue') == true) { ?>
+                            <?php if (setting('Amauchar.settingActiverMultilangue') == true) { ?>
                                 <?php $setting_supportedLocales = json_decode(service('Settings')->setting_supportedLocales); ?> 
                                 <div class="lang_tabs" data-dft-lang="<?= service('Settings')->setting_lang_iso; ?>" style="display: block;">
 
@@ -42,18 +42,29 @@
                             <div class="kt-portlet__body">
                                 <div class="form-group">
                                     <label><?= ucfirst(lang('Core.titre')); ?></label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="" value="<?= old('titre') ? old('titre') : $mediaLang->titre; ?>" name="lang[<?= service('request')->getLocale(); ?>][titre]" kl_vkbd_parsed="true">
+                                    <?= form_input_lang('titre', $media->getLangAll(), 'id="titre" class="form-control form-control-solid form-input-control-lang"', 'text', true); ?> 
                                 </div>
                                 <div class="form-group">
                                     <label><?= ucfirst(lang('Core.legende')); ?></label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="" value="<?= old('legende') ? old('legende') : $mediaLang->legende; ?>" name="lang[<?= service('request')->getLocale(); ?>][legende]" kl_vkbd_parsed="true">
+                                    <?= form_input_lang('legende', $media->getLangAll(), 'id="legende" class="form-control form-control-solid form-input-control-lang"', 'text', true); ?> 
                                 </div>
                                 <div class="form-group">
                                     <label><?= ucfirst(lang('Core.descriptionAlt')); ?> </label>
-                                    <input type="text" class="form-control form-control-solid" placeholder="" value="<?= old('description') ? old('description') : $mediaLang->description; ?>" name="lang[<?= service('request')->getLocale(); ?>][description]" kl_vkbd_parsed="true">
+                                    <?= form_input_lang('description', $media->getLangAll(), 'id="description" class="form-control form-control-solid form-input-control-lang"', 'text', true); ?> 
                                 </div>
                                 <?= form_input(['type'  => 'hidden', 'name'  => 'uuid_media', 'id'    => 'uuid_media', 'value' => $media->getUuid(), 'class' => 'id_media']); ?>
                                 <?= form_input(['type'  => 'hidden', 'name'  => 'id_media_lang', 'id'    => 'id_media_lang', 'value' => $mediaLang->id_media_lang, 'class' => 'id_media_lang']); ?>
+
+                                <div class="separator separator-dashed my-5"></div>
+
+                                <div class="d-flex flex-row">
+                                <?php foreach($supportedLocales as $lang){ ?>
+                                    <div class="menu-item ">
+                                        <a href="<?= current_url(); ?>" data-choice-lang="<?= $lang['iso_code']; ?>" class="data-choice-lang menu-link px-3"><img class="w-15px h-15px rounded-1 ms-2" src="<?= theme()->getMediaUrl($lang['flag']); ?>" alt="<?= ucfirst(lang($lang['name'])); ?>"/></a>
+                                    </div>
+                                <?php } ?>
+                                </div>
+
                             </div>
                             <div class="kt-portlet__foot">
                                 <div class="kt-form__actions mt-5">

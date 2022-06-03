@@ -238,7 +238,7 @@
         </div>
     </section>
 
-    <?= $this->include('Adnduweb\Pages\frontend\themes\/'.$theme_front.'/\_partials\sections\contact') ?>
+    <?= $this->include('Amauchar\Pages\frontend\themes\/'.$theme_front.'/\_partials\sections\contact') ?>
 
 
 <?= $this->endSection() ?>

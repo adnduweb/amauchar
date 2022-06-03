@@ -736,4 +736,144 @@ class Data {
             )
         );
     }
+
+    public static function getPages() {
+
+        $faker = Factory::create();
+
+        return [
+            [
+                'id'                 => 1,
+                'id_parent'          => 0,
+                'template'           => 'page_default',
+                'active'             => 1, 
+                'visible_title'      => 1,
+                'no_follow_no_index' => 0,
+                'handle'             => 'home',
+                'is_natif'           => 1,
+                'display_title'      => 1,
+                'order'              => 1,
+                'created_at'         => date('Y-m-d H:i:s'),
+                'lang' =>  [
+                    'page_id'           => 1,
+                    'lang'              => 'fr',
+                    'name'              => 'Welcome to CodeIgniter',
+                    'name_2'            => 'The small framework with powerful features',
+                    'description_short' => $faker->sentence(),
+                    'description'       => $faker->text(),
+                    'meta_title'        => $faker->sentence(),
+                    'meta_description'  => $faker->sentence(),
+                    'robots'            => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+                    'tags'              => 'test',
+                    'slug'              => '/'
+                ],
+            ],
+            [
+                'id'                 => 2,
+                'id_parent'          => 0,
+                'template'           => 'page_default',
+                'active'             => 1,
+                'visible_title'      => 1,
+                'no_follow_no_index' => 0,
+                'handle'             => 'mentions-legales',
+                'is_natif'           => 1,
+                'display_title'      => 1,
+                'order'              => 1,
+                'created_at'         => date('Y-m-d H:i:s'),
+                'lang' =>  [
+                    'page_id'           => 2,
+                    'lang'              => 'fr',
+                    'name'              => 'Mentions légales',
+                    'name_2'            => $faker->name(),
+                    'description_short' => $faker->sentence(),
+                    'description'       => $faker->text(),
+                    'meta_title'        => $faker->sentence(),
+                    'meta_description'  => $faker->sentence(),
+                    'robots'            => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+                    'tags'              => 'test',
+                    'slug'              => 'mentions-legales'
+                ], 
+            ],
+            [
+                'id'                 => 3,
+                'id_parent'          => 0,
+                'template'           => 'page_default',
+                'active'             => 1,
+                'visible_title'      => 1,
+                'no_follow_no_index' => 0,
+                'handle'             => 'politique-de-confidentialite',
+                'is_natif'           => 1,
+                'display_title'      => 1,
+                'order'              => 1,
+                'created_at'         => date('Y-m-d H:i:s'),
+                'lang' =>  [
+                    'page_id'           => 3,
+                    'lang'              => 'fr',
+                    'name'              => 'Politique de confidentialité',
+                    'name_2'            => $faker->name(),
+                    'description_short' => $faker->sentence(),
+                    'description'       => $faker->text(),
+                    'meta_title'        => $faker->sentence(),
+                    'meta_description'  => $faker->sentence(),
+                    'robots'            => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+                    'tags'              => 'test',
+                    'slug'              => 'politique-de-confidentialite'
+                ], 
+            ],
+            [
+                'id'                 => 4,
+                'id_parent'          => 0,
+                'template'           => 'page_contact',
+                'active'             => 1,
+                'visible_title'      => 1,
+                'no_follow_no_index' => 0,
+                'handle'             => 'contactez-nous',
+                'is_natif'           => 1,
+                'display_title'      => 1,
+                'order'              => 1,
+                'created_at'         => date('Y-m-d H:i:s'),
+                'lang' =>  [
+                    'page_id'           => 4,
+                    'lang'              => 'fr',
+                    'name'              => 'Contactez nous',
+                    'name_2'            => $faker->name(),
+                    'description_short' => $faker->sentence(),
+                    'description'       => $faker->text(),
+                    'meta_title'        => $faker->sentence(),
+                    'meta_description'  => $faker->sentence(),
+                    'robots'            => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+                    'tags'              => 'test',
+                    'slug'              => 'contactez-nous'
+                ], 
+            ],
+            [
+                'id'                 => 5,
+                'id_parent'          => 0,
+                'template'           => 'page_default',
+                'active'             => 1,
+                'visible_title'      => 1,
+                'no_follow_no_index' => 0,
+                'handle'             => 'condition-utilisation',
+                'is_natif'           => 1,
+                'display_title'      => 1,
+                'order'              => 1,
+                'created_at'         => date('Y-m-d H:i:s'),
+                'lang' =>  [
+                    'page_id'           => 5,
+                    'lang'              => 'fr',
+                    'name'              => "Condition d'utilisation",
+                    'name_2'            => $faker->name(),
+                    'description_short' => $faker->sentence(),
+                    'description'       => $faker->text(),
+                    'meta_title'        => $faker->sentence(),
+                    'meta_description'  => $faker->sentence(),
+                    'robots'            => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+                    'tags'              => 'test',
+                    'slug'              => 'condition-utilisation'
+                ]
+            ]
+
+        ];
+    }
+    
 }

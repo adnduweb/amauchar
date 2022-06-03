@@ -7623,6 +7623,83 @@ var KTAppsAdnduWeb = function() {
 
         var tinymce = window.tinymce.init(paramsTinymce);
         //console.log(window.tinymce.get('tinymce').getContent());
+        //console.log(tinymce);
+    }
+
+    // Category status handler
+    const handleSelectlang = () => {
+
+        const select = document.getElementById('kt_select_lang');
+        const selectChoiceLang = document.querySelectorAll('.data-choice-lang');
+        const formControlLang = document.querySelectorAll('.form-input-control-lang');
+        const inputControlLang = document.querySelectorAll('.input-group-text-lang');
+        const tabControlLang = document.querySelectorAll('.tab-lang');
+
+
+        if (selectChoiceLang != undefined) {
+
+            selectChoiceLang.forEach(s => {
+
+                s.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const value = s.getAttribute('data-choice-lang');
+
+                    inputControlLang.forEach(d => {
+                        d.setAttribute('data-lang', value),
+                            d.innerHTML = value;
+                    });
+
+
+                    formControlLang.forEach(d => {
+                        if (d.getAttribute('data-lang') == value) {
+                            d.style.display = 'block';
+                        } else {
+                            d.style.display = 'none';
+                        }
+
+                    });
+
+                    //console.log(t.getAttribute('data-lang'));
+                    const tabSousControlLang = document.querySelectorAll('.tab-lang[data-lang="' + value + '"]');
+                    tabSousControlLang.forEach(r => {
+                        r.click();
+                    });
+                });
+            });
+
+
+            tabControlLang.forEach(t => {
+                t.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const value = e.target.getAttribute('data-lang');
+
+                    inputControlLang.forEach(d => {
+                        d.setAttribute('data-lang', value),
+                            d.innerHTML = value;
+                    });
+
+                    formControlLang.forEach(d => {
+                        if (d.getAttribute('data-lang') == value) {
+                            d.style.display = 'block';
+                        } else {
+                            d.style.display = 'none';
+                        }
+
+                    });
+
+                    //console.log(t.getAttribute('data-lang'));
+                    const tabSousControlLang = document.querySelectorAll('.tab-lang[data-lang="' + value + '"]');
+
+                    tabSousControlLang.forEach(r => {
+                        r.click();
+                        // r.classList.add('active');
+                        // console.log(t.getAttribute('data-lang'));
+                    });
+
+                });
+            });
+        }
     }
 
 
@@ -7632,6 +7709,7 @@ var KTAppsAdnduWeb = function() {
         init: function() {
             initApps();
             initTinymce();
+            handleSelectlang();
         }
     };
 }();
@@ -7779,6 +7857,7 @@ var KTImageManager = function() {
             console.log(file, response);
         });
         DropZone.on("error", function(file, response, xhr) {
+            blockUI.release();
             console.log('errored', file, response, xhr); // for debugging
             if (typeof xhr !== 'undefined') {
                 this.defaultOptions.error(file, xhr.statusText); // use xhr err (from server)
@@ -7878,9 +7957,39 @@ var KTImageManager = function() {
             axios.post(Medias.editionImage, { uuid: uuid })
                 .then(response => {
                     //console.log(response);
+
                     // blockUI.release();
                     $('#list-media-edition').html(response.data.editionMediaManager);
                     // DropZone.removeAllFiles();
+
+                    const selectChoiceLang = document.querySelectorAll('#kt_apps_edition_manager_media .data-choice-lang');
+                    const formControlLang = document.querySelectorAll('#kt_apps_edition_manager_media .form-input-control-lang');
+                    const inputControlLang = document.querySelectorAll('#kt_apps_edition_manager_media .input-group-text-lang');
+                    if (selectChoiceLang != undefined) {
+
+                        selectChoiceLang.forEach(s => {
+
+                            s.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                const value = s.getAttribute('data-choice-lang');
+
+                                inputControlLang.forEach(d => {
+                                    d.setAttribute('data-lang', value),
+                                        d.innerHTML = value;
+                                });
+
+
+                                formControlLang.forEach(d => {
+                                    if (d.getAttribute('data-lang') == value) {
+                                        d.style.display = 'block';
+                                    } else {
+                                        d.style.display = 'none';
+                                    }
+
+                                });
+                            });
+                        });
+                    }
                 })
                 .catch(error => {});
         });

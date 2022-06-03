@@ -1,4 +1,4 @@
-<?= $this->extend(config('Core')->views['layout']) ?>
+<?= $this->extend(config('Amauchar')->views['layout']) ?>
 <?= $this->section('main') ?>
 <div class="card mb-5 mb-xl-10">
     <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">

@@ -202,6 +202,18 @@ mix.js('resources/backend/' + demo + '/js/app.js', OutputDir + '/js/app.js');
 
 }
 
+if (args.indexOf('front') !== -1) {
+    //mix.config.fileLoaderDirs.fonts = 'assets/fonts';
+    mix.setResourceRoot('/frontend/themes/default')
+    mix.js('resources/frontend/front.js', 'public/frontend/themes/default/js/bundle.js') // Output: public/js/app.js
+        .sass('resources/frontend/front.scss', 'public/frontend/themes/default/css/bundle.css'); // Output: public/css/app.css
+
+    mix.copyDirectory('fonts/vendor/line-awesome/dist/line-awesome', 'public/frontend/themes/default/fonts/vendor/line-awesome/dist/line-awesome');
+    mix.copyDirectory('fonts/vendor/@fortawesome/fontawesome-free', 'public/frontend/themes/default/fonts/vendor/line-awesome/dist/line-awesome');
+    del('fonts/*');
+
+}
+
 function getDemos(pathDemos) {
     // get possible demo from parameter command
     let demos = [];

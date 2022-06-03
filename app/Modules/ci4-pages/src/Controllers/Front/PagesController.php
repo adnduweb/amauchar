@@ -1,17 +1,17 @@
 <?php
 
-namespace Adnduweb\Pages\Controllers\Front;
+namespace Amauchar\Pages\Controllers\Front;
 
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
-use Adnduweb\Pages\Entities\Page;
-use Adnduweb\Pages\Models\PageModel;
-use Adnduweb\Pages\Entities\Composer;
-use Adnduweb\Pages\Models\ComposerModel;
-use Adnduweb\Pages\Models\FormContactModel;
-use Adnduweb\Pages\Libraries\Theme;
+use Amauchar\Pages\Entities\Page;
+use Amauchar\Pages\Models\PageModel;
+use Amauchar\Pages\Entities\Composer;
+use Amauchar\Pages\Models\ComposerModel;
+use Amauchar\Pages\Models\FormContactModel;
+use Amauchar\Pages\Libraries\Theme;
 
-class PagesController extends  \Adnduweb\Pages\Controllers\BaseFrontController
+class PagesController extends  \Amauchar\Pages\Controllers\BaseFrontController
 {
 
      /**  @var string  */
@@ -24,7 +24,7 @@ class PagesController extends  \Adnduweb\Pages\Controllers\BaseFrontController
      public $path = "\Adnduweb\Ci4Pages";
  
      /**  @var string  */
-     protected $viewPrefix = 'Adnduweb\Pages\Views\frontend\themes\\';
+     protected $viewPrefix = 'Amauchar\Pages\Views\frontend\themes\\';
  
      /**  @var string  */
      public $category  = '';

@@ -1,12 +1,12 @@
 <?php
 
-namespace Adnduweb\Pages\Controllers\Admin;
+namespace Amauchar\Pages\Controllers\Admin;
 
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use Adnduweb\Ci4Admin\Libraries\Theme;
-use Adnduweb\Pages\Entities\Menu;
-use Adnduweb\Pages\Models\MenuModel;
+use Amauchar\Pages\Entities\Menu;
+use Amauchar\Pages\Models\MenuModel;
 use CodeIgniter\API\ResponseTrait;
 
 class MenusController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
@@ -24,7 +24,7 @@ class MenusController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
     public $path = "\Adnduweb\Ci4Pages";
 
     /**  @var string  */
-    protected $viewPrefix = 'Adnduweb\Pages\Views\backend\themes\\';
+    protected $viewPrefix = 'Amauchar\Pages\Views\backend\themes\\';
 
     /**  @var string  */
     public $category  = '';

@@ -1,11 +1,11 @@
 <?php
 
-namespace Adnduweb\Pages\Libraries;
-use \Adnduweb\Pages\Models\MenuModel;
+namespace Amauchar\Pages\Libraries;
+use \Amauchar\Pages\Models\MenuModel;
 use Spatie\Menu\Link;
 
 
-class MainMenu extends \Adnduweb\Pages\Libraries\Menu
+class MainMenu extends \Amauchar\Pages\Libraries\Menu
 {
 	public $menu;
 	public function __toString(): string

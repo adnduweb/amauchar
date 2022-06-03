@@ -609,4 +609,22 @@ class Util {
             $mdp_final = str_pad($partie_visible, 10, $remplacement);
             return  $mdp_final;
         }
+
+        public static function arrayToObject($arr)
+        {
+            $flat = array_keys($arr) === range(0, count($arr) - 1);
+            $out = $flat ? [] : new \stdClass();
+
+            foreach ($arr as $key => $value) {
+                $temp = is_array($value) ? self::arrayToObject($value) : $value;
+
+                if ($flat) {
+                    $out[] = $temp;
+                } else {
+                    $out->{$key} = $temp;
+                }
+            }
+
+            return $out;
+        }
 }

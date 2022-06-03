@@ -1,10 +1,10 @@
-<?php namespace Adnduweb\Pages\Filters;
+<?php namespace Amauchar\Pages\Filters;
 
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use Adnduweb\Pages\Libraries\Menu;
+use Amauchar\Pages\Libraries\Menu;
 use InvalidArgumentException;
 use RuntimeException;
 

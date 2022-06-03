@@ -1,6 +1,6 @@
 <?php
 
-namespace Adnduweb\Pages\Config;
+namespace Amauchar\Pages\Config;
 
 use CodeIgniter\Config\BaseConfig;
 

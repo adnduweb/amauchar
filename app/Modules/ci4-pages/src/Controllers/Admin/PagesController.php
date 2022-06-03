@@ -1,50 +1,36 @@
 <?php
 
-namespace Adnduweb\Pages\Controllers\Admin;
+namespace Amauchar\Pages\Controllers\Admin;
 
+use Amauchar\Core\Controllers\Admin\AdminController;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
-use Adnduweb\Ci4Admin\Libraries\Theme;
-use Adnduweb\Pages\Entities\Page;
-use Adnduweb\Pages\Models\PageModel;
-use Adnduweb\Pages\Entities\Composer;
-use Adnduweb\Pages\Models\ComposerModel;
-use Adnduweb\Ci4Medias\Models\MediaModel;
-use Adnduweb\Ci4Core\Traits\ExportData;
+use CodeIgniter\Events\Events;
+use Amauchar\Pages\Entities\Page;
+use Amauchar\Pages\Entities\PageLang;
+use Amauchar\Pages\Models\PageModel;
+use Amauchar\Pages\Entities\Composer;
+use Amauchar\Pages\Models\ComposerModel;
+use Amauchar\Medias\Models\MediaModel;
 use CodeIgniter\API\ResponseTrait;
+use Amauchar\Core\Libraries\Util;
+use Amauchar\Core\Traits\ExportTrait;
 
-class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
+class PagesController extends AdminController
 {
 
     use ResponseTrait;
-    use ExportData;
+    use ExportTrait;
 
     /**  @var string  */
-    protected $table = "pages";
-
-    /**  @var string  */
-    protected $className = "Page";
-
-    /**  @var string  */
-    public $path = "\Adnduweb\Ci4Pages";
-
-    /**  @var string  */
-    protected $viewPrefix = 'Adnduweb\Pages\Views\backend\themes\\';
-
-    /**  @var string  */
-    public $category  = '';
+    protected $viewPrefix = '\Amauchar\Pages\Views\backend\\'.ADMIN_THEME.'\pages\\';
 
     /**  @var object  */
     public $tableModel = PageModel::class;
 
-    /**  @var string  */
-    public $identifier_name = 'name'; 
+    public $dirLang = [];
 
-    /** @var bool */
     public $filterDatabase = false;
-
-     /** @var bool */
-     public $stopConcurrentOperations = true;
 
 
     /**
@@ -54,22 +40,21 @@ class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
      */
     public function index(): string
     {
-        Theme::add_js('plugins/custom/datatables/datatables.bundle.js');
-        parent::index();
-        $this->viewData['lists'] = model(PageModel::class)->countAllResults();
-		$this->viewData['active'] = 'medias';
+        theme()->add_js('plugins/custom/datatables/datatables.bundle.js');
+        $this->viewData['itemCount'] = model(PageModel::class)->countAllResults();
+        $this->viewData['active'] = 'medias';
 
-        return $this->render($this->viewPrefix . $this->theme . '/\pages\index', $this->viewData);
+        return $this->render($this->viewPrefix . 'index', $this->viewData);
     }
-
-      /**
+    
+    /**
 	 * Charge Params JS
 	 */
-
-	protected function initParamJs(){
-		parent::initParamJs();
-		$this->viewData['paramJs']['Medias'] = service('media')->addParamsJs();
+	protected function addJsDf(){
+		parent::addJsDf();
+		$this->viewData['addJsDef']['Medias'] = service('media')->addParamsJs();
 	}
+
 
     /**
      * Shows details for one item.
@@ -80,32 +65,31 @@ class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
      */
     public function edit(string $id): string
     {
-        parent::edit($id);
-
-        //$this->display_notice();
-        Theme::add_js('plugins/custom/tinymce/tinymce.bundle.js');
-        Theme::add_js('plugins/custom/tinymce/plugins/code/plugin.bundle.js');      
-
+    
         helper(['tools']);
+        $this->viewData['selectLangues'] = true;
+        $this->id = $id;
+        $this->getPageCurrentProvider();
 
-        $this->viewData['title_detail'] =  $this->object->name  . ' - ' .  $this->object->description;
-        $this->viewData['form'] = $this->object;
+        $this->viewData['title_detail'] =  $this->object->name;
+        $this->viewData['formItem'] = $this->object;
+        $this->viewData['itemCount'] = model(PageModel::class)->countAllResults();
+        $this->viewData['active'] = 'pages';
         $this->viewData['medias'] = model(MediaModel::class)->where('id !=1')->findAll();
         $composer = model(ComposerModel::class)->where('page_id', $this->object->id)->first();
         $this->viewData['composer'] = (!empty($composer)) ? $composer : new Composer() ;
-        $this->viewData['widgets'] = service('widget')->getAll($this->viewData['composer']);
+        // $this->viewData['widgets'] = service('widget')->getAll($this->viewData['composer']);
         
 
+        //print_r($this->object); exit;
          //print_r($this->viewData['widgets']); exit;
          //print_r($this->viewData['composer']->getItems());exit;
 
         if($this->request->getGet('builderpage')){
             return $this->render($this->viewPrefix . $this->theme . '/\pages\editor', $this->viewData);
         }else{
-            return $this->render($this->viewPrefix . $this->theme . '/\pages\form', $this->viewData);
+            return $this->render($this->viewPrefix . 'form', $this->viewData);
         }
-
-        
 
     }
 
@@ -116,13 +100,17 @@ class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
      */
     public function new(): string
     {
-        helper('tools');
-        Theme::add_js('plugins/custom/tinymce/tinymce.bundle.js');
+        helper('tools'); 
+
+        $this->viewData['selectLangues'] = true;
 
         // Initialize form
-        $this->viewData['form'] = new Page();
-
-        return $this->render($this->viewPrefix . $this->theme . '/\pages\form', $this->viewData);
+        $this->viewData['formItem'] = new Page();
+        $this->viewData['formItem']->lang = new PageLang();
+        $this->viewData['itemCount'] = model(PageModel::class)->countAllResults();
+        $this->viewData['groups'] = model(PageModel::class)->findAll();
+        $this->viewData['active'] = 'pages';
+        return $this->render($this->viewPrefix . 'form', $this->viewData);
     }
 
     /**
@@ -140,7 +128,7 @@ class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
             'lang.'.service('request')->getLocale() . '.slug' => 'required',
         ];
         if (!$this->validate($this->rules)) {
-            Theme::set_message('error', $this->validator->getErrors(), lang('Core.warning_error'));
+            alert('error', $this->validator->getErrors());
             return redirect()->back()->withInput();
         }
 
@@ -148,16 +136,15 @@ class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
         $page = $this->request->getPost();
         $page['active'] = isset($page['active']) ? $page['active'] : 0;
         $page['display_title'] = isset($page['display_title']) ? $page['display_title'] : 0;
-        $page['handle'] = uniforme($page['lang'][service('request')->getLocale()]['name']);
-        if (! $pageId = model(PageModel::class)->insert($page, true)) {
-            Theme::set_message('error', model(PageModel::class)->errors(), lang('Core.warning_error'));
-            return redirect()->back()->withInput();
+        $page['handle'] = Util::stringCleanUrl($page['lang'][service('request')->getLocale()]['name']);
+        if (! $objId = model(PageModel::class)->insert($page, true)) {
+            $response = ['errors' => model(PageModel::class)->errors()];
+            return $this->respond($response, ResponseInterface::HTTP_FORBIDDEN);
         }
 
-    
-          // Success!
-          Theme::set_message('success', lang('Core.saved_data'), lang('Core.cool_success'));
-          return redirect()->to($this->path_redirect . '/edit/' . $pageId  . '?token=' . $this->token );
+        // Success!
+        alert('success', lang('Core.resourcesSaved'));
+        return redirect()->to(route_to('page.edit',  $objId));
 
     }
 
@@ -170,7 +157,7 @@ class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
      */
     public function update( string $id): RedirectResponse
     {
-         //print_r($this->request->getPost()); exit;
+        //print_r($this->request->getPost()); exit;
 
         helper('string');
         // validate
@@ -180,7 +167,7 @@ class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
         ];
 
         if (!$this->validate($this->rules)) {
-            Theme::set_message('error', $this->validator->getErrors(), lang('Core.warning_error'));
+            alert('error', $this->validator->getErrors());
             return redirect()->back()->withInput();
         }
 
@@ -189,20 +176,14 @@ class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
         $page = $this->request->getPost();
         $page['active'] = isset($page['active']) ? $page['active'] : 0;
         $page['display_title'] = isset($page['display_title']) ? $page['display_title'] : 0;
-        if (! $menuId = model(PageModel::class)->save($page, true)) {
-            Theme::set_message('error', model(PageModel::class)->errors(), lang('Core.warning_error'));
-            return redirect()->back()->withInput();
+        if (! $objId = model(PageModel::class)->save($page, true)) {
+            $response = ['errors' => model(PageModel::class)->errors()];
+            return $this->respond($response, ResponseInterface::HTTP_FORBIDDEN);
         }
 
-        // Builder
-        if (! $menuId = model(ComposerModel::class)->saveComposer($page, true)) {
-            Theme::set_message('error', model(PageModel::class)->errors(), lang('Core.warning_error'));
-            return redirect()->back()->withInput();
-        }
-            cache()->delete('page-'.$page['lang'][service('request')->getLocale()]['slug']);
          // Success!
-         Theme::set_message('success', lang('Core.saved_data'), lang('Core.cool_success'));
-         return redirect()->to($this->path_redirect . '/edit/' . $id);
+        alert('success', lang('Core.resourcesSaved'));
+        return redirect()->to(route_to('page.edit', $id));
 
     }
 
@@ -272,9 +253,11 @@ class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
                 }
 
                 if ($isNatif == true) {
-                    return $this->getResponse(['error' => lang('Core.not_delete_perm_natif')], 401);
+                    $response = ['errors' => [lang('Core.notDeletePermNatif')]];
+                    return $this->respond($response, ResponseInterface::HTTP_BAD_REQUEST);  
                 } else {
-                    return $this->getResponse(['success' => lang('Core.your_selected_records_have_been_deleted')], 200);
+                    $response = ['messages' => ['sucess' => lang('Core.resourcesDeleted')]];
+                    return $this->respondDeleted($response, ResponseInterface::HTTP_OK);  
                 }
         
         }
@@ -414,6 +397,56 @@ class PagesController extends \Adnduweb\Ci4Admin\Controllers\BaseAdminController
                 return $this->getResponse(['success' => lang('Core.delete_data')], 200);
             }
 
+        }
+    }
+
+     /**
+     * Returns the Media provider
+     *
+     * @return mixed
+     */
+    protected function getPageCurrentProvider()
+    {
+        $this->object = model('PageModel')->where([model('PageModel')->primaryKey => $this->id])->first();
+        if($this->object){
+            $this->object->lang =  $this->object->getPagelangCurrent();
+            $this->object->langAll =  $this->object->getPagelangAll();
+        }
+       
+            
+    }
+
+    public function updatePage(){
+
+        if ($this->request->isAJAX()) {
+
+            $request = (object)$this->request->getPost();
+            //print_r($request); exit;  
+            switch ($request->action) {
+                case 'activation':
+                    
+                    $this->page = model(PageModel::class)->where(['id' => $request->id])->first();
+  
+                    if(!$this->page)
+                    return false;
+
+                    if( $this->page->active == 0){
+                        $this->page->activate();
+                    }else{
+                        $this->page->deactivate();
+                    }
+
+                    if(!model(PageModel::class)->save($this->page)){
+                        return $this->failure(400, 'No page save', true);
+                    }
+
+                    // Success!
+                    $response = ['messages' => ['sucess' => lang('Core.resourcesSaved')]];
+                    return $this->respond($response, ResponseInterface::HTTP_OK);  
+                break;
+                default:
+                    return $this->respondNoContent();
+            }
         }
     }
 

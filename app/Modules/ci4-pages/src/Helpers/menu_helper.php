@@ -1,6 +1,6 @@
 <?php
 
-use Adnduweb\Pages\Entities\Menu;
+use Amauchar\Pages\Entities\Menu;
 
 if (!function_exists('afficher_menu_admin')) {
     function afficher_menu_admin($parent, $niveau, $array, $table = 'tabs')

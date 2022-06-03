@@ -1,13 +1,14 @@
-<?php namespace Adnduweb\Pages\Config;
+<?php namespace Amauchar\Pages\Config;
 
+use CodeIgniter\Config\BaseService;
 use CodeIgniter\Model;
-use Adnduweb\Pages\Libraries\Theme;
-use Adnduweb\Pages\Libraries\Shortcode;
-use Adnduweb\Pages\Libraries\Widget;
-use Config\Services as BaseService;
+use Amauchar\Pages\Libraries\Theme;
+use Amauchar\Pages\Libraries\Shortcode;
+use Amauchar\Pages\Libraries\Widget;
+
 
 class Services extends BaseService
-{
+{ 
   
 	/**
 	 * Return List Theme.
@@ -17,16 +18,16 @@ class Services extends BaseService
 	 *
 	 * @return ResetterInterface
 	 */
-	public static function theme_fo(Theme $config = null, bool $getShared = true): Theme
+	public static function themefo(Theme $config = null, bool $getShared = true): Theme
 	{
 		if ($getShared)
 		{
-			return self::getSharedInstance('theme_fo', $config);
+			return self::getSharedInstance('themefo', $config);
 		}
 
-		$config = $config ?? config(ThemeFo::class);
+		$config = $config ?? config(FrontTheme::class);
 
-		return new Theme($config ?? config(ThemeFo::class));
+		return new Theme($config ?? config(FrontTheme::class));
 	}
 
 

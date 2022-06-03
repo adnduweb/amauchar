@@ -6,6 +6,7 @@ use Michalsn\Uuid\UuidEntity;
 use CodeIgniter\Files\Exceptions\FileNotFoundException;
 use Config\Mimes;
 use Amauchar\Medias\Structures\MediaObject;
+use Amauchar\Medias\Models\MediaModel;
 use Amauchar\Medias\Models\MediaLangModel;
 use CodeIgniter\I18n\Time;
 
@@ -311,5 +312,44 @@ class Media extends UuidEntity
 		}
 			
 	}
+
+	  /**
+     * Creates a new Adresse for this user
+     */
+    public function getLangCurrent()
+    {
+        if(!empty( $this->attributes['id'])){
+            return model(MediaLangModel::class)->where(['media_id' => $this->attributes['id'],'lang' => service('request')->getLocale()])->first();
+        }else{
+            return new PageLang();
+        }
+    }
+
+     /**
+     * Creates a new Adresse for this user
+     */
+    public function getLangAll()
+    {
+        $temp = [];
+        if(!empty( $this->attributes['id'])){
+            $langAll = model(MediaLangModel::class)->where(['media_id' => $this->attributes['id']])->findAll();
+          
+            if(!empty($langAll)){
+                foreach($langAll as $lang){
+                    $temp[$lang->lang] = $lang;
+                }
+            }
+        }else{
+            $language = new language();
+            $supportedLocales = $language->supportedLocales();
+
+            if(!empty($supportedLocales)){
+                foreach($supportedLocales as $k => $v) {
+                    $temp[$k] = new PageLang();
+                }
+            }                    
+        }
+        return $temp;
+    }
 
 }

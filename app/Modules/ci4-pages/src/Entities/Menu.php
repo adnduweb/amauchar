@@ -1,6 +1,6 @@
 <?php
 
-namespace Adnduweb\Pages\Entities;
+namespace Amauchar\Pages\Entities;
 
 use CodeIgniter\Entity;
 

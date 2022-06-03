@@ -13,6 +13,7 @@ use Amauchar\Core\Libraries\Util;
 use Amauchar\Core\Libraries\Audits;
 use Amauchar\Core\Config\Audits as AuditsConfig;
 use Amauchar\Core\Libraries\Mail;
+use Amauchar\Core\Libraries\Module;
 
 
 /**
@@ -143,6 +144,26 @@ class Services extends BaseService
 		endif;
 
 		return new Mail();
+    }
+    
+    /**
+	 * Return List Theme.
+	 *
+	 * @param Module|null $config
+	 * @param bool      $getShared
+	 *
+	 * @return ResetterInterface
+	 */
+	public static function module(Modules $config = null, bool $getShared = true): Module
+	{
+		if ($getShared)
+		{
+			return self::getSharedInstance('module', $config);
+		}
+
+		$config = $config ?? config(Modules::class);
+
+		return new Module($config ?? config(Modules::class));
 	}
 
 }

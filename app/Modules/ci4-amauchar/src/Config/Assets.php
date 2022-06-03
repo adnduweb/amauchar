@@ -60,6 +60,7 @@ class Assets extends BaseConfig
      * This should make up the first segment of an asset URL.
      */
     public $folders = [
-        'backend'   => ROOTPATH . 'public/backend'
+        'backend'   => ROOTPATH . 'public/backend',
+        'frontend'   => ROOTPATH . 'public/frontend'
     ];
 }

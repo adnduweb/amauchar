@@ -1,9 +1,14 @@
 <?php 
 
-namespace Adnduweb\Pages\Entities;
+namespace Amauchar\Pages\Entities;
 
 use CodeIgniter\Entity\Entity;
-use Adnduweb\Pages\Models\PageModel;
+use Amauchar\Pages\Models\PageModel;
+use Amauchar\Pages\Models\PageLangModel;
+use Amauchar\Medias\Models\MediaModel;
+use Amauchar\Pages\Entities\PageLang;
+use Amauchar\Core\Libraries\Language;
+
 
 class Page extends Entity
 {
@@ -109,6 +114,44 @@ class Page extends Entity
        }
     } 
 
+     /**
+     * Creates a new Adresse for this user
+     */
+    public function getPagelangCurrent()
+    {
+        if(!empty( $this->attributes['id'])){
+            return model(PageLangModel::class)->where(['page_id' => $this->attributes['id'],'lang' => service('request')->getLocale()])->first();
+        }else{
+            return new PageLang();
+        }
+    }
+
+     /**
+     * Creates a new Adresse for this user
+     */
+    public function getPagelangAll()
+    {
+        $temp = [];
+        if(!empty( $this->attributes['id'])){
+            $langAll = model(PageLangModel::class)->where(['page_id' => $this->attributes['id']])->findAll();
+          
+            if(!empty($langAll)){
+                foreach($langAll as $lang){
+                    $temp[$lang->lang] = $lang;
+                }
+            }
+        }else{
+            $language = new language();
+            $supportedLocales = $language->supportedLocales();
+
+            if(!empty($supportedLocales)){
+                foreach($supportedLocales as $k => $v) {
+                    $temp[$k] = new PageLang();
+                }
+            }                    
+        }
+        return $temp;
+    }
     
 
      /**
@@ -140,7 +183,10 @@ class Page extends Entity
         $media =  'https://via.placeholder.com/300';
         if(!empty($this->attributes['media_id'])){
             $this->attributes['medias'] = model(MediaModel::class)->find($this->attributes['media_id']);
-           $media = $this->attributes['medias']->getUrlMedia('medium');
+            if(!empty($this->attributes['medias'])){
+                $media = $this->attributes['medias']->getUrlMedia('medium');
+            }
+         
         }
 
         return $media;
@@ -151,12 +197,14 @@ class Page extends Entity
 
         $this->attributes['medias'] = model(MediaModel::class)->find(1);
         if(!empty($this->attributes['media_id'])){
-            $this->attributes['medias'] = model(MediaModel::class)->find($this->attributes['media_id']);
-            $this->attributes['medias']->getUrlMedia('medium');
+            $medias = model(MediaModel::class)->find($this->attributes['media_id']);
+            if(!empty($medias)){               
+                $this->attributes['medias'] = $medias;
+                $this->attributes['medias']->getUrlMedia('medium');
+            }
         }
 
         return $this->attributes['medias'];
-       
     }
 
 }

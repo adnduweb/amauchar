@@ -1,7 +1,7 @@
 <?php
 
-namespace Adnduweb\Pages\Models;
-use Adnduweb\Pages\Entities\FormContact;
+namespace Amauchar\Pages\Models;
+use Amauchar\Pages\Entities\FormContact;
 use CodeIgniter\Model;
 
 class FormContactModel extends Model

@@ -1,12 +1,15 @@
 <?php
 
-namespace Adnduweb\Pages\Models;
-use Adnduweb\Pages\Entities\Composer;
+namespace Amauchar\Pages\Models;
+
 use CodeIgniter\Model;
+use Amauchar\Pages\Entities\Composer;
+use Amauchar\Core\Traits\AuditsTrait;
+use Amauchar\Core\Libraries\Util;
 
 class ComposerModel extends Model
 {
-    use \Tatter\Relations\Traits\ModelTrait, \Adnduweb\Ci4Core\Traits\AuditsTrait;
+    use AuditsTrait;
 
     protected $DBGroup          = 'default';
     protected $table            = 'pages_composer';
@@ -49,6 +52,7 @@ class ComposerModel extends Model
         if(!is_array($items))
             return false;
 
+       
         // if (! is_dir(config('Medias')->getPath() . config('Carousels')->segementUrl . DIRECTORY_SEPARATOR . $carousel_id) && ! @mkdir(config('Medias')->getPath() . config('Carousels')->segementUrl . DIRECTORY_SEPARATOR . $carousel_id, 0775, true)){
         //     throw MediasException::forDirFail(config('Medias')->getPath() . $carousel_id);
         // }
@@ -65,12 +69,13 @@ class ComposerModel extends Model
 
                 if($e != '__i__'){
 
-                    $construction[$e][$k] = $v;
+                    $construction[$e][$k] = Util::arrayToObject($v);
                 }
                 $i++;
             }
         }
-       // print_r($construction);
+        // print_r($construction);
+        // exit;
 
         $i = 0;
         foreach($construction as $builder){
@@ -130,7 +135,7 @@ class ComposerModel extends Model
 
     public function saveComposerItems(array $items,  int $page_id){
 
-        $data = [
+       $data = [
             'page_id' => $page_id,
             'lang'    => service('request')->getLocale(),
             'items'    => serialize($items),

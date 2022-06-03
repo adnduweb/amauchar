@@ -1237,7 +1237,7 @@ class Medias extends AdminController
 			'messages' => [
 				'sucess' => lang('Core.resourcesSaved')
 			], 
-			'editionMediaManager' => view($this->viewPrefix .'imageManagerEdition', ['media' => $this->object, 'mediaLang' => $this->object->lang])
+			'editionMediaManager' => view($this->viewPrefix .'imageManagerEdition', ['media' => $this->object, 'mediaLang' => $this->object->lang, 'supportedLocales' => $this->viewData['supportedLocales']])
 		];
 		return $this->respond($response, ResponseInterface::HTTP_OK);
 	}
@@ -1252,24 +1252,26 @@ class Medias extends AdminController
 		$lang = [];
 		
 		foreach($response['lang'] as $k => $v){
-			$lang = $v; 
-			$lang['lang'] = $k;
+			$lang[$k] = $v; 
+			$lang[$k]['lang'] = $k;
+			$lang[$k]['media_id'] = $this->object->id;
 			
 		}	
-		$lang['media_id'] = $this->object->id;
-		$lang['id_media_lang'] = $response['id_media_lang'];
+		//$lang['media_id'] = $this->object->id;
+		//$lang['id_media_lang'] = $response['id_media_lang'];
 		//print_r($lang); exit;
-
-		if (!model(MediaLangModel::class)->save($lang, true)) {
-			$response = ['errors' => model(MediaLangModel::class)->errors()];
-            return $this->respond($response, ResponseInterface::HTTP_FORBIDDEN);
+		foreach($lang as $k => $s){
+			if (!model(MediaLangModel::class)->updatelang($s)) {
+				$response = ['errors' => model(MediaLangModel::class)->errors()];
+				return $this->respond($response, ResponseInterface::HTTP_FORBIDDEN);
+			}
 		}
 		
 		$response = [
 			'messages' => [
 				'sucess' => lang('Core.resourcesSaved')
 			], 
-			'editionMediaManager' => view($this->viewPrefix .'imageManagerEdition', ['media' => $this->object, 'mediaLang' => $this->object->lang])
+			'editionMediaManager' => view($this->viewPrefix .'imageManagerEdition', ['media' => $this->object, 'mediaLang' => $this->object->lang, 'supportedLocales' => $this->viewData['supportedLocales']])
 		];
 		return $this->respond($response, ResponseInterface::HTTP_OK);
 	}

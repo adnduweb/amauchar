@@ -1,12 +1,15 @@
 <?php
 
-namespace Adnduweb\Pages\Models;
-use Adnduweb\Pages\Entities\Page;
+namespace Amauchar\Pages\Models;
+
 use CodeIgniter\Model;
+use Amauchar\Core\Traits\AuditsTrait;
+use Amauchar\Pages\Entities\Page;
+use Amauchar\Core\Libraries\Util;
 
 class PageModel extends Model
 {
-    use \Tatter\Relations\Traits\ModelTrait, \Adnduweb\Ci4Core\Traits\AuditsTrait;
+    use AuditsTrait;
 
     protected $DBGroup          = 'default';
     protected $table            = 'pages';
@@ -106,32 +109,24 @@ class PageModel extends Model
         return ($page->is_natif) ? true : false;
     }
 
-    
-
-
-    // // ...
-    // protected function checkCache(array $data)
-    // {
-    //     // Check if the requested item is already in our cache
-    //     print_r($data); exit;
-
-    // }
-
     public function insertLang($params){
 
         if($this->lang == true){
 
             $post = service('request')->getPost();
-            if(isset($post['lang'])){                
+            if(isset($post['lang']) && is_array($post['lang'])){            
                 
-                $data = $post['lang'][service('request')->getLocale()];
-                $data['page_id'] = $params['id'];
-                $data['slug'] = empty($data['slug']) ? uniforme($data['lang'][service('request')->getLocale()]['name']) : uniforme($data['slug']) ;
-                $data['lang'] = service('request')->getLocale();
+                foreach($post['lang'] as $k => $v){
+                
+                    $data = $post['lang'][$k];
+                    $data['page_id'] = $params['id'];
+                    $data['slug'] = empty($data['slug']) ? Util::stringCleanUrl($data['lang'][$k]['name']) : Util::stringCleanUrl($data['slug']) ;
+                    $data['lang'] = $k;
 
-               if(!$this->db->table('pages_langs')->insert($data)){
-                    return $this->errors();
-               }
+                    if(!$this->db->table('pages_langs')->insert($data)){
+                            return $this->errors();
+                    }
+                }
             }
         }
     }
@@ -141,15 +136,30 @@ class PageModel extends Model
         if($this->lang == true){
 
             $post = service('request')->getPost();
-            if(isset($post['lang'])){                
+            if(isset($post['lang']) && is_array($post['lang'])){      
+               
+                foreach($post['lang'] as $k => $v){
                 
-                $data = $post['lang'][service('request')->getLocale()];
-                $data['lang'] = service('request')->getLocale();
-                $data['slug'] = empty($data['slug']) ? uniforme($data['lang'][service('request')->getLocale()]['name']) : uniforme($data['slug']) ;
+                    if($this->db->table('pages_langs')->select('id_page_lang')->where( ['page_id' => $params['id'][0], 'lang' => $k])->get()->getRow()){
+                        $data = $post['lang'][$k];
+                        $data['lang'] = $k;
+                        $data['slug'] = empty($data['slug']) ? Util::stringCleanUrl($data['lang'][$k]['name']) : Util::stringCleanUrl($data['slug']) ;
 
-               if(!$this->db->table('pages_langs')->update($data, ['id_page_lang' => $post['id_page_lang']])){
-                    return $this->errors();
-               }
+                        //print_r($data); exit;
+                        if(!$this->db->table('pages_langs')->update($data, ['id_page_lang' => $post['id_page_lang'], 'lang' => $k])){
+                                return $this->errors();
+                        }
+                    }else{
+                        $data = $post['lang'][$k];
+                        $data['page_id'] = $params['id'][0];
+                        $data['slug'] = empty($data['slug']) ? Util::stringCleanUrl($data['name']) : Util::stringCleanUrl($data['slug']) ;
+                        $data['lang'] = $k;
+
+                        if(!$this->db->table('pages_langs')->insert($data)){
+                                return $this->errors();
+                        }
+                    }
+                }
             }
 
         }

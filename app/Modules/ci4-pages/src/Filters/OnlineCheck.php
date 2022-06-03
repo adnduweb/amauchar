@@ -1,4 +1,4 @@
-<?php namespace Adnduweb\Pages\Filters;
+<?php namespace Amauchar\Pages\Filters;
 
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
@@ -29,7 +29,7 @@ class OnlineCheck implements FilterInterface
         ->setScheme('')
         ->stripQuery('token');
 
-        if(!in_array(CI_AREA_ADMIN, service('request')->getUri()->getSegments()) && !in_array((string)$current, [route_to('site-adw-offline')])){
+        if(!in_array(ADMIN_AREA, service('request')->getUri()->getSegments()) && !in_array((string)$current, [route_to('site-adw-offline')])){
             if ( service('settings')->get('App.core', 'ModeMaintenance') == true) {
                 $user = user();
 
@@ -39,7 +39,7 @@ class OnlineCheck implements FilterInterface
             }
         }
         if ( service('settings')->get('App.core', 'ModeMaintenance') == false) {
-            if(!in_array(CI_AREA_ADMIN, service('request')->getUri()->getSegments()) && in_array((string)$current, [route_to('site-adw-offline')])){
+            if(!in_array(ADMIN_AREA, service('request')->getUri()->getSegments()) && in_array((string)$current, [route_to('site-adw-offline')])){
                 return redirect()->to('/');
             }
         }

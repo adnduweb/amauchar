@@ -16,20 +16,20 @@ var KTSigninGeneral = function() {
                     'email': {
                         validators: {
                             notEmpty: {
-                                message: 'Email address is required'
+                                message: _LANG_.EmailAddressIsRequired
                             },
                             emailAddress: {
-                                message: 'The value is not a valid email address'
+                                message: _LANG_.ValueIsNotAValidEmail
                             }
                         }
                     },
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: _LANG_.PasswordIsRequired
                             },
                             callback: {
-                                message: 'Please enter valid password',
+                                message: _LANG_.PleaseEnterValidPassword
                             }
                         }
                     }
@@ -70,36 +70,20 @@ var KTSigninGeneral = function() {
                                 showConfirmButton: false,
                                 timer: 1500,
                             }).then(function(result) {
-                                console.log(result);
                                 form.querySelector('[name="email"]').value = "";
                                 form.querySelector('[name="password"]').value = "";
                                 window.location.href = response.data.redirect;
                             });
-                            console.log(response);
+
                         })
-                        .catch(
-                            //     function(error) {
-                            //     let dataMessage = error.response.data.message;
-                            //     let dataErrors = error.response.data.errors;
+                        .catch(function(error) {
+                            // always executed
+                            // Hide loading indication
+                            submitButton.removeAttribute('data-kt-indicator');
 
-                            //     for (const errorsKey in dataErrors) {
-                            //         if (!dataErrors.hasOwnProperty(errorsKey)) continue;
-                            //         dataMessage += "\r\n" + dataErrors[errorsKey] + "\r\n";
-                            //     }
-
-                            //     if (error.response) {
-                            //         Swal.fire({
-                            //             html: dataMessage,
-                            //             icon: "error",
-                            //             buttonsStyling: false,
-                            //             confirmButtonText: "Ok, got it!",
-                            //             customClass: {
-                            //                 confirmButton: "btn btn-primary"
-                            //             }
-                            //         });
-                            //     }
-                            // }
-                        )
+                            // Enable button
+                            submitButton.disabled = false;
+                        })
                         .then(function() {
                             // always executed
                             // Hide loading indication
@@ -111,10 +95,10 @@ var KTSigninGeneral = function() {
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        text: _LANG_.sorryLooksLikeThereArSomeErrorsDetectedPleaseTryAgain,
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: _LANG_.close,
                         customClass: {
                             confirmButton: "btn btn-primary"
                         }

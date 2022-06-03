@@ -1,7 +1,7 @@
 <?php 
-namespace Adnduweb\Pages\Libraries;
+namespace Amauchar\Pages\Libraries;
 
-use Adnduweb\Pages\Entities\Composer;
+use Amauchar\Pages\Entities\Composer;
 
 class Widget
 {
@@ -29,7 +29,7 @@ class Widget
 
                 if(property_exists(config(ucfirst($two)), 'widget')){
                     if(config(ucfirst($two))->widget == true){
-                        $model      = 'Adnduweb\Ci4'.plural(ucfirst($two)).'\Models\\' . singular(ucfirst($two)) . 'Model';
+                        $model      = 'Amauchar\\'.plural(ucfirst($two)).'\Models\\' . singular(ucfirst($two)) . 'Model';
                         $models = new $model();
                         $this->instanceWidget[$i] = $module;
                         $this->instanceWidget[$i]->moduleComposer = singular($two);

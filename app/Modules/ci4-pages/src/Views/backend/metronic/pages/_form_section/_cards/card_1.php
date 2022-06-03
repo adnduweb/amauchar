@@ -1,0 +1,43 @@
+<?php 
+$paramsMedia = [
+    'button' => 'icone', 
+    'type' => 'image', 
+    'multiple' => 'false',
+    'media' => $formItem->getMedia()
+    ]; ?>
+
+<!--begin::Thumbnail settings-->
+<div class="card card-flush py-4">
+    <!--begin::Card header-->
+    <div class="card-header">
+        <!--begin::Card title-->
+        <div class="card-title">
+            <h2>Image</h2>
+        </div>
+        <!--end::Card title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body text-center pt-0">
+        <!--begin::Image input-->
+        <div class="image-input <?= (!empty($formItem->media_id)) ? '' : 'image-input-empty';?> image-input-outline mb-3" data-kt-image-input="true" style="">
+            <!--begin::Preview existing avatar-->
+            <div class="image-input-wrapper w-150px h-150px" style="background-image: url(<?= $formItem->getUrlMedia('medium'); ?>"></div>
+            <!--end::Preview existing avatar-->
+            <!--begin::Label-->
+            <?= view('Amauchar\Medias\Views\backend\metronic\templates\add_button', $paramsMedia) ?>
+            <!--end::Label-->
+            <!--begin::Cancel-->
+            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-imagemanager-input-action="cancel" data-bs-toggle="tooltip" title="<?= ucfirst(lang('Medias.cancelAvatar')); ?>">
+                <i class="bi bi-x fs-2"></i>
+            </span>
+            <!--end::Cancel-->
+        </div>
+        <!--end::Image input-->
+        <!--begin::Description-->
+        <div class="text-muted fs-7">Définissez l'image miniature de la création. Seuls les fichiers images *.png, *.jpg et *.jpeg sont acceptés</div>
+        <!--end::Description-->
+    </div>
+    <!--end::Card body-->
+</div>
+<!--end::Thumbnail settings-->

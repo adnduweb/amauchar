@@ -1,14 +1,14 @@
 <?php
 
-namespace Adnduweb\Pages\Controllers\Api;
+namespace Amauchar\Pages\Controllers\Api;
  
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
-use Adnduweb\Pages\Entities\Page;
-use Adnduweb\Pages\Models\PageModel;
-use Adnduweb\Pages\Entities\Composer;
-use Adnduweb\Pages\Models\ComposerModel;
+use Amauchar\Pages\Entities\Page;
+use Amauchar\Pages\Models\PageModel;
+use Amauchar\Pages\Entities\Composer;
+use Amauchar\Pages\Models\ComposerModel;
  
 class Ressources extends ResourceController
 {

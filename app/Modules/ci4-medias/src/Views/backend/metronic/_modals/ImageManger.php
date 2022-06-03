@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-fullscreen modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="dropzoneModalTitle">Image manager</h5>
+                <h5 class="modal-title" id="dropzoneModalTitle"><?= ucfirst(lang('Medias.imageManger')); ?></h5>
                <!--begin::Close-->
                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
                     <span class="svg-icon svg-icon-2x"></span>
@@ -23,8 +23,8 @@
                                     <!--end::Icon-->
                                     <!--begin::Info-->
                                     <div class="ms-4">
-                                        <h3 class="fs-5 fw-bolder text-gray-900 mb-1"><?= lang('Media.DropFilesHereOrClickToUpload'); ?></h3>
-                                        <span class="fs-7 fw-bold text-gray-400"><?= lang('Media.UploadUpTo10Files'); ?></span>
+                                        <h3 class="fs-5 fw-bolder text-gray-900 mb-1"><?= ucfirst(lang('Medias.DropFilesHereOrClickToUpload')); ?></h3>
+                                        <span class="fs-7 fw-bold text-gray-400"><?= ucfirst(lang('Medias.UploadUpTo10Files')); ?></span>
                                     </div>
                                     <!--end::Info-->
                                 </div>

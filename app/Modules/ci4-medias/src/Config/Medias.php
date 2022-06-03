@@ -15,6 +15,8 @@ class Medias extends BaseConfig
      */
     public $routeFiles = true;
 
+    public $natif = true;
+
     /**
      * View file aliases
      *

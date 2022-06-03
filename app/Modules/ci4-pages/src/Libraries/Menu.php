@@ -1,4 +1,4 @@
-<?php namespace Adnduweb\Pages\Libraries;
+<?php namespace Amauchar\Pages\Libraries;
 
 use CodeIgniter\HTTP\URI;
 use Spatie\Menu\Menu as BaseMenu;

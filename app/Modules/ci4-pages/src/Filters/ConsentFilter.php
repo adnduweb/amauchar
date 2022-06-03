@@ -1,4 +1,4 @@
-<?php namespace Adnduweb\Pages\Filters;
+<?php namespace Amauchar\Pages\Filters;
 
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
@@ -30,7 +30,7 @@ class ConsentFilter implements FilterInterface
 
        
         //var_dump(setting('Consent.requireConsent')); exit;
-        if(in_array(CI_AREA_ADMIN, service('request')->getUri()->getSegments())){
+        if(in_array(ADMIN_AREA, service('request')->getUri()->getSegments())){
             return;
         }
             

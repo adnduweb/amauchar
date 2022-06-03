@@ -1,4 +1,4 @@
-<?= $this->extend(config('Core')->views['layout-register']) ?>
+<?= $this->extend(config('Amauchar')->views['layout-register']) ?>
 
 <?= $this->section('title') ?><?= lang('Auth.login') ?> <?= $this->endSection() ?>
 

@@ -1,4 +1,4 @@
-<?php namespace Adnduweb\Pages\Libraries;
+<?php namespace Amauchar\Pages\Libraries;
 
  class Shortcode
 {

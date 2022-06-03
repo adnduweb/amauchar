@@ -1,57 +1,69 @@
 <?php
 
-namespace Adnduweb\Pages\Libraries;
+/**
+ * This file is part of Bonfire.
+ *
+ * (c) Lonnie Ezell <lonnieje@gmail.com>
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
 
+namespace Amauchar\Pages\Libraries;
+
+use Amauchar\Core\Libraries\Util;
+
+/**
+ * Class Theme
+ *
+ * Provides utility commands to work with themes.
+ */
 class Theme
 {
 
-    /** @var string*/
-    public static $mode;
 
-    /** @var back */
-    protected static $isfrontend = false;
+    protected static $version = '1.7.0';
+    /**
+     * Are we currently in the admin area?
+     *
+     * @var bool
+     */
+    public static $inAdmin = false;
 
-    /** @var string*/
-    protected static $defaultTheme = 'default';
+    /**
+     * @var string
+     */
+    protected static $defaultTheme = 'metronic';
 
-    /** @var string*/
-    public static $name;
+    /**
+     * @var string
+     */
+    protected static $currentTheme;
 
-    /** @var string*/
-    public static $demo;
+    /**
+     * @var string
+     */
+    protected static $config;
 
-    /** @var string*/
-    public static $htmlAttributes;
-
-    /** @var string*/
-    public static $htmlClasses;
-
-    /** @var string*/
-    public static $cssVariables;
-
-    /** @var string*/
-    public static $page = 'index';
-
-    /** @var string*/
-    private static $currentTheme;
-    
-    /** @var string*/
+    /**
+     * Holds theme info retrieved
+     *
+     * @var array
+     */
     protected static $themeInfo;
 
-    protected static $ignore_session = false;
+        /**
+     * Demo name
+     *
+     * @var string
+    */
+    public static $demo = 'demo1';
 
-    protected static $message;
+    public static $htmlAttributes;
 
-    // Free version flag
-    public static $freeVersion = false;
+    public static $htmlClasses;
 
-   
-
-    protected static $message_template = "
-    <script type='text/javascript'>
-    $(document).ready(function(){
-        toastr.{type}('{message}', '{title}');
-    });</script>";
+    public static $cssVariables;
 
     /** @var string*/
     public static $custom = 'app.js';
@@ -65,34 +77,16 @@ class Theme
     /** @var bool*/
     private static $debug = true;
 
-    /**
-     * The URI to use for matching routed assets.
-     * Defaults to uri_string()
-     *
-     * @var string
-     */
-    protected $route;
+    public function __construct(){
+        $this->saveInAdmin();
 
-    /**
-     * Whether the route has been sanitized
-     * Prevents re-processing on multiple display calls
-     *
-     * @var bool
-     */
-    protected $sanitized = false;
-
-    /**
-     * Route collection used to determine the default route (if needed).
-     *
-     * @var CodeIgniter\Router\RouteCollectionInterface
-     */
-    protected $collection;
-
+       // if(self::$inAdmin){
+            self::$config = config('AdminTheme');
+       // }
+    }
 
     /**
      * Sets the active theme.
-     *
-     * @param string $theme
      */
     public static function setTheme(string $theme)
     {
@@ -102,12 +96,8 @@ class Theme
     /**
      * Returns the path to the specified theme folder.
      * If no theme is provided, will use the current theme.
-     *
-     * @param string|null $theme
-     *
-     * @return string
      */
-    public static function path(string $theme=null): string
+    public static function path(?string $theme = null): string
     {
         if (empty($theme)) {
             $theme = static::current();
@@ -118,7 +108,9 @@ class Theme
             static::$themeInfo = self::available();
         }
 
-        foreach(static::$themeInfo as $info) {
+        //print_r(static::$themeInfo); exit;
+
+        foreach (static::$themeInfo as $info) {
             if ($info['name'] === $theme) {
                 return $info['path'];
             }
@@ -142,37 +134,48 @@ class Theme
     /**
      * Returns an array of all available themes
      * and the paths to their directories.
-     *
-     * @return array
      */
     public static function available(): array
     {
         $themes = [];
         helper('filesystem');
 
-
-        foreach(config('Themes')->collectionsFrontend as $collection) {
+        foreach (config('Themes')->collections as $collection) {
             $info = get_dir_file_info($collection, true);
 
             if (! count($info)) {
                 continue;
             }
 
-            foreach($info as $name => $row) {
+            foreach ($info as $name => $row) {
                 $themes[] = [
-                    'name' => $name,
-                    'path' => $row['relative_path']. '/' . $name .'/',
-                    'hasComponents' => is_dir($row['relative_path'].$name.'/Components'),
+                    'name'          => $name,
+                    'path'          => $row['relative_path'] . $name . '/',
+                    'hasComponents' => is_dir($row['relative_path'] . $name . '/Components'),
                 ];
             }
         }
-
-        //var_dump($themes); exit;
+        //print_r($themes); exit;
 
         return $themes;
     }
+    /**
+     * 
+     * METRONIC 
+     * 
+     */
 
+    public static function includeFonts($value='') {
 
+        if (self::$config->assets['fonts']['google']) {
+            $fonts = self::$config->assets['fonts']['google'];
+            echo '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=' . implode('|', $fonts) . '"/>';
+        }
+    }
+
+    public static function addHtmlAttribute($scope, $name, $value) {
+        self::$htmlAttributes[$scope][$name] = $value;
+    }
 
     public static function addHtmlAttributes($scope, $attributes) {
         foreach ($attributes as $key => $value) {
@@ -180,170 +183,143 @@ class Theme
         }
     }
 
-    public static function addHtmlAttribute($scope, $name, $value)
-    {
-        self::$htmlAttributes[$scope][$name] = $value;
-    }
-
     public static function addHtmlClass($scope, $class) {
         self::$htmlClasses[$scope][] = $class;
-    }
-
-    public static function delHtmlClass($scope) {
-        unset(self::$htmlClasses[$scope]);
     }
 
     public static function addCssVariable($scope, $name, $value) {
         self::$cssVariables[$scope][$name] = $value;
     }
 
-    public static function printHtmlAttributes($scope)
-    {
-        $attrs = [];
+    public static function printHtmlAttributes($scope) {
+        $Attributes = array();
 
         if (isset(self::$htmlAttributes[$scope]) && !empty(self::$htmlAttributes[$scope])) {
-            foreach (self::$htmlAttributes[$scope] as $name => $value) {
-                $attrs[] = $name . '="' . $value . '"';
-            }
-            echo ' ' . implode(' ', $attrs) . ' ';
+            echo  Util::getHtmlAttributes(self::$htmlAttributes[$scope]);
         }
+
         echo '';
     }
 
-    public static function printHtmlClasses($scope, $full = true)
-    {
-       
-        $controller = service('router');
-        $controllerName = explode('\\',  $controller->controllerName());
-        $onload = '';
-
-        if ($scope == 'body') {
-             self::$htmlClasses[$scope][] = 'ps_front-office html controller_' . strtolower(end($controllerName)) . ' method_' . strtolower($controller->methodName()) . ' lang-' . service('request')->getLocale();
-          
-        }
-
-
+    public static function printHtmlClasses($scope, $full = true) {
         if (isset(self::$htmlClasses[$scope]) && !empty(self::$htmlClasses[$scope])) {
             $classes = implode(' ', self::$htmlClasses[$scope]);
+
             if ($full) {
-                echo 'class="' . $classes . '"';
+                echo  Util::getHtmlClass(self::$htmlClasses[$scope]);
             } else {
-                echo  $classes . ' ';
+                echo  Util::getHtmlClass(self::$htmlClasses[$scope], false);
             }
         } else {
             echo '';
         }
     }
 
-    public static function printCssVariables($scope, $full = true) {
-        $result = array();
+    public static function printCssVariables($scope) {
+        $Attributes = array();
+
         if (isset(self::$cssVariables[$scope]) && !empty(self::$cssVariables[$scope])) {
-
-            foreach (self::$cssVariables[$scope] as $name => $value) {
-                if ( !empty($value) ) {
-                    $result[] = $name . ':' . $value;
-                }
-            }
-
-            $result = implode(';', $result);
-
-            if ( $full === true ) {
-                return ' style="' . $result . '" ';
-            } else {
-                return ' ' . $result . ' ';
-            }
+            echo  Util::getCssVariables(self::$cssVariables[$scope]);
         }
-    }
-
-    public static function getPagePath() {
-        return self::$page;
-    }
-
-    public static function getAssetsPath() {
-
-        return service('settings')->get('App.theme_fo', 'name') . '/assets/';
-    }
-
-    public static function getMediaPath() {
-        return self::getAssetsPath() . 'media/';
-    }
-
-    public static function getBaseUrlPath() {
-        // if ( ! isset($_SERVER['PHP_SELF'])) {
-        //     return '';
-        // }
-
-        // if (!empty($_SERVER['PHP_SELF'])) {
-        //     return dirname($_SERVER['PHP_SELF']).'/';
-        // }
-
-        return site_url('frontend/themes/' . service('settings')->get('App.theme_fo', 'name') . '/');
-    }
-
-    public static function getAssetsUrlPath() {
-        return self::getBaseUrlPath() . 'assets/';
-    }
-
-    public static function getMediaUrlPath() {
-        return self::getAssetsUrlPath() . 'media/';
     }
 
     /**
-     * Prints Google Fonts
+     * Get the option's value from config
+     *
+     * @param $scope
+     * @param  false  $path
+     * @param  null  $default
+     *
+     * @return mixed|string
      */
-    public static function includeFonts()
+    public static function getOption($scope, $path = false, $default = null)
     {
-        //print_r(config('ThemeFo')); exit;
-        if (config('ThemeFo')->layout['assets']['fonts']['google']) {
-            $fonts = config('ThemeFo')->layout['assets']['fonts']['google'];
-            echo '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=' . implode('|', $fonts) . '">';
-        }
-        echo '';
-    }
 
-    public static function rtlCssFilename($path) {
-        if (isset($_REQUEST['rtl']) && $_REQUEST['rtl'] == 1) {
-            if (strpos($path, 'fullcalendar') !== false) {
-            } else {
-                $path = str_replace('.css', '.rtl.css', $path);
-            }
-
-            if (isset($_REQUEST['mode']) && $_REQUEST['mode'] && !in_array($_REQUEST['mode'], ['default', 'rtl'])) {
-                if (self::isDarkModeEnabled() && (strpos($path, 'plugins.bundle') !== false || strpos($path, 'style.bundle') !== false)) {
-                    // import dark mode css
-                    $path = str_replace('.bundle', '.'.$_REQUEST['mode'].'.bundle', $path);
-                }
-            }
-
-        } elseif (isset($_REQUEST['mode']) && $_REQUEST['mode'] && !in_array($_REQUEST['mode'], ['default', 'rtl'])) {
-            if (self::isDarkModeEnabled() && (strpos($path, 'plugins.bundle.css') !== false || strpos($path, 'style.bundle.css') !== false)) {
-                // import dark mode css
-                $path = str_replace('.bundle', '.'.$_REQUEST['mode'].'.bundle', $path);
-            }
+        if (!self::hasOption($scope, $path)) {
+            return $default;
         }
 
-        return $path;
+        $result = array();
+
+        if (!isset(self::$config->{$scope})) {
+            return null;
+        }
+
+        if ($path === false) {
+            $result = self::$config->{$scope};
+        } else {
+            $result = Util::getArrayValue(self::$config->{$scope}, $path);
+        }
+
+        // check if its a callback
+        if (is_callable($result) && !is_string($result)) {
+            $result = call_user_func($result);
+        }
+
+        return $result;
     }
 
-    public static function isRTL() {
-        if (isset($_REQUEST['rtl']) && $_REQUEST['rtl'] == 1) {
-            return true;
+    public static function setOption($scope, $path, $value) {
+        if (isset(self::$config->{$scope})) {
+            return Util::setArrayValue(self::$config->{$scope}, $path, $value);
         } else {
             return false;
         }
     }
 
-    public static function strposa($haystack, $needle, $offset = 0) {
-        if (!is_array($needle)) {
-            $needle = array($needle);
+    public static function hasOption($scope, $path = false) {
+        if (isset(self::$config->{$scope})) {
+            if ($path === false) {
+                return isset(self::$config->{$scope});
+            } else {
+                return Util::hasArrayValue(self::$config->{$scope}, $path);
+            }
+        } else {
+            return false;
         }
-        foreach ($needle as $query) {
-            if (strpos($haystack, $query, $offset) !== false) {
-                return true;
-            } // stop on first true result
+    }
+
+     /**
+     * Get current demo
+     *
+     * @return string
+     */
+    public static function getDemo()
+    {
+        //return service('request')->getGet('demo');
+        return self::$demo;
+    }
+
+
+     /**
+     * Check dark mode
+     *
+     * @return mixed|string
+     */
+    public static function isDarkMode()
+    {
+        $context = 'user:' . user_id();
+        if (setting('App.modeDark', $context) == 1) {
+            return 'dark';
+        }
+    }
+
+    /**
+     * Get current skin
+     *
+     * @return mixed|string
+     */
+    public static function getCurrentMode()
+    {
+        helper('auth');
+        if (auth()->loggedIn()) {
+            $context = 'user:' . user_id();
+            if(service('settings')->get('App.modeDark', $context) == 1){
+                return 'dark';
+            }
         }
 
-        return false;
+        return 'light';
     }
 
     /**
@@ -351,129 +327,69 @@ class Theme
      *
      * @return bool
      */
-    public static function isDarkModeEnabled() {
-        //return (bool) Config('ThemeFo')->layout['main']['dark-mode-enabled'];
-        //var_dump(service('settings')->get('App.mode_bo', 'dark')); exit;
-        return (bool) service('settings')->get('App.mode_bo', 'dark');
+    public static function isDarkModeEnabled()
+    {
+        return (bool) self::getOption('layout', 'main/dark-mode-enabled');
     }
+
+     /**
+     * Get media path
+     *
+     * @return string
+     */
+    public static function getMediaUrlPath()
+    {
+        if(self::$inAdmin){
+            return config('Amauchar')->views['backend'] . '/' . setting('App.themebo').'/assets/media/'; 
+        }
+      
+    }
+
 
     /**
-     * Get current mode
+     * Get media Url
      *
-     * @return mixed|string
+     * @return string
      */
-    public static function getCurrentMode() {
-
-        if(service('settings')->get('App.mode_bo', 'dark') == 1 || env('modeTheme', 1)){
-            return 'dark';
-        }
-
-        return 'default';
+    public static function getMediaUrl(string $scope)
+    {
+       // if(self::$inAdmin){
+            $racine = str_replace(ROOTPATH . 'public', '', config('Amauchar')->views['backend']);
+            return base_url($racine  . '/' . setting('App.themebo').'/assets/media/'. $scope);
+      //  }
+      
     }
 
-    /**
-     * Check dark mode
-     *
-     * @return mixed|string
+     /**
+     * Checks to see if we're in the admin area
+     * by analyzing the current url and the ADMIN_AREA constant.
      */
-    public static function isDarkMode() {
-        //return self::getCurrentMode() === 'dark';
-        return service('settings')->get('App.mode_bo', 'dark') == '1';
+    private function saveInAdmin()
+    {
+        $url = current_url();
+
+        $path = parse_url($url, PHP_URL_PATH);
+
+        self::$inAdmin = strpos($path, ADMIN_AREA) !== false;
     }
 
-    public static function getPageUrl($path, $demo = '', $mode = null) {
-        // Disable pro page URL's for the free version
-        if (self::isFreeVersion() === true && self::isProPage($path) === true) {
-            return "#";
-        }
+    public static function getPageKey() {
+        $el = (array)explode('/', self::getPagePath());
 
-        $baseUrl = self::getBaseUrlPath();
-
-        $params = '';
-        if (isset($_REQUEST['type']) && $_REQUEST['type'] === 'html') {
-            // param keep in url
-            if (isset($_REQUEST['rtl']) && $_REQUEST['rtl']) {
-                $params = 'rtl/';
-            }
-
-            if ($mode !== null) {
-                if ($mode) {
-                    $params = $mode.'/';
-                }
-            } else {
-                if (isset($_REQUEST['mode']) && $_REQUEST['mode']) {
-                    $params = $_REQUEST['mode'].'/';
-                }
-            }
-
-            if (!empty($demo)) {
-                if (self::getViewMode() === 'release') {
-                    // force add link to other demo in release
-                    $baseUrl .= '../../'.$demo.'/dist/';
-                } else {
-                    // for preview
-                    $baseUrl .= '../'.$demo.'/'.$params;
-                }
-            } else {
-                $d = '';
-                if (!empty(self::getDemo())) {
-                    $d = '../'.self::getDemo().'/';
-                }
-                if (self::getViewMode() === 'release') {
-                    // force add link to other demo in release
-                    $baseUrl .= '../'.$d.'dist/';
-                } else {
-                    // for preview
-                    $baseUrl .= $d.$params;
-                }
-            }
-
-            $url = $baseUrl.$path.'.html';
-
-            // skip layout builder page for generated html
-            if (strpos($path, 'builder') !== false && self::getViewMode() === 'release') {
-
-                if (!empty(self::getDemo())) {
-                    $path = self::getDemo().'/'.$path;
-                }
-
-                $url = self::getOption('product', 'preview').'/'.$path.'.html';
-            }
-        } else {
-            if (isset($_REQUEST['rtl']) && $_REQUEST['rtl']) {
-                $params = '&rtl=1';
-            }
-
-            if ($mode !== null) {
-                if ($mode) {
-                    $params = '&mode='.$mode;
-                }
-            } else {
-                if (isset($_REQUEST['mode']) && $_REQUEST['mode']) {
-                    $params = '&mode='.$_REQUEST['mode'];
-                }
-            }
-
-            if (!empty($demo)) {
-                // force add link to other demo
-                $baseUrl .= '../../'.$demo.'/dist/';
-            }
-
-            $url = $baseUrl.'?page='.$path.$params;
-        }
-
-        return $url;
+        return end($el);
     }
 
-    public static function isCurrentPage($path) {
-        return self::$page === $path;
+    public static function getPagePath() {
+        return current_url();
     }
 
-    public static function getSvgIcon($path, $class = '', $svgClass = '') {
-        $path = str_replace('\\', '/', $path);
+    public static function getSVG($path, $class = '', $svgClass = '', $javascript = false) {
+        $path = str_replace('\\', '/', trim($path));
         $full_path = $path;
         if ( ! file_exists($path)) {
-            $full_path = self::getMediaPath().$path;
+            $full_path = self::getMediaUrlPath().$path;
+
+            //print_r($full_path); exit;
 
             if ( ! is_string($full_path)) {
                 return '';
@@ -484,170 +400,6 @@ class Theme
             }
         }
 
-        $svg_content = file_get_contents($full_path);
-
-        $dom = new \DOMDocument();
-        $dom->loadXML($svg_content);
-
-        // remove unwanted comments
-        $xpath = new \DOMXPath($dom);
-        foreach ($xpath->query('//comment()') as $comment) {
-            $comment->parentNode->removeChild($comment);
-        }
-
-        // add class to svg
-        if ( ! empty($svgClass)) {
-            foreach ($dom->getElementsByTagName('svg') as $element) {
-                $element->setAttribute('class', $svgClass);
-            }
-        }
-
-        // remove unwanted tags
-        $title = $dom->getElementsByTagName('title');
-        if ($title['length']) {
-            $dom->documentElement->removeChild($title[0]);
-        }
-        $desc = $dom->getElementsByTagName('desc');
-        if ($desc['length']) {
-            $dom->documentElement->removeChild($desc[0]);
-        }
-        $defs = $dom->getElementsByTagName('defs');
-        if ($defs['length']) {
-            $dom->documentElement->removeChild($defs[0]);
-        }
-
-        // remove unwanted id attribute in g tag
-        $g = $dom->getElementsByTagName('g');
-        foreach ($g as $el) {
-            $el->removeAttribute('id');
-        }
-        $mask = $dom->getElementsByTagName('mask');
-        foreach ($mask as $el) {
-            $el->removeAttribute('id');
-        }
-        $rect = $dom->getElementsByTagName('rect');
-        foreach ($rect as $el) {
-            $el->removeAttribute('id');
-        }
-        $xpath = $dom->getElementsByTagName('path');
-        foreach ($xpath as $el) {
-            $el->removeAttribute('id');
-        }
-        $circle = $dom->getElementsByTagName('circle');
-        foreach ($circle as $el) {
-            $el->removeAttribute('id');
-        }
-        $use = $dom->getElementsByTagName('use');
-        foreach ($use as $el) {
-            $el->removeAttribute('id');
-        }
-        $polygon = $dom->getElementsByTagName('polygon');
-        foreach ($polygon as $el) {
-            $el->removeAttribute('id');
-        }
-        $ellipse = $dom->getElementsByTagName('ellipse');
-        foreach ($ellipse as $el) {
-            $el->removeAttribute('id');
-        }
-
-        $string = $dom->saveXML($dom->documentElement);
-
-        // remove empty lines
-        $string = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $string);
-
-        $cls = array('svg-icon');
-
-        if ( ! empty($class)) {
-            $cls = array_merge($cls, explode(' ', $class));
-        }
-
-        $asd = explode('/media/', $path);
-        if (isset($asd[1])) {
-            $path = 'assets/media/'.$asd[1];
-        }
-
-        $output  = "<!--begin::Svg Icon | path: $path-->\n";
-        $output .= '<span class="'.implode(' ', $cls).'">'.$string.'</span>';
-        $output .= "\n<!--end::Svg Icon-->";
-
-        return $output;
-    }
-
-    /**
-     * Walk recursive array with callback
-     * @param array    $array
-     * @param callable $callback
-     * @return array
-     */
-    public static function arrayWalkCallback(array &$array, callable $callback)
-    {
-        foreach ($array as $k => &$v) {
-            if (is_array($v)) {
-                $callback($k, $v, $array);
-                self::arrayWalkCallback($v, $callback);
-            }
-        }
-
-        return $array;
-    }
-
-    /**
-     * Convert css file path to RTL file
-     */
-    public static function rtlCssPath($css_path)
-    {
-        $css_path = substr_replace($css_path, '.rtl.css', -4);
-
-        return $css_path;
-    }
-
-    /**
-     * Initialize theme CSS files
-     */
-    public static function initThemes()
-    {
-        $themes = [];
-
-        $themes[] = 'css/themes/layout/header/base/' . config('ThemeFo')->layout['header']['self']['theme'] . '.css';
-        $themes[] = 'css/themes/layout/header/menu/' . config('ThemeFo')->layout['header']['menu']['desktop']['submenu']['theme'] . '.css';
-        $themes[] = 'css/themes/layout/aside/' . config('ThemeFo')->layout['aside']['self']['theme'] . '.css';
-
-        if (config('ThemeFo')->layout['aside']['self']['display']) {
-            $themes[] = 'css/themes/layout/brand/' . config('ThemeFo')->layout['brand']['self']['theme'] . '.css';
-        } else {
-            $themes[] = 'css/themes/layout/brand/' . config('ThemeFo')->layout['brand']['self']['theme'] . '.css';
-        }
-
-        return $themes;
-    }
-
-    /**
-     * Get SVG content
-     * @param string $filepath
-     * @param string $class
-     *
-     * @return string|string[]|null
-     */
-    public static function getSVG($filepath, $class = '', $nav = false, $javascript = false)
-    {
-        $filepath = ROOTPATH . 'public/frontend/themes/' .self::getMediaPath() . $filepath; 
-
-        
-        $path = str_replace('\\', '/', $filepath);
-        $full_path = $path;
-
-        if ( ! file_exists($path)) {
-            $full_path = self::getMediaPath().$path;
-
-            if ( ! is_string($full_path)) {
-                return '';
-            }
-
-            if ( ! file_exists($full_path)) {
-                return "<!--SVG file not found: $path-->\n";
-            }
-        }
-        //var_dump($full_path);
         $svg_content = @file_get_contents($full_path);
         if(!$svg_content){
             return '';
@@ -761,117 +513,187 @@ class Theme
                 return $html;
         }
 
+
         return $output;
     }
 
-    /**
-     * Check if $path provided is SVG
-     */
-    public static function isSVG($path)
+    public static function getVersion(){
+        return self::$version;
+    }
+
+    public static function add_js($script = null, $type = 'external', $prepend = false, $vueJs = false)
     {
-        if (is_string($path)) {
-            return substr(strrchr($path, '.'), 1) === 'svg';
+        $themeCurrent = setting('App.themebo');
+
+        if (is_array($script) && count($script)) {
+           
+            foreach ($script as &$scrip) {
+                //Dectect url
+                $retour = strstr($scrip, '://', true);
+                if (!$retour) {
+                    $scrip = '/backend/themes/' . $themeCurrent . '/assets/' . $scrip;
+                }
+            }
+        } else {
+            $retour = strstr($script, '://', true);
+            //print_r($script); exit;
+            if (!$retour) {
+                $script = '/backend/themes/' . $themeCurrent . '/assets/' . $script;
+            }
         }
 
-        return false;
-    }
 
-    public static function getVersion() {
-        return Config("Theme")->version;
-    }
-
-    /**
-     * --------------------------------------------------------------------------------------------------------------
-     * Get message Toast on application
-     * --------------------------------------------------------------------------------------------------------------
-     */
-
-    public static function set_message($type = 'info', $message = '', $title = 'info')
-    {
-        if (empty($message)) {
+        if (empty($script)) {
             return;
         }
-        $session = \Config\Services::session();
-
-        if (!self::$ignore_session && isset($session)) {
-            //echo serialize($message); exit;
-            $message = serialize($message);
-            $session->setFlashdata('message', "{$type}::{$message}::{$title}");
+        if (is_string($script)) {
+            $script = array(
+                $script
+            );
         }
-
-        self::$message = array(
-            'type' => $type,
-            'message' => $message,
-            'title' => $title
-        );
-    }
-
-    public static function message($type = 'information', $message = '', $title = 'standard')
-    {
-        helper('html');
-        // Does session data exist?
-        $session = \Config\Services::session();
-
-        if (empty($message) && !self::$ignore_session) {
-            $message = $session->getFlashdata('message');
-            if (!empty($message)) {
-                // Split out the message parts
-                $temp_message = explode('::', $message);
-                if (count($temp_message) > 3) {
-                    $type = $temp_message[0];
-                    $message = $temp_message[1];
-                    $title = $temp_message[2];
-                } else {
-                    $type = $temp_message[0];
-                    $message = $temp_message[1];
-                    $title = $temp_message[2];
+        $scriptsToAdd = array();
+        if (is_array($script) && count($script)) {
+            foreach ($script as $s) {
+                if (!in_array($s, self::$scripts[$type])) {
+                    $scriptsToAdd[] = $s;
                 }
-
-                unset($temp_message);
             }
         }
-
-
-
-        // If message is empty, check the $message property.
-        if (empty($message)) {
-            if (empty(self::$message['message'])) {
-                return '';
-            }
-            $message = unserialize(self::$message['message']);
-            $type = self::$message['type'];
-            $title = self::$message['title'];
-        }
-        $message = unserialize($message);
-        $templateVarMessage = '';
-        if (is_array($message) && !empty($message)) {
-            $templateVarMessage .= '<ul>';
-            foreach ($message as $k => $v) {
-                $templateVarMessage .= '<li>' . addslashes($v) . '</li>';
-            }
-            $templateVarMessage .= '</ul>';
+        if ($prepend) {
+            self::$scripts[$type] = array_merge($scriptsToAdd, self::$scripts[$type]);
         } else {
-            $templateVarMessage = addslashes($message);
+            self::$scripts[$type] = array_merge(self::$scripts[$type], $scriptsToAdd);
         }
 
-        $template = str_replace(
-            array('{title}', '{type}', '{message}', '{title}'),
-            array($title, $type, minify_html($templateVarMessage), $title),
-            self::$message_template
-        );
-
-        return $template;
     }
 
+    public static function external_js($extJs = null, $list = false, $addExtension = true, $bypassGlobals = false, $bypassInheritance = false)
+    {
+
+        $return             = '';
+        $scripts            = array();
+        $renderSingleScript = false;
+        if (empty($extJs)) {
+            $scripts = self::$scripts['external'];
+        } elseif (is_string($extJs)) {
+            $scripts[]          = $extJs;
+            $renderSingleScript = true;
+        } elseif (is_array($extJs)) {
+            $scripts = $extJs;
+        }
+
+
+        if (is_array($scripts)) {
+            foreach ($scripts as $script) {
+                $return .= self::buildScriptElement($script, 'text/javascript') . "\n";
+            }
+        }
+
+       // print_r($return); exit;
+
+        return trim($return, ', ');
+    }
+
+    public static function add_module_js($module = '', $file = '')
+    {
+        if (empty($file)) {
+            return;
+        }
+        if (is_string($file)) {
+            $file = array(
+                $file
+            );
+        }
+        if (is_array($file) && count($file)) {
+            foreach ($file as $s) {
+                self::$scripts['module'][] = array(
+                    'module' => $module,
+                    'file' => $s
+                );
+            }
+        }
+    }
+
+    public static function inline_js()
+    {
+        if (empty(self::$scripts['inline'])) {
+            return;
+        }
+        $content = self::$ci->config->item('assets.js_opener') . "\n";
+        $content .= implode("\n", self::$scripts['inline']);
+        $content .= "\n" . self::$ci->config->item('assets.js_closer');
+        return self::buildScriptElement('', 'text/javascript', $content);
+    }
+
+    public static function module_js($list = false, $cached = false)
+    {
+        if (empty(self::$scripts['module']) || !is_array(self::$scripts['module'])) {
+            return '';
+        }
+        $scripts = self::find_files(self::$scripts['module'], 'js');
+        $src     = self::combine_js($scripts, 'module') . ($cached ? '' : '?_dt=' . time());
+        if ($list) {
+            return '"' . $src . '"';
+        }
+        return self::buildScriptElement($src, 'text/javascript') . "\n";
+    }
+
+
+    public static function js($script = null, $type = 'external')
+    {
+
+        if (!empty($script)) {
+            if (is_string($script) && $type == 'external') {
+                return self::external_js($script);
+            }
+            self::add_js($script, $type);
+        }
+ 
+
+        $output = '<!-- Local JS files -->' . PHP_EOL;
+       
+        $output .= self::external_js();
+        $output .= self::module_js();
+        $output .= self::inline_js();
+        return $output;
+    }
+
+    protected static function buildScriptElement($src = '', $type = '', $content = '')
+    {
+
+        if (!file_exists(env('DOCUMENT_ROOT') . $src) && !strstr($src, '://', true)) {
+            return '<div class="red-not-script" style="position: absolute; z-index: 99999;background: #c32d00; width: 100%; color: #fff;  padding: 10px;"> le lien n\'existe pas : ' . $src . '</div>';
+        }
+        if (empty($src) && empty($content)) {
+            return '';
+        }
+        $return = '<script';
+        if (!empty($type)) {
+            $return .= ' type="' . htmlspecialchars($type, ENT_QUOTES) . '"';
+        }
+        if (!empty($src) && !strstr($src, '://', true)) {
+            $return .= ' src="' . htmlspecialchars(base_url($src), ENT_QUOTES) . '?v=' . filemtime(env('DOCUMENT_ROOT') . $src) . '"';
+        }
+        if (!empty($src) && strstr($src, '://', true)) {
+            $return .= ' src="' . htmlspecialchars($src, ENT_QUOTES) . '"';
+        }
+        $return .= '>';
+        if (!empty($content)) {
+            $return .= "\n{$content}\n";
+        }
+        return "{$return}</script>";
+    }
+
+    
     public static function css($style = null, $media = 'screen', $bypassInheritance = false, $bypassModule = false)
     {
-        $request = service('request');
+        $request = \Config\Services::request();
         $nameUri = (implode('_', $request->uri->getSegments()));
 
         /** Cache */
         if (env('assets.minifyCSS') == true) {
-            if (file_exists(ROOTPATH.'public/frontend/themes/'.service('settings')->get('App.theme_fo', 'name').'/css/min/app_'.md5($nameUri).'.css')) {
-                return self::buildStyleLink(['href' => '/frontend/themes/'.service('settings')->get('App.theme_fo', 'name').'/css/min/app_'.md5($nameUri).'.css','media' => 'screen']);
+            if (file_exists(ROOTPATH.'public/backend/themes/'.setting('App.themebo').'/assets/css/min/app_'.md5($nameUri).'.css')) {
+                return self::buildStyleLink(['href' => '/backend/themes/'.setting('App.themebo').'/assets/css/min/app_'.md5($nameUri).'.css','media' => 'screen']);
             }
         }
         if ($media == '1') {
@@ -890,18 +712,18 @@ class Theme
             );
         }
         
-        if (!file_exists(ROOTPATH.'public/frontend/themes/'.service('settings')->get('App.theme_fo', 'name').'/css/custom.css')) {
-            $file = fopen(ROOTPATH.'public/frontend/themes/'.service('settings')->get('App.theme_fo', 'name').'/css/custom.css', "w");
+        if (!file_exists(ROOTPATH.'public/backend/themes/'.setting('App.themebo').'/assets/css/custom.css')) {
+            $file = fopen(ROOTPATH.'public/backend/themes/'.setting('App.themebo').'/assets/css/custom.css', "w");
             echo fwrite($file, "/********** custom css *********/");
             fclose($file);
             $custom[] = array(
-                'file' => base_url() .'/frontend/themes/'.service('settings')->get('App.theme_fo', 'name').'/css/custom.css',
+                'file' => '/backend/themes/'.setting('App.themebo').'/assets/css/custom.css',
                 'media' => $media
             );
             $styles = array_merge($styles, $custom);
         } else {
             $custom[] = array(
-                'file' => base_url() .'/frontend/themes/'.service('settings')->get('App.theme_fo', 'name').'/css/custom.css',
+                'file' => '/backend/themes/'.setting('App.themebo').'/assets/css/custom.css',
                 'media' => $media
             );
             $styles = array_merge($styles, $custom);
@@ -909,9 +731,9 @@ class Theme
         $return = '';
        
         if (env('assets.minifyCSS') == true) {
-            if (!is_dir(ROOTPATH.'public/frontend/themes/'.service('settings')->get('App.theme_fo', 'name').'/css/min')) {
+            if (!is_dir(ROOTPATH.'public/backend/themes/'.setting('App.themebo').'/assets/css/min')) {
                 try {
-                    mkdir(ROOTPATH.'public/frontend/themes/'.service('settings')->get('App.theme_fo', 'name').'/css/min', 0755);
+                    mkdir(ROOTPATH.'public/backend/themes/'.setting('App.themebo').'/assets/css/min', 0755);
                 } catch (\Exception $e) {
                     die($e->getMessage());
                 }
@@ -922,8 +744,8 @@ class Theme
                     $minifier->add(ROOTPATH.'public/'.$style['file']);
                 }
             }
-            $minifier->minify(ROOTPATH.'public/frontend/themes/'.service('settings')->get('App.theme_fo', 'name').'/css/min/app_'.md5($nameUri).'.css');
-            $return .= self::buildStyleLink(['href' => '/frontend/themes/'.service('settings')->get('App.theme_fo', 'name').'/css/min/app_'.md5($nameUri).'.css','media' => 'screen']);
+            $minifier->minify(ROOTPATH.'public/backend/themes/'.setting('App.themebo').'/assets/css/min/app_'.md5($nameUri).'.css');
+            $return .= self::buildStyleLink(['href' => '/backend/themes/'.setting('App.themebo').'/assets/css/min/app_'.md5($nameUri).'.css','media' => 'screen']);
         } else {
             foreach ($styles as $styleToAdd) {
                 if (is_array($styleToAdd)) {
@@ -965,227 +787,19 @@ class Theme
         if (is_array($style)) {
             foreach ($style as $file) {
                 $stylesToAdd[] = array(
-                    'file' => base_url() . '/frontend/themes/'.service('settings')->get('App.theme_fo', 'name') .'/' . $file,
+                    'file' => '/backend/themes/' . setting('App.themebo') . '/assets/' . $file,
                     'media' => $media
                 );
             }
         }
+
         if ($prepend) {
             self::$styles['css'] = array_merge($stylesToAdd, self::$styles['css']);
         } else {
             self::$styles['css'] = array_merge(self::$styles['css'], $stylesToAdd);
         }
-
-        //print_r(self::$styles['css'] );exit;
     }
 
-    /**
-     * --------------------------------------------------------------------------------------------------------------
-     * Assets management js*, css*, media*
-     * --------------------------------------------------------------------------------------------------------------
-     */
-
-    public static function add_js($script = null, $type = 'external', $prepend = false, $vueJs = false)
-    {
-        $themeCurrent = service('settings')->get('App.theme_fo', 'name');
-
-        if (is_array($script) && count($script)) {
-           
-            foreach ($script as &$scrip) {
-                //Dectect url
-                $retour = strstr($scrip, '://', true);
-                if (!$retour) {
-                    if (env('CI_WEBPACK_MIX') == 'true') {
-                        $scrip = '/frontend/themes/' . $themeCurrent . $scrip;
-                    } else {
-                        $scrip = '/frontend/themes/' . $themeCurrent . '/' . $scrip;
-                    }
-                }
-            }
-        } else {
-            $retour = strstr($script, '://', true);
-            //print_r($script); exit;
-            if (!$retour) {
-                if (env('CI_WEBPACK_MIX') == 'true') {
-                   // $script = str_replace("/resources/" . $themeCurrent, '/' . ENVIRONMENT, $script);
-                    $script = '/frontend/themes/' . $themeCurrent . $script;
-                } else {
-                    $script = '/frontend/themes/' . $themeCurrent . '/assets/' . $script;
-                }
-            }
-        }
-
-
-        if (empty($script)) {
-            return;
-        }
-        if (is_string($script)) {
-            $script = array(
-                $script
-            );
-        }
-        $scriptsToAdd = array();
-        if (is_array($script) && count($script)) {
-            foreach ($script as $s) {
-                if (!in_array($s, self::$scripts[$type])) {
-                    $scriptsToAdd[] = $s;
-                }
-            }
-        }
-        if ($prepend) {
-            self::$scripts[$type] = array_merge($scriptsToAdd, self::$scripts[$type]);
-        } else {
-            self::$scripts[$type] = array_merge(self::$scripts[$type], $scriptsToAdd);
-        }
-    }
-
-    public static function add_module_js($module = '', $file = '')
-    {
-        if (empty($file)) {
-            return;
-        }
-        if (is_string($file)) {
-            $file = array(
-                $file
-            );
-        }
-        if (is_array($file) && count($file)) {
-            foreach ($file as $s) {
-                self::$scripts['module'][] = array(
-                    'module' => $module,
-                    'file' => $s
-                );
-            }
-        }
-    }
-
-    public static function js($script = null, $type = 'external')
-    {
-        if (!empty($script)) {
-            if (is_string($script) && $type == 'external') {
-                return self::external_js($script);
-            }
-            self::add_js($script, $type);
-        }
-
-
-        $output = '<!-- Local JS files -->' . PHP_EOL;
-        helper('auth');
-        if (logged_in() == true) {
-            $url = '\frontend\themes\/'. service('settings')->get('App.theme_fo', 'name') .'\/' . ENVIRONMENT . '\js\app.js';
-            if (is_file(env('DOCUMENT_ROOT') . $url)) {
-                $output .=  self::buildScriptElement($url, 'text/javascript') . "\n";
-            } else {
-            }
-        }
-
-        $output .= self::external_js();
-        $output .= self::module_js();
-        $output .= self::vue_js();
-        $output .= self::inline_js();
-        return $output;
-    }
-
-    public static function external_js($extJs = null, $list = false, $addExtension = true, $bypassGlobals = false, $bypassInheritance = false)
-    {
-
-        $return             = '';
-        $scripts            = array();
-        $renderSingleScript = false;
-        if (empty($extJs)) {
-            $scripts = self::$scripts['external'];
-        } elseif (is_string($extJs)) {
-            $scripts[]          = $extJs;
-            $renderSingleScript = true;
-        } elseif (is_array($extJs)) {
-            $scripts = $extJs;
-        }
-
-
-        if (is_array($scripts)) {
-            foreach ($scripts as $script) {
-                $return .= self::buildScriptElement($script, 'text/javascript') . "\n";
-            }
-        }
-
-        return trim($return, ', ');
-    }
-
-    public static function vue_js($extJs = null, $list = false, $addExtension = true, $bypassGlobals = false, $bypassInheritance = false)
-    {
-
-        $return             = '';
-        $scripts            = array();
-        $renderSingleScript = false;
-        if (empty($extJs)) {
-            $scripts = self::$scripts['vueJs'];
-        } elseif (is_string($extJs)) {
-            $scripts[]          = $extJs;
-            $renderSingleScript = true;
-        } elseif (is_array($extJs)) {
-            $scripts = $extJs;
-        }
-
-
-
-        if (is_array($scripts)) {
-            foreach ($scripts as $script) {
-                $return .= self::buildScriptElement($script, 'module') . "\n";
-            }
-        }
-
-        return trim($return, ', ');
-    }
-
-    public static function module_js($list = false, $cached = false)
-    {
-        if (empty(self::$scripts['module']) || !is_array(self::$scripts['module'])) {
-            return '';
-        }
-        $scripts = self::find_files(self::$scripts['module'], 'js');
-        $src     = self::combine_js($scripts, 'module') . ($cached ? '' : '?_dt=' . time());
-        if ($list) {
-            return '"' . $src . '"';
-        }
-        return self::buildScriptElement($src, 'text/javascript') . "\n";
-    }
-
-    public static function inline_js()
-    {
-        if (empty(self::$scripts['inline'])) {
-            return;
-        }
-        $content = self::$ci->config->item('assets.js_opener') . "\n";
-        $content .= implode("\n", self::$scripts['inline']);
-        $content .= "\n" . self::$ci->config->item('assets.js_closer');
-        return self::buildScriptElement('', 'text/javascript', $content);
-    }
-
-    protected static function buildScriptElement($src = '', $type = '', $content = '')
-    {
-
-        if (!file_exists(env('DOCUMENT_ROOT') . $src) && !strstr($src, '://', true)) {
-            return '<div class="red-not-script" style="position: absolute; z-index: 99999;background: #c32d00; width: 100%; color: #fff;  padding: 10px;"> le lien n\'existe pas : ' . $src . '</div>';
-        }
-        if (empty($src) && empty($content)) {
-            return '';
-        }
-        $return = '<script';
-        if (!empty($type)) {
-            $return .= ' type="' . htmlspecialchars($type, ENT_QUOTES) . '"';
-        }
-        if (!empty($src) && !strstr($src, '://', true)) {
-            $return .= ' src="' . htmlspecialchars(base_url($src), ENT_QUOTES) . '?v=' . filemtime(env('DOCUMENT_ROOT') . $src) . '"';
-        }
-        if (!empty($src) && strstr($src, '://', true)) {
-            $return .= ' src="' . htmlspecialchars($src, ENT_QUOTES) . '"';
-        }
-        $return .= '>';
-        if (!empty($content)) {
-            $return .= "\n{$content}\n";
-        }
-        return "{$return}</script>";
-    }
     protected static function buildStyleLink(array $style)
     {
         $default    = array(
@@ -1203,126 +817,4 @@ class Theme
         echo $style  . "\n";
     }
 
-    public function assets_url($path = null) 
-    {
-        return $path;
-    }
-
-    // Cleans up the route and expands implicit segments
-    protected function sanitizeRoute()
-    {
-        if ($this->sanitized) {
-            return;
-        }
-
-        // If no route was specified then load the current URI string
-        if (is_null($this->route)) {
-            $this->route = uri_string();
-        }
-
-        // If no collection was specified then load the default shared
-        if (is_null($this->collection)) {
-            $this->collection = Services::routes();
-        }
-
-        // Sanitize characters
-        $this->route = filter_var($this->route, FILTER_SANITIZE_URL);
-
-        // Clean up slashes
-        $this->route = trim($this->route, '/');
-
-        // Verify for {locale}
-        if (Config::get('App')->negotiateLocale) {
-            $route = explode('/', $this->route);
-            if (count($route) && $route[0] == Services::request()->getLocale()) {
-                unset($route[0]);
-            }
-            $this->route = implode('/', $route);
-        }
-
-        // If the route is empty then assume the default controller
-
-        if (empty($this->route)) {
-            $this->route = strtolower($this->collection->getDefaultController());
-        }
-
-        // Always check the default method in case the route is implicit
-        $defaultMethod = $this->collection->getDefaultMethod();
-        if (!preg_match('/' . $defaultMethod . '$/', $this->route)) {
-            $this->route .= '/' . $defaultMethod;
-        }
-
-        $this->sanitized = true;
-    }
-
-
-    public static function isDocumentationMenu() {
-		return (Config('ThemeFo')->layout['aside']['menu'] === 'documentation');
-	}
-
-     /**
-     * Sets the theme's mode.
-     *
-     * @param string $value the theme's mode(preview, release).
-    */
-    public static function setMode($value) {
-        // force preview mode on server
-        if (isset($_SERVER['SERVER_NAME']) && strpos($_SERVER['SERVER_NAME'], 'keenthemes.com') !== false) {
-            self::$mode = 'preview';
-        } elseif (isset($_REQUEST['type']) && $_REQUEST['type'] === 'html') {
-            self::$mode = 'release';
-        } else {
-            self::$mode = $value;
-        }
-    }
-
-    public static function getMode() {
-        return self::$mode;
-    }
-
-    public static function getName() {
-        return self::$name;
-    }
-
-    public static function addPageJs($path) {
-        Config('ThemeFo')->page["assets"]['custom']['js'][] = $path;
-    }
-
-    public static function isFreeVersion() {
-        if (isset($_REQUEST['free'])) {
-            return filter_var($_REQUEST['free'], FILTER_VALIDATE_BOOLEAN);
-        }
-
-        return self::$freeVersion;
-    }
-
-    public static function setFreeVersion($flag) {
-        return self::$freeVersion = $flag;
-    }
-
-    public static function getDemo() {
-        return self::$demo;
-    }
-
-    public static function hasWebpack() {
-        return !(isset($_REQUEST['webpack']) && !filter_var($_REQUEST['webpack'], FILTER_VALIDATE_BOOLEAN));
-    }
-
-    public static function isProPage($path) {
-        $pageConfig = self::getPageOptionsByPath($path);
-
-        if ($pageConfig && isset($pageConfig['pro']) && $pageConfig['pro'] === true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static function getPageOptionsByPath($path) {
-        if (service('tools')::hasArrayValue(self::$config['pages'], $path)) {
-            return service('tools')::getArrayValue(self::$config['pages'], $path);
-        } else {
-            return false;
-        }
-    }
 }

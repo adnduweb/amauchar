@@ -41,6 +41,13 @@ return [
 	'textWatermark'                      => 'texte du watermark',
 	'deleteTheFiles'                     => 'supprimer les fichiers',
 	'settingseMedias'                    => 'réglages des médias',
-	'uploadFile'                         => 'télécharger les fichiers'
+	'uploadFile'                         => 'télécharger les fichiers',
+	'NoMediasToDisplay'                  => 'pas de médias disponibles',
+	'cancelAvatar'                       => 'supprimer le média',
+	'changeAvatar'                       => 'changer le média',
+	'DropFilesHereOrClickToUpload'       => 'télécharger votre média',
+	'UploadUpTo10Files'                  => 'télécharger 10 médias à la fois',
+	'imageManger'                        => 'gestion des médias',
+	
 
 ];

@@ -1,4 +1,4 @@
-<?= $this->extend(config('Core')->views['layout']) ?>
+<?= $this->extend(config('Amauchar')->views['layout']) ?>
 <?= $this->section('main') ?>
 
 <?= view('Amauchar\Customers\Views\backend\metronic\customers\partials\cartd_top', ['customerCount' => $customerCount, 'active' => $active, 'name' => $name]) ?>

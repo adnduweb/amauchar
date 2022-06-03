@@ -73,9 +73,8 @@ trait Themeable
             $path = Theme::path();
 
         }else{
-            // Theme::setTheme($this->theme);
             Theme::setTheme($this->theme);
-            $path = \Amauchar\Core\Libraries\Theme::path($this->theme);
+            $path = Theme::path();
         }
 
         if (! is_dir($path)) {

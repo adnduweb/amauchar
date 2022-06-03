@@ -1,23 +1,24 @@
 <?php
 
-namespace Adnduweb\Pages\Controllers;
+namespace Amauchar\Pages\Controllers;
 
 //use CodeIgniter\Controller;
-use \Adnduweb\Ci4Core\Traits\Themeable;
-use \Adnduweb\Pages\Libraries\Theme;
+//use \Adnduweb\Ci4Core\Traits\Themeable;
+use \Amauchar\Pages\Libraries\Theme;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
-// use Adnduweb\Ci4Core\Helpers;
 
 
 abstract class BaseFrontController extends \App\Controllers\BaseController
 {
-    use Themeable;
-  
 
+    public $theme_front = 'default';
+
+    public static $isBackend = false;
+  
     /**
      * https://includebeer.com/en/blog/creating-a-multilingual-website-with-codeigniter-4-part-1
 	 * Instance of the main Request object.
@@ -54,19 +55,18 @@ abstract class BaseFrontController extends \App\Controllers\BaseController
 		// Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
+        $this->theme = $this->theme_front;
+
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
         // E.g.: $this->session = \Config\Services::session();
 
         $this->helpers = array_merge($this->helpers, ['url', 'form', 'lang', 'string']);
-
-        helper('\Adnduweb\Ci4Core\Helpers\detect_helper');
+        helper('\Amauchar\Core\Helpers\themes');
+        helper('\Amauchar\Core\Helpers\assets');
         helper('front');
-
-        //print_r( $this); exit;
-
-        $this->theme = 'default';
+ 
         $this->session   = service('session'); // Check Backtrace
         $this->encrypter = service('encrypter');
 
@@ -88,7 +88,7 @@ abstract class BaseFrontController extends \App\Controllers\BaseController
          $this->viewData['locale'] = $request->getLocale();
          $this->viewData['supportedLocales'] = $request->config->supportedLocales;
 
-         $this->viewData['mainMenu'] = (string) new \Adnduweb\Pages\Libraries\MainMenu(); 
+         $this->viewData['mainMenu'] = (string) new \Amauchar\Pages\Libraries\MainMenu(); 
         
 
         $this->controller   = $this;

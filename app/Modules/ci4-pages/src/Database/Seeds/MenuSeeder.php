@@ -1,6 +1,6 @@
 <?php
 
-namespace Adnduweb\Pages\Database\Seeds;
+namespace Amauchar\Pages\Database\Seeds;
 
 use Adnduweb\Ci4_menu\Models\MenuModel;
 

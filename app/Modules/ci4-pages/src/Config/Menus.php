@@ -1,7 +1,7 @@
-<?php namespace Adnduweb\Pages\Config;
+<?php namespace Amauchar\Pages\Config;
 
 use CodeIgniter\Config\BaseConfig;
-use Adnduweb\Pages\Menus\BreadcrumbsMenu;
+use Amauchar\Pages\Menus\BreadcrumbsMenu;
 
 class Menus extends BaseConfig
 {
@@ -11,7 +11,7 @@ class Menus extends BaseConfig
 	 * @var array<string, string>
 	 */
 	public $aliases = [
-        'mainmenu'  => \Adnduweb\Pages\Libraries\MainMenu::class,
+        'mainmenu'  => \Amauchar\Pages\Libraries\MainMenu::class,
 		//'breadcrumbs' => BreadcrumbsMenu::class,
 	];
 }

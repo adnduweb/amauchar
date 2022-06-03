@@ -1,6 +1,6 @@
 <?php
 
-namespace Adnduweb\Pages\Controllers\Front;
+namespace Amauchar\Pages\Controllers\Front;
 
 class OfflineController extends \App\Controllers\BaseController{
 

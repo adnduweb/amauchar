@@ -1,6 +1,6 @@
 <?php 
 
-namespace Adnduweb\Pages\Config;
+namespace Amauchar\Pages\Config;
 
 use CodeIgniter\Config\BaseConfig;
 
@@ -76,10 +76,10 @@ class Pages extends BaseConfig
      * have them not included, in case you would rather include them in a
      * build system, etc.
      */
-    public string $consentForm = 'Adnduweb\Pages\Views\frontend\themes\default\_rgpd\consent_form';
+    public string $consentForm = 'Amauchar\Pages\Views\frontend\themes\default\_rgpd\consent_form';
 
-    public string $consentFormStyles  = 'Adnduweb\Pages\Views\frontend\themes\default\_rgpd\consent_styles';
-    public string $consentFormScripts = 'Adnduweb\Pages\Views\frontend\themes\default\_rgpd\consent_scripts';
+    public string $consentFormStyles  = 'Amauchar\Pages\Views\frontend\themes\default\_rgpd\consent_styles';
+    public string $consentFormScripts = 'Amauchar\Pages\Views\frontend\themes\default\_rgpd\consent_scripts';
 
     /**
      * --------------------------------------------------------------------------

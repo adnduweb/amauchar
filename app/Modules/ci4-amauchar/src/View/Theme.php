@@ -155,6 +155,7 @@ class Theme
                 ];
             }
         }
+        //print_r($themes); exit;
 
         return $themes;
     }
@@ -339,7 +340,7 @@ class Theme
     public static function getMediaUrlPath()
     {
         if(self::$inAdmin){
-            return config('Core')->views['backend'] . '/' . setting('App.themebo').'/assets/media/';
+            return config('Amauchar')->views['backend'] . '/' . setting('App.themebo').'/assets/media/'; 
         }
       
     }
@@ -353,7 +354,7 @@ class Theme
     public static function getMediaUrl(string $scope)
     {
        // if(self::$inAdmin){
-            $racine = str_replace(ROOTPATH . 'public', '', config('Core')->views['backend']);
+            $racine = str_replace(ROOTPATH . 'public', '', config('Amauchar')->views['backend']);
             return base_url($racine  . '/' . setting('App.themebo').'/assets/media/'. $scope);
       //  }
       

@@ -18,10 +18,10 @@ class DashboardController extends AdminController
     {
 
         //print_r($this->viewData); exit;
-        //print_r(setting('Core.views')); exit;
-         echo view(setting('Core.views')['dashboard'], $this->viewData);
+        //print_r(setting('Amauchar.views')); exit;
+         echo view(setting('Amauchar.views')['dashboard'], $this->viewData);
 
-       // echo $this->render(setting('Core.views')['dashboard'], $this->viewData);
+       // echo $this->render(setting('Amauchar.views')['dashboard'], $this->viewData);
     }
 }
 //service('settings')->set('App.siteName', 'My Great Site');

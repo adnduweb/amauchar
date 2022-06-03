@@ -1,27 +1,5 @@
 <?php
 
-/*
- | --------------------------------------------------------------------
- | Login Hidden
- | --------------------------------------------------------------------
- |
- | Defines the base path of the URL where Amauchar's admin area can be
- | found. By default, this is 'admin', which means that the admin area
- | would be found at http://localhost:8080/admin
- */
-defined('ADMIN_AREA') || define('ADMIN_AREA', getenv('ADMIN_AREA'));
-
-/*
- | --------------------------------------------------------------------
- | App Namespace
- | --------------------------------------------------------------------
- |
- | Defines the base path of the URL where Amauchar's admin area can be
- | found. By default, this is 'admin', which means that the admin area
- | would be found at http://localhost:8080/admin
- */
-defined('ADMIN_THEME') || define('ADMIN_THEME', 'metronic');
-
 /**
  * This file is part of Amauchar.
  *
@@ -109,8 +87,6 @@ $routes->group(ADMIN_AREA, $options, static function ($routes) {
     $routes->post('settings/consent', 'SettingsController::saveConsent',  ['as' => 'settings.consent.save']);
     $routes->get('settings', 'SettingsController::userCurrent',  ['as' => 'settings.user.current']);
     $routes->post('settings', 'SettingsController::userCurrent',  ['as' => 'settings.user.current']);
-    $routes->post('settings/dark-mode', 'SettingsController::darkModeEnabled',  ['as' => 'settings.update.darkmodeenabled']);
-    
     
 
          // Logs
@@ -182,6 +158,9 @@ $routes->group(ADMIN_AREA, $options, static function ($routes) {
 });
 
 //service('auth')->routes($routes);
+$routes->group('api', function ($routes) {
+    $routes->post('settings/dark-mode', '\Amauchar\Core\Controllers\Api\SettingsUsers::darkModeEnabled',  ['as' => 'settings.update.darkmodeenabled']);
+});
 
 $routes->get('login', '\Amauchar\Core\Controllers\Auth\LoginController::loginViewOverride', ['as' => 'action.login']);
 $routes->post('login', '\Amauchar\Core\Controllers\Auth\LoginController::loginActionAjax');

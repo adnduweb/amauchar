@@ -1,4 +1,4 @@
-<?php namespace Adnduweb\Pages\Filters;
+<?php namespace Amauchar\Pages\Filters;
 
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
@@ -27,7 +27,7 @@ class ShortcodesFilter implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        if(in_array(CI_AREA_ADMIN, service('request')->getUri()->getSegments()) || in_array(Config('Medias')->segementUrl, service('request')->getUri()->getSegments())){
+        if(in_array(ADMIN_AREA, service('request')->getUri()->getSegments()) || in_array(Config('Medias')->segementUrl, service('request')->getUri()->getSegments())){
             return;
         }
 

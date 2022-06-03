@@ -1,12 +1,14 @@
 <?php
 
-namespace Adnduweb\Pages\Models;
-use Adnduweb\Pages\Entities\Menu;
+namespace Amauchar\Pages\Models;
+
 use CodeIgniter\Model;
+use Amauchar\Core\Traits\AuditsTrait;
+use Amauchar\Pages\Entities\Menu;
 
 class MenuModel extends Model
 {
-    use \Tatter\Relations\Traits\ModelTrait, \Adnduweb\Ci4Core\Traits\AuditsTrait;
+    use AuditsTrait;
 
     protected $DBGroup          = 'default';
     protected $table            = 'menus';

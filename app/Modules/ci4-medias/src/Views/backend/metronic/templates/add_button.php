@@ -5,7 +5,7 @@
 <?php } ?>
 
 <?php if(isset($button) && $button == 'icone'){ ?> 
-    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-filemanager-state="false" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar" data-kt-filemanager="imageManager" data-kt-filemanager-type="<?= $type; ?>" data-bs-target="#kt_modal_image_manager" class="btn btn-primary me-3 select-image">
+    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-filemanager-state="false" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="<?= ucfirst(lang('Medias.changeAvatar')); ?>" data-kt-filemanager="imageManager" data-kt-filemanager-type="<?= $type; ?>" data-bs-target="#kt_modal_image_manager" class="btn btn-primary me-3 select-image">
         <i class="bi bi-pencil-fill fs-7"></i>
     </label>
 <?php } ?>

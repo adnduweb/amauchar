@@ -55,6 +55,8 @@ class AdminController extends BaseController
 
     public $breadcrumbs;
 
+    public $selectLangues = false;
+
     protected $errors = [];
 
     /**
@@ -67,7 +69,7 @@ class AdminController extends BaseController
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
-        $this->helpers = array_merge($this->helpers, ['auth', 'assets', 'setting', 'themes', 'form', 'array', 'alerts']);
+        $this->helpers = array_merge($this->helpers, ['auth', 'setting', 'assets', 'themes', 'form', 'array', 'alerts']);
 
         parent::initController($request, $response, $logger);
 
@@ -115,6 +117,8 @@ class AdminController extends BaseController
             'allow_import' => $this->allow_import,
             'type_export' => $this->type_export,
             'breadcrumbs' => $this->breadcrumbs,
+            'selectLangues' => $this->selectLangues,
+            
 
         ];
 
@@ -138,7 +142,7 @@ class AdminController extends BaseController
             'crsftoken'      => csrf_token(),
             'csrfHash'       => csrf_hash(),
             'env'            => ENVIRONMENT,
-            'SP_VERSION'     => config('Core')->version
+            'SP_VERSION'     => config('Amauchar')->version
         ];
 
         if ($this->inAdmin) {

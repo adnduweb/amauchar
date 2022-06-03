@@ -12,8 +12,6 @@ use Adnduweb\Ci4Core\Exceptions\ThumbnailsException;
 
 class MediaLangModel extends BaseModel
 {
-	//use \Tatter\Relations\Traits\ModelTrait, \Adnduweb\Ci4Core\Traits\AuditsTrait, \Adnduweb\Ci4Core\Models\BaseModel;
-	//use \Tatter\Permits\Traits\PermitsTrait;
 	use AuditsTrait;
 
 	protected $table          = 'medias_langs';
@@ -40,9 +38,6 @@ class MediaLangModel extends BaseModel
 	protected $skipValidation       = false;
 	protected $cleanValidationRules = true;
 
-
-
-
 	// Callbacks
 	protected $allowCallbacks = true;
 	protected $beforeInsert   = [];
@@ -53,5 +48,23 @@ class MediaLangModel extends BaseModel
 	protected $afterFind      = [];
 	protected $beforeDelete   = [];
 	protected $afterDelete    = ['auditDelete'];
+
+	public function updatelang($params){
+		//print_r($this->db->table('medias_langs')->insert($params)); exit;
+	
+		if($this->db->table('medias_langs')->select('media_id')->where( ['media_id' => $params['media_id'], 'lang' => $params['lang']])->get()->getRow()){
+
+			// print_r($params); exit;
+			if(!$this->db->table('medias_langs')->update($params, ['media_id' => $params['media_id'], 'lang' => $params['lang']])){
+				//print_r($this->db); exit;
+					return $this->db->errors();
+			}
+		}else{
+			if(!$this->db->table('medias_langs')->insert($params)){
+				return $this->db->errors();
+			}
+		}
+		return true;
+    }
 
 }
