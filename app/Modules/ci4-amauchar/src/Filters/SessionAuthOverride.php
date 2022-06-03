@@ -1,11 +1,13 @@
 <?php namespace Amauchar\Core\Filters;
 
 use CodeIgniter\Filters\FilterInterface;
+use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Shield\Entities\UserIdentity;
 use CodeIgniter\Shield\Models\UserIdentityModel;
+use CodeIgniter\Shield\Authentication\Authenticators\Session;
 
 /**
  * Session Authentication Filter.
@@ -49,10 +51,6 @@ class SessionAuthOverride implements FilterInterface
              if (setting('Auth.recordActiveDate')) {
                  $authenticator->recordActiveDate();
              }
-
-            if(setting('Medias.formatThumbnail') == null|| setting('Medias.formatThumbnail') == ''){
-                return redirect()->to(route_to('medias.settings'));
-            }
  
              return;
          }

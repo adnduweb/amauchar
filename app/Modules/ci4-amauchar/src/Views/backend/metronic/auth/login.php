@@ -18,7 +18,6 @@
 		<div class="w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">
 			<!--begin::Form-->
 			<?= form_open(route_to('action.login'), ['id' => 'kt_sign_in_form', 'class' => 'form w-100 fv-plugins-bootstrap5 fv-plugins-framework', 'novalidate' => 'novalidate']); ?>
-			<?= csrf_field() ?>
 				<!--begin::Heading-->
 				<div class="text-center mb-10">
 					<!--begin::Title-->
@@ -39,7 +38,7 @@
 					<label class="form-label fs-6 fw-bolder text-dark"><?= ucfirst(lang("Core.yourEmail")); ?></label>
 					<!--end::Label-->
 					<!--begin::Input-->
-					<input class="form-control form-control-lg form-control-solid" required type="text"  placeholder="<?= ucfirst(lang('Auth.emailOrUsername')) ?>" name="email" inputmode="email" autocomplete="email" autocomplete="off" value="" />
+					<input class="form-control form-control-lg form-control-solid" required type="email"  placeholder="<?= ucfirst(lang('Auth.emailOrUsername')) ?>" name="email" inputmode="email" autocomplete="email" autocomplete="off" value="" />
 					<!--end::Input-->
 				</div>
 				<!--end::Input group-->
@@ -77,7 +76,7 @@
 				<!--begin::Actions-->
 				<div class="text-center">
 					<!--begin::Submit button-->
-					<button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+					<button type="submit" id="" class="btn btn-lg btn-primary w-100 mb-5">
 						<span class="indicator-label"><?=ucfirst(lang('Core.continue'));?></span>
 						<span class="indicator-progress"><?=ucfirst(lang('Core.pleaseWait'));?>
 						<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

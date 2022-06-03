@@ -151,6 +151,66 @@ class LoginController extends ShieldLogin
     }
 
     /**
+     * Attempts to log the user in.
+     *
+     * @return Response|string
+     */
+    public function loginActionOverride()
+    {
+        /** @var IncomingRequest $request */
+        $request = service('request');
+
+        $credentials             = $request->getPost(setting('Auth.validFields'));
+        $credentials             = array_filter($credentials);
+        $credentials['password'] = $request->getPost('password');
+        $remember                = (bool) $request->getPost('remember');
+
+        $rules = [
+             'email'           => 'required|valid_email',
+             'password'         => 'required',
+        ];
+
+        if (! $this->validate($rules)) {
+            $response = ['errors' => $this->validator->getErrors()];
+            return redirect()->route('login')->withInput()->with('error',$this->validator->getErrors());
+        }
+
+        $validCreds = auth()->check($credentials); 
+
+        if (! $validCreds->isOK()) {
+            return redirect()->route('login')->withInput()->with('error', $result->reason());
+        }
+
+        if (! $validCreds->extraInfo()->active) {
+            Events::trigger('notActivatedLogin', $credentials);
+            return redirect()->route('login')->withInput()->with('error', $result->reason());
+        }
+
+        // Attempt to login
+        $result = auth('session')->remember($remember)->attempt($credentials);
+        if (! $result->isOK()) {
+            return redirect()->route('login')->withInput()->with('error', $result->reason());
+        }
+
+        $user = $result->extraInfo();
+
+        // If an action has been defined for login, start it up.
+        $actionClass = setting('Auth.actions')['login'] ?? null;
+        if (! empty($actionClass)) {
+            return redirect()->to(route_to('auth-action-show'))->withCookies();
+        }
+
+        if(session()->get('redirect_url')){
+            $redirect = session()->get('redirect_url');
+        }
+        else{
+            $redirect = config('Auth')->loginRedirect();
+        }
+
+        return redirect()->to($redirect)->withCookies();
+    }
+
+    /**
      * Logs the current user out.
      */
     public function logoutAction(): RedirectResponse

@@ -163,7 +163,7 @@ $routes->group('api', function ($routes) {
 });
 
 $routes->get('login', '\Amauchar\Core\Controllers\Auth\LoginController::loginViewOverride', ['as' => 'action.login']);
-$routes->post('login', '\Amauchar\Core\Controllers\Auth\LoginController::loginActionAjax');
+$routes->post('login', '\Amauchar\Core\Controllers\Auth\LoginController::loginActionOverride');
 $routes->get('login/gauth', '\Amauchar\Core\Controllers\Auth\LoginController::gauth', ['as' => 'action.login.gauth']);
 $routes->get('sign-up', '\Amauchar\Core\Controllers\Auth\RegisterController::registerView', ['as' => 'action.register']);
 $routes->post('sign-up', '\Amauchar\Core\Controllers\Auth\RegisterController::registerActionAjax');
