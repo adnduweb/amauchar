@@ -88,7 +88,8 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
  | found. By default, this is 'admin', which means that the admin area
  | would be found at http://localhost:8080/admin
  */
-defined('ADMIN_AREA') || define('ADMIN_AREA', getenv('ADMIN_AREA'));
+//defined('ADMIN_AREA') || define('ADMIN_AREA', getenv('ADMIN_AREA'));
+defined('ADMIN_AREA') || define('ADMIN_AREA', 'admin1117669688');
 
 /*
  | --------------------------------------------------------------------

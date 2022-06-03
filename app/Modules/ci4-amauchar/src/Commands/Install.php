@@ -270,7 +270,7 @@ class Install extends BaseCommand
         $user->createAdresseDefault();
 
         $user->addGroup('superadmin');
-
+        service('settings')->set('App.adminUrl', env('ADMIN_AREA'));
         CLI::write('Done. You can now login as a superadmin : '. env('app.baseURL') . env('ADMIN_AREA'), 'green');
     }
 

@@ -178,7 +178,7 @@ class LoginController extends ShieldLogin
         $validCreds = auth()->check($credentials); 
 
         if (! $validCreds->isOK()) {
-            return redirect()->route('login')->withInput()->with('error', $result->reason());
+            return redirect()->route('login')->withInput()->with('error',  lang('Auth.notActivated'));
         }
 
         if (! $validCreds->extraInfo()->active) {
