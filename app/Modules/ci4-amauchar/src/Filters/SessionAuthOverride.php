@@ -34,15 +34,7 @@ class SessionAuthOverride implements FilterInterface
     {
         helper(['auth', 'setting']);
 
-        if (! auth('session')->loggedIn()) {
-            session()->set('redirect_url', current_url());
-            session()->set('previous_page', service('request')->uri->getPath()); //ADN
-            return redirect()->route('login');
-        }
-
-        if (setting('Auth.recordActiveDate')) {
-            auth('session')->recordActive();
-        }
+      
 
          /** @var Session $authenticator */
          $authenticator = auth('session')->getAuthenticator();
@@ -51,9 +43,19 @@ class SessionAuthOverride implements FilterInterface
              if (setting('Auth.recordActiveDate')) {
                  $authenticator->recordActiveDate();
              }
+
+             if(setting('Medias.formatThumbnail') == ''){
+                return redirect()->to(route_to('medias.settings'));
+            }
  
              return;
          }
+
+         if (!$authenticator->loggedIn()) {
+            session()->set('redirect_url', current_url());
+            session()->set('previous_page', service('request')->uri->getPath()); //ADN
+            return redirect()->route('login');
+        }
  
          if ($authenticator->isPending()) {
              return redirect()->route('auth-action-show')

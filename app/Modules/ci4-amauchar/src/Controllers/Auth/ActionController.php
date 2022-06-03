@@ -4,7 +4,9 @@ namespace Amauchar\Core\Controllers\Auth;
 
 use App\Controllers\BaseController;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\Response;
 use CodeIgniter\Shield\Authentication\Actions\ActionInterface;
+use CodeIgniter\Shield\Authentication\Authenticators\Session;
 
 /**
  * Class ActionController
@@ -13,11 +15,7 @@ use CodeIgniter\Shield\Authentication\Actions\ActionInterface;
  */
 class ActionController extends BaseController
 {
-    /**
-     * @var ActionInterface|null
-     */
-    protected $action;
-
+    protected ?ActionInterface $action = null;
     protected $helpers = ['auth', 'setting', 'assets', 'form', 'alerts',  'themes'];
 
     /**
@@ -28,13 +26,11 @@ class ActionController extends BaseController
      */
     public function _remap($method, ...$params)
     {
-        // Grab our action instance if one has been set.
-        $actionClass = session('auth_action');
+        /** @var Session $authenticator */
+        $authenticator = auth('session')->getAuthenticator();
 
-        if (! empty($actionClass) && class_exists($actionClass)) {
-            $this->action = new $actionClass();
-        }
-        // var_dump($this->action); exit;
+        // Grab our action instance if one has been set.
+        $this->action = $authenticator->getAction();
 
         if (empty($this->action) || ! $this->action instanceof ActionInterface) {
             throw new PageNotFoundException();
