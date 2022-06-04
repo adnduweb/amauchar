@@ -48800,6 +48800,10 @@ input[type=checkbox]:indeterminate {
   opacity: 0.3;
 }
 
+.hidden {
+  display: none;
+}
+
 .form-check-input[type=checkbox]:indeterminate {
   background-color: #0d6efd;
   border-color: #0d6efd;
@@ -48807,7 +48811,7 @@ input[type=checkbox]:indeterminate {
 }
 
 .toast-top-center {
-  top: 0;
+  top: 10px;
   right: 0;
   width: 100%;
 }

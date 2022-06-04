@@ -48825,9 +48825,13 @@ body {
 }
 
 .toast-top-center {
-  top: 0;
+  top: 10px;
   right: 0;
   width: 100%;
+}
+
+.hidden {
+  display: none;
 }
 
 .toast-bottom-center {

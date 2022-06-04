@@ -72,7 +72,7 @@ var KTSigninGeneral = function() {
                             }).then(function(result) {
                                 form.querySelector('[name="email"]').value = "";
                                 form.querySelector('[name="password"]').value = "";
-                                //window.location.href = response.data.redirect;
+                                window.location.href = response.data.redirect;
                                 //location.reload();
                             });
 

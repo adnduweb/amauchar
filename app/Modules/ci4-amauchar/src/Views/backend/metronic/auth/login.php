@@ -76,7 +76,7 @@
 				<!--begin::Actions-->
 				<div class="text-center">
 					<!--begin::Submit button-->
-					<button type="submit" id="" class="btn btn-lg btn-primary w-100 mb-5">
+					<button type="submit" id="" class="kt_sign_in_submit btn btn-lg btn-primary w-100 mb-5">
 						<span class="indicator-label"><?=ucfirst(lang('Core.continue'));?></span>
 						<span class="indicator-progress"><?=ucfirst(lang('Core.pleaseWait'));?>
 						<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
