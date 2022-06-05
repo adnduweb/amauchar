@@ -5,7 +5,7 @@ if (empty(config('Medias')->routeFiles)){
 }
  
 $options = [
-    'filter'    => 'session',
+    'filter'    => 'sessionAuth',
     'namespace' => '\Amauchar\Medias\Controllers\Admin',
 ];
 

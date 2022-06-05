@@ -29,8 +29,6 @@ class Module
                 continue;
             }
 
-            
-
             if (is_dir($modules_path) . '/' . $module && $module != '.DS_Store') {
 
                 $class = '';

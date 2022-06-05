@@ -245,7 +245,10 @@
 	'displayTTC' => 'afficher les prix en TTC',
 	'notDeletePermNatif' => 'impossible de supprimer les éléments natifs',
 	'sousTitre' => 'sous titre',
-	'selectLangues' => 'selectionner votre langue'
+	'selectLangues' => 'selectionner votre langue',
+	'webSite' => 'voir le site internet',
+	'darkMode' => 'mode sombre/clair',
+	'notAuthorizedOwnAccount' => 'vous ne pas désactiver votre propore compte'
 	
 
 

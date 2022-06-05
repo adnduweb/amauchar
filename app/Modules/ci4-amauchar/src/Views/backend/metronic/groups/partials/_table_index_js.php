@@ -29,12 +29,6 @@ var KTGroupsList = function () {
             'searchDelay': 400,
             'serverMethod': 'get',
             'headers': window.axios.defaults.headers.common,
-            'language': {
-              //processing: '<i class="ace-icon fa fa-spinner fa-spin orange bigger-500" style="font-size:60px;margin-top:50px;"></i>'
-              //'processing': _LANG_.loading_wait,
-              'processing': '<div class="blockui-overlay " style="z-index: 1;"><span class="spinner-border text-primary"></span></div>',
-              'noRecords': _LANG_.no_record_found,
-            },
             'ajax': {
                 'url':current_url + "/datatable",
                 'data': {

@@ -875,5 +875,32 @@ class Data {
 
         ];
     }
+
+    public static function getAddModuleCore() {
+        return array(
+            array(
+                'id'           => 1,
+                'name'         => 'ci4 amauchar',
+                'handle'       => 'ci4-amauchar',
+                'class'        => 'Amauchar\Core',
+                'is_natif'     => 1,
+                'is_installed' => 1,
+                'active'       => 1,
+                'created_at'   => date('Y-m-d H:i:s'),
+                'updated_at'   => date('Y-m-d H:i:s'),
+            ),
+            array(
+                'id'           => 2,
+                'name'         => 'ci4 medias',
+                'handle'       => 'ci4-medias',
+                'class'        => 'Amauchar\Medias',
+                'is_natif'     => 1,
+                'is_installed' => 1,
+                'active'       => 1,
+                'created_at'   => date('Y-m-d H:i:s'),
+                'updated_at'   => date('Y-m-d H:i:s'),
+            )
+        );
+    }
     
 }

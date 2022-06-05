@@ -57,6 +57,8 @@ class AuthGroups extends BaseConfig
      */
     public array $permissions = [
         'admin.access'        => 'Can access the sites admin area',
+        'admin.account'       => 'Can access the account admin area',
+        'admin.tools'         => 'Can access the tools admin area',
         'admin.settings'      => 'Can access the main site settings',
         'groups.edit'         => 'Can edit user groups',
         'groups.settings'     => 'Can edit existing user groups',
@@ -79,6 +81,10 @@ class AuthGroups extends BaseConfig
         'logs.create'         => 'Can create the logs',
         'logs.edit'           => 'Can edit the logs',
         'logs.delete'         => 'Can delete the logs',
+        'customers.access' => 'Can view the customers',
+        'customers.create' => 'Can create the customers',
+        'customers.edit' => 'Can edit the customers',
+        'customers.delete' => 'Can delete the customers',
        
     ];
 
@@ -98,7 +104,8 @@ class AuthGroups extends BaseConfig
             'widgets.*',
             'consent.*',
             'recycler.*',
-            'logs.*'
+            'logs.*',
+            'customers.*'
         ],
         'admin' => [
             'admin.access',

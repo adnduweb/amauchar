@@ -2,6 +2,7 @@
 
 namespace Amauchar\Core\Controllers\Admin;
 
+use Amauchar\Core\View\Themeable;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -12,6 +13,8 @@ use Amauchar\Core\Libraries\Language;
 
 class AdminController extends Controller
 {
+
+    use Themeable;
 
     public $theme_admin = 'basic';
 

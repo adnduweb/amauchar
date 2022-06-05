@@ -7,7 +7,7 @@
 
 <!--begin::Toolbar wrapper-->
 <div class="d-flex align-items-stretch flex-shrink-0">
-    <?php if (class_exists('\Adnduweb\Ci4Pages\Controllers\Admin\PagesController')) { ?>
+    <?php if (class_exists('\Amauchar\Pages\Controllers\Admin\PagesController')) { ?>
         <?= $this->include('\Themes\backend\/'.service('settings')->get('App.themebo').'/\topbar\partials\_front'); ?>
     <?php } ?>
 

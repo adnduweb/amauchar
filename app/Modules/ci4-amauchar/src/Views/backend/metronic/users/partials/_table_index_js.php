@@ -27,10 +27,6 @@ var KTUserList = function () {
             'searchDelay': 400,
             'serverMethod': 'get',
             'headers': window.axios.defaults.headers.common,
-            'language': {
-              'processing': '<div class="blockui-overlay " style="z-index: 1;"><span class="spinner-border text-primary"></span></div>',
-              'noRecords': _LANG_.no_record_found,
-            },
             'ajax': {
                 'url':current_url + "/datatable",
                 'data': {

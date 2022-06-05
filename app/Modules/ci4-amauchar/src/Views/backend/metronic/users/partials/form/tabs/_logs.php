@@ -31,7 +31,7 @@
         <?php endforeach ?>
     </tbody>
 <?php else : ?>
-    <div class="alert alert-secondary">No recent audits attempts.</div>
+    <div class="alert alert-secondary"><?= ucfirst(lang('Core.NoRecentData')); ?>.</div>
 <?php endif ?>
 
 

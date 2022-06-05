@@ -80,6 +80,7 @@ return [
 
     // Permissions
     'unknownPermission' => "{0} n'est pas une autorisation valide",
+    'resourceNotAutorized' => 'Vous n\'avez pas l\'autorisation necessaire',
 
     // Too many requests
     'tooManyRequests'           => 'Trop de requêtes. Veuillez attendre {0, number} secondes.',

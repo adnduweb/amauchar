@@ -98,11 +98,13 @@ class Install extends BaseCommand
         } elseif (CLI::getOption('continue')) {
             $this->migrate();
             $this->setSettings();
+            $this->addModule();
             $this->createCompany();
             $this->createUser();
         } elseif (CLI::getOption('create-company')) {
             $this->migrate();
             $this->setSettings();
+             $this->addModule();
             $this->createCompany();
         }
 
@@ -237,6 +239,22 @@ class Install extends BaseCommand
     {
         command('migrate --all');
         CLI::newLine();
+    }
+
+    private function addModule(){
+
+        CLI::write('Create initial module', 'yellow');
+
+        foreach (Data::getAddModuleCore() as $row) {
+            $moduleRow = db_connect()->table('modules')->where('name', $row['name'])->get()->getRow();
+
+            if (empty($moduleRow)) {
+                // No company type - add the row
+                db_connect()->table('modules')->insert($row);
+            }
+        }
+        
+        CLI::write('Done module.', 'green');
     }
 
     private function createUser()

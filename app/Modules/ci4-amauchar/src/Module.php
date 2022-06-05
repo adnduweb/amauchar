@@ -32,35 +32,35 @@ class Module extends BaseModule
             'group'      => 'account',
             'namedRoute' => '#',
             'IconSvg'    => ["icons/duotune/general/gen051.svg", "svg-icon"],
-            'permission' => 'admin.settings',
+            'permission' => 'admin.account',
             'children'   => [
                 [
                     'title'      => 'Core.users',
                     'group'      => 'account',
                     'namedRoute' => 'users.index',
                     'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
-                    'permission' => 'admin.settings',
+                    'permission' => 'admin.account',
                 ],
                 [
                     'title'      => 'Core.company',
                     'group'      => 'account',
                     'namedRoute' => 'companies.index',
                     'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
-                    'permission' => 'admin.settings',
+                    'permission' => 'admin.account',
                 ],
                 [
                     'title'      => 'Core.permissions',
                     'group'      => 'account',
                     'namedRoute' => 'permissions.index',
                     'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
-                    'permission' => 'admin.settings',
+                    'permission' => 'admin.account',
                 ],
                 [
                     'title'      => 'Core.roles',
                     'group'      => 'account',
                     'namedRoute' => 'groups.index',
                     'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
-                    'permission' => 'admin.settings',
+                    'permission' => 'admin.account',
                 ],
             ]
         ]];
@@ -81,35 +81,35 @@ class Module extends BaseModule
             'group'      => 'tools',
             'namedRoute' => '#',
             'IconSvg'    => ["icons/duotune/general/gen019.svg", "svg-icon"],
-            'permission' => 'admin.settings',
+            'permission' => 'admin.tools',
             'children'   => [
                 [
                     'title'      => 'Core.logs',
                     'group'      => 'tools',
                     'namedRoute' => 'logs.index',
                     'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
-                    'permission' => 'admin.settings',
+                    'permission' => 'admin.tools',
                 ],
                 [
                     'title'      => 'Core.informations',
                     'group'      => 'account',
                     'namedRoute' => 'informations.index',
                     'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
-                    'permission' => 'admin.settings',
+                    'permission' => 'admin.tools',
                 ],
                 [
                     'title'      => 'Core.translates',
                     'group'      => 'account',
                     'namedRoute' => 'translates.index',
                     'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
-                    'permission' => 'admin.settings',
+                    'permission' => 'admin.tools',
                 ],
                 [
                     'title'      => 'Core.blocnotes',
                     'group'      => 'account',
                     'namedRoute' => 'blocsnotes.index',
                     'IconSvg'    => ["icons/duotone/Design/PenAndRuller.svg", "svg-icon"],
-                    'permission' => 'admin.settings',
+                    'permission' => 'admin.tools',
                 ],
             ]
         ]];

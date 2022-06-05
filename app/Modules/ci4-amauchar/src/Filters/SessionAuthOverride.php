@@ -40,18 +40,21 @@ class SessionAuthOverride implements FilterInterface
 
          /** @var Session $authenticator */
          $authenticator = auth('session')->getAuthenticator();
-
          if ($authenticator->loggedIn()) {
              if (setting('Auth.recordActiveDate')) {
                  $authenticator->recordActiveDate();
              }
 
-             if(setting('Medias.formatThumbnail') == ''){
-                return redirect()->to(route_to('medias.settings'));
+            if(setting('Medias.formatThumbnail') == ''){
+                if (!in_array((string)$current, [route_to('medias.settings')])){
+                    return redirect()->to(route_to('medias.settings'));
+                }
             }
  
              return;
          }
+
+
 
          if (!$authenticator->loggedIn()) {
             if (!in_array((string)$current, [route_to('action.logout')])){
