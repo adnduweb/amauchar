@@ -29,6 +29,7 @@
                         <!--end::Link-->
                     </div>
                     <!--end::Heading-->
+                    <?php if (setting('App.activeGoogle') == true){ ?>
                     <!--begin::Action-->
                     <button type="button" class="btn btn-light-primary fw-bolder w-100 mb-10">
                     <img alt="Logo" src="<?= theme()->getMediaUrl('svg/brand-logos/google-icon.svg'); ?>" class="h-20px me-3">Sign in with Google</button>
@@ -40,6 +41,7 @@
                         <div class="border-bottom border-gray-300 mw-50 w-100"></div>
                     </div>
                     <!--end::Separator-->
+                    <?php } ?>
                     <!--begin::Input group-->
                     <div class="fv-row mb-7 fv-plugins-icon-container">
                         <label class="form-label fw-bolder text-dark fs-6"><?= lang('Auth.username') ?></label>

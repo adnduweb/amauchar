@@ -192,12 +192,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/shield.git",
-                "reference": "c66012f887d9e9ab14183472b162114f48ad4561"
+                "reference": "a4af434627e11dda1a08cf36a10c9262f5bd6f99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/c66012f887d9e9ab14183472b162114f48ad4561",
-                "reference": "c66012f887d9e9ab14183472b162114f48ad4561",
+                "url": "https://api.github.com/repos/codeigniter4/shield/zipball/a4af434627e11dda1a08cf36a10c9262f5bd6f99",
+                "reference": "a4af434627e11dda1a08cf36a10c9262f5bd6f99",
                 "shasum": ""
             },
             "require": {
@@ -243,9 +243,9 @@
             ],
             "support": {
                 "issues": "https://github.com/codeigniter4/shield/issues",
-                "source": "https://github.com/codeigniter4/shield/tree/v1.0.0-beta"
+                "source": "https://github.com/codeigniter4/shield/tree/develop"
             },
-            "time": "2022-06-03T03:40:05+00:00"
+            "time": "2022-06-05T01:02:54+00:00"
         },
         {
             "name": "codeigniter4/tasks",

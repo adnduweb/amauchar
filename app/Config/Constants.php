@@ -77,27 +77,3 @@ defined('EXIT_USER_INPUT')     || define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
-
-
-/*
- | --------------------------------------------------------------------
- | Login Hidden
- | --------------------------------------------------------------------
- |
- | Defines the base path of the URL where Amauchar's admin area can be
- | found. By default, this is 'admin', which means that the admin area
- | would be found at http://localhost:8080/admin
- */
-//defined('ADMIN_AREA') || define('ADMIN_AREA', getenv('ADMIN_AREA'));
-defined('ADMIN_AREA') || define('ADMIN_AREA', 'admin1117669688');
-
-/*
- | --------------------------------------------------------------------
- | App Namespace
- | --------------------------------------------------------------------
- |
- | Defines the base path of the URL where Amauchar's admin area can be
- | found. By default, this is 'admin', which means that the admin area
- | would be found at http://localhost:8080/admin
- */
-defined('ADMIN_THEME') || define('ADMIN_THEME', 'metronic');

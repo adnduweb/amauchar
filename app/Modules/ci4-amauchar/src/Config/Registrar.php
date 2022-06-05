@@ -9,6 +9,7 @@ use Amauchar\Core\Filters\CorsFilter;
 use Amauchar\Core\Filters\ThrottleFilter;
 use Amauchar\Core\Filters\AlertsFilter;
 
+include_once __DIR__ .'/Constants.php';
 
 class Registrar
 {

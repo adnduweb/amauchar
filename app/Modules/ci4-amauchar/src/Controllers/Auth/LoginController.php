@@ -210,7 +210,7 @@ class LoginController extends ShieldLogin
         return redirect()->to($redirect)->withCookies();
     }
 
-    /** 
+    /**
      * Logs the current user out.
      */
     public function logoutAction(): RedirectResponse

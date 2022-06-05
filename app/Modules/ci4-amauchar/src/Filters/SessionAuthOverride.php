@@ -16,6 +16,8 @@ use CodeIgniter\Shield\Authentication\Authenticators\Session;
  */
 class SessionAuthOverride implements FilterInterface
 {
+
+
     /**
      * Do whatever processing this filter needs to do.
      * By default it should not return anything during
@@ -34,7 +36,7 @@ class SessionAuthOverride implements FilterInterface
     {
         helper(['auth', 'setting']);
 
-      
+        $current = (string)current_url(true)->setHost('')->setScheme('')->stripQuery('token');
 
          /** @var Session $authenticator */
          $authenticator = auth('session')->getAuthenticator();
@@ -52,8 +54,10 @@ class SessionAuthOverride implements FilterInterface
          }
 
          if (!$authenticator->loggedIn()) {
-            session()->set('redirect_url', current_url());
-            session()->set('previous_page', service('request')->uri->getPath()); //ADN
+            if (!in_array((string)$current, [route_to('action.logout')])){
+                session()->set('redirect_url', current_url());
+                session()->set('previous_page', service('request')->uri->getPath()); //ADN
+            }
             return redirect()->route('login');
         }
  

@@ -2,13 +2,15 @@
 
 namespace Amauchar\Core\Controllers\Admin;
 
-use Amauchar\Core\Libraries\Language;
-use App\Controllers\BaseController;
+use CodeIgniter\Controller;
+use CodeIgniter\HTTP\CLIRequest;
+use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use Amauchar\Core\Libraries\Language;
 
-class AdminController extends BaseController
+class AdminController extends Controller
 {
 
     public $theme_admin = 'basic';
