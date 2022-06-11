@@ -121,9 +121,13 @@ class MenuItem
      *
      * @return $this
      */
-    public function setNamedRoute(string $name)
+    public function setNamedRoute(mixed $name)
     {
-        $this->url = route_to($name);
+        if(is_array($name)){
+            $this->url = route_to($name[0], $name[1]);
+        }else{
+            $this->url = route_to($name);
+        }
 
         return $this;
     }

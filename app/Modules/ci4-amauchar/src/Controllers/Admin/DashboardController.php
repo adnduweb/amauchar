@@ -16,7 +16,7 @@ class DashboardController extends AdminController
      */
     public function indexView()
     {
-
+        
         //print_r($this->viewData); exit;
         //print_r(setting('Amauchar.views')); exit;
          echo view(setting('Amauchar.views')['dashboard'], $this->viewData);

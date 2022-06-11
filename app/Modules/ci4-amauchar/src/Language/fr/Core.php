@@ -24,6 +24,8 @@
 	'resourcesDeleted' => 'Les éléments ont bien été supprimés',	
 	'edit' => 'Modification',
 	'active' => 'statut',
+	'activer' => 'activer',
+	'desactiver' => 'desactiver',
 	'edit: %s' => 'Modification : {0}',
 	'list: %s' => 'Liste des {0}',
 	'Exporter: %s' =>  'Exporter : {0}',
@@ -244,11 +246,14 @@
 	'ape' => 'ape',
 	'displayTTC' => 'afficher les prix en TTC',
 	'notDeletePermNatif' => 'impossible de supprimer les éléments natifs',
+	'notDeleteItemsExist' => 'impossible de supprimer des éléments sont rattachés',
 	'sousTitre' => 'sous titre',
 	'selectLangues' => 'selectionner votre langue',
 	'webSite' => 'voir le site internet',
 	'darkMode' => 'mode sombre/clair',
-	'notAuthorizedOwnAccount' => 'vous ne pas désactiver votre propore compte'
+	'notAuthorizedOwnAccount' => 'vous ne pas désactiver votre propore compte',
+	'syncMatrix' => 'synchroniser les permissions globales',
+	'slug' => 'url',
 	
 
 

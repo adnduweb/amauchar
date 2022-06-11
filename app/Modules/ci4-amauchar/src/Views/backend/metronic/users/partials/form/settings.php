@@ -76,6 +76,17 @@
         </div>
         <?php endif ?>
 
+        <div class="form-group form-group-sm row mb-6 ">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.syncMatrix')); ?></label>
+            <div class="col-lg-8">
+                <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                    <input type="checkbox" class="form-check-input" name="syncMatrix" value="1"> 
+                    <label class="form-check-label" for="flexCheckDefault"></label>
+                </div>
+            </div>
+        </div>
+
+
         <?php if (!empty($form->id)) { ?> <?= form_hidden('_id', $form->_id); ?> <?php } ?>
 
 

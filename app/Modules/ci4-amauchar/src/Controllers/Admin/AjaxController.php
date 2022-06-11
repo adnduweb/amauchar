@@ -33,7 +33,7 @@ class AjaxController extends AdminController
                 $response, 
                 view('Amauchar\Core\emails\backend\sendMailAccountManager', ['response' => $response])
             ) == true){
-                $response = ['success' => lang('Core.resourcesSaved')];
+                $response = ['messages' => ['success' => lang('Core.resourcesSaved')]];
                 return $this->respond($response, ResponseInterface::HTTP_OK);
             }
 

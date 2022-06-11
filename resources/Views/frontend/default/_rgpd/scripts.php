@@ -1,6 +1,6 @@
 <script>
     tarteaucitron.init({
-        "privacyUrl": "<?= (service('settings')->get('Pages.consent', 'urlConsent_'.service('request')->getLocale())) ?  service('settings')->get('Pages.consent', 'urlConsent_'.service('request')->getLocale()) : "" ; ?>", /* URL de la page de la politique de vie privée */
+        "privacyUrl": "<?= (service('settings')->get('Consent.consent', 'urlConsent_'.service('request')->getLocale())) ?  service('settings')->get('Consent.consent', 'urlConsent_'.service('request')->getLocale()) : "" ; ?>", /* URL de la page de la politique de vie privée */
 
         "hashtag": "#tarteaucitron", /* Ouvrir le panneau contenant ce hashtag */
         "cookieName": "tarteaucitron", /* Nom du Cookie */
@@ -41,13 +41,13 @@
     };
 
     //Services
-    <?php if(!empty(service('settings')->get('App.core', 'tagManager'))){ ?>
+    <?php if(!empty(service('settings')->get('Consent.tagManager'))){ ?>
         tarteaucitron.user.gtagUa = 'UA-XXXXXXXX-X';
         tarteaucitron.user.gtagMore = function () { /* add here your optionnal gtag() */ };
         (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
     <?php } ?>
 
-     <?php if(!empty(service('settings')->get('App.core', 'googleAnalitycs_'.service('request')->getLocale()))){ ?>
+     <?php if(!empty(service('settings')->get('Consent.googleAnalitycs_'.service('request')->getLocale() ))){ ?>
         (tarteaucitron.job = tarteaucitron.job || []).push('analitycs');
 
         tarteaucitron.services.analytics = {
@@ -72,7 +72,7 @@
         }
     <?php } ?>
 
-    <?php if(!empty(service('settings')->get('App.core', 'googleMaps'))){ ?>
+    <?php if(!empty(service('settings')->get('Consent.googleMaps'))){ ?>
         (tarteaucitron.job = tarteaucitron.job || []).push('googlemaps');
 
         tarteaucitron.services.googlemaps = {
@@ -108,7 +108,7 @@
             var script_callback = "";
             var script = document.createElement( "script" );
             script.setAttribute("type", "text/javascript");
-            script.setAttribute("src" , 'https://maps.google.com/maps/api/js?key=<?= service('settings')->get('App.core', 'googleMaps'); ?>&libraries=places&callback=initMap');
+            script.setAttribute("src" , 'https://maps.google.com/maps/api/js?key=<?= service('settings')->get('Consent.googleMaps'); ?>&libraries=places&callback=initMap');
             script.setAttribute('async','');
             script.setAttribute('defer','');
             $("script#rgpd_script_maps").replaceWith(script); 
@@ -116,7 +116,7 @@
                         
     <?php } ?>
 
-    <?php if(service('settings')->get('App.rgpd', 'rgpdYoutube') == 1){ ?>
+    <?php if(service('settings')->get('Consent.rgpdYoutube') == 1){ ?>
         (tarteaucitron.job = tarteaucitron.job || []).push('youtube');
 
         tarteaucitron.services.youtube = {
@@ -139,7 +139,7 @@
         }
     <?php } ?>
 
-    <?php if(service('settings')->get('App.rgpd', 'rgpdDaylimotion') == 1){ ?>
+    <?php if(service('settings')->get('Consent.rgpdDaylimotion') == 1){ ?>
         (tarteaucitron.job = tarteaucitron.job || []).push('daylimotion');
 
         tarteaucitron.services.daylimotion = {
@@ -162,7 +162,7 @@
         }
     <?php } ?>
 
-    <?php if(service('settings')->get('App.rgpd', 'rgpdVimeo') == 1){ ?>
+    <?php if(service('settings')->get('Consent.rgpdVimeo') == 1){ ?>
         (tarteaucitron.job = tarteaucitron.job || []).push('vimaeo');
 
         tarteaucitron.services.vimaeo = {
@@ -186,7 +186,7 @@
     <?php } ?>
 
 
-    <?php if(service('settings')->get('App.rgpd', 'rgpdFacebook') == 1){ ?>
+    <?php if(service('settings')->get('Consent.rgpdFacebook') == 1){ ?>
         (tarteaucitron.job = tarteaucitron.job || []).push('facebook');
 
         tarteaucitron.services.facebook = {

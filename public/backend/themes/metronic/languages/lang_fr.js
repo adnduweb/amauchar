@@ -165,6 +165,7 @@ var _LANG_ = {
     "sorryLooksLikeThereArSomeErrorsDetectedPleaseTryAgain": "Désolé, il semble qu'il y ait des erreurs détectées, veuillez réessayer.",
     "Ok": "Ok",
     "GroupIsRequired": "Le röle est requis",
-    "close": "fermer"
+    "close": "fermer",
+    "formatIsRequired": "Le format est requis"
 
 }

@@ -24,6 +24,7 @@ class AlertsFilter implements FilterInterface
         // Gather alerts from the Session
         $session = service('session');
         $alerts  = [];
+       
 
         foreach ($config->classes as $key => $class) {
             $content = session($key);
@@ -39,6 +40,8 @@ class AlertsFilter implements FilterInterface
                 $alerts[] = [$class, $content];
             }
         }
+
+        //print_r($alerts); exit;
 
         return $alerts;
     }

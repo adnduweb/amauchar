@@ -126,3 +126,93 @@
 </div>
 
 
+<?= form_open('', ['id' => 'kt_' . strtolower($name) . '_form', 'class' => 'kt-form', 'novalidate' => false]); ?>
+<input type="hidden" name="action" value="edit" />
+
+<div class="card mb-5 mb-xl-10">
+    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bolder m-0"><?= ucfirst(lang('Core.listAnalytics')); ?></h3>
+        </div>
+        <!--end::Card title-->
+    </div>
+
+    <div class="card-body border-top p-9">
+
+       
+    <div class="row mb-10">
+        <label for="tagManager" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.tagManager')); ?>* : </label>
+        <div class="col-lg-8">
+            <input class="form-control form-control-solid" type="text" value="<?= old('tagManager') ? old('tagManager') : service('settings')->get('Consent.tagManager'); ?>" name="tagManager" id="tagManagercode">
+        </div>
+    </div>
+
+    <div class="row mb-10">
+        <label for="googleAnalitycs" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.googleAnalitycsCode')); ?>* : </label>
+            <div class="col-lg-8">
+            <input class="form-control form-control-solid" type="text" value="<?= old('googleAnalitycs') ? old('googleAnalitycs') : service('settings')->get('Consent.googleAnalitycs'); ?>" name="googleAnalitycs" id="consent-googleAnalitycs" id="googleAnalitycs">
+        </div>
+    </div>
+
+
+    <div class="row mb-10">
+        <label for="google_maps" class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.googleMaps')); ?>* : </label>
+        <div class="col-lg-8">
+            <input class="form-control form-control-solid" type="text" value="<?= old('googleMaps') ? old('googleMaps') : service('settings')->get('Consent.googleMaps'); ?>" name="googleMaps" id="googleMaps">
+        </div>
+    </div>
+
+    <div class="kt-separator kt-separator--border-dashed kt-separator--portlet-fit kt-separator--space-lg"></div>
+
+    <div class="row mb-10">
+        <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.rgpdYoutube')); ?></label>
+        <div class="col-lg-8">
+            <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                    <input class="form-check-input" type="checkbox"  <?= service('settings')->get('Consent.rgpdYoutube') == true ? 'checked="checked"' : ''; ?> name="rgpd[rgpdYoutube]" value="1">
+                    <label class="form-check-label" for="flexCheckDefault"></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-10">
+        <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.rgpdFacebook')); ?></label>
+        <div class="col-lg-8">
+            <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                    <input class="form-check-input" type="checkbox" <?= service('settings')->get('Consent.rgpdFacebook') == true ? 'checked="checked"' : ''; ?> name="rgpd[rgpdFacebook]" value="1">
+                    <label class="form-check-label" for="flexCheckDefault"></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-10">
+        <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.rgpdTwitter')); ?></label>
+        <div class="col-lg-8">
+            <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                    <input class="form-check-input" type="checkbox" <?= service('settings')->get('Consent.rgpdTwitter') == true ? 'checked="checked"' : ''; ?> name="rgpd[rgpdTwitter]" value="1">
+                    <label class="form-check-label" for="flexCheckDefault"></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-10">
+        <label class="col-lg-4 col-form-label required fw-bold fs-6"><?= ucfirst(lang('Core.rgpdStoreCookieConsent')); ?></label>
+        <div class="col-lg-8">
+            <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                    <input class="form-check-input" type="checkbox" <?= service('settings')->get('Consent.rgpdStoreCookieConsent') == true ? 'checked="checked"' : ''; ?> name="rgpd[rgpdStoreCookieConsent]" value="1">
+                    <label class="form-check-label" for="flexCheckDefault"></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer d-flex justify-content-end py-6 px-9">
+        <x-form-action-footer type="<?= strtolower($name); ?>"></x-form-action-footer>
+    </div>
+
+    </div>
+
+</div>
+
+
+
+

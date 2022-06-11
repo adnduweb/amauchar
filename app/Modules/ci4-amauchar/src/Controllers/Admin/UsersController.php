@@ -756,6 +756,11 @@ class UsersController extends AdminController
          setting('App.aclientID', $this->request->getPost('aclientID'));
          setting('App.asecretID', $this->request->getPost('asecretID'));
 
+         if($this->request->getPost('syncMatrix')){
+            $matrix                     = Config('AuthGroups')->matrix;
+            setting('AuthGroups.matrix', $matrix);
+         }
+
         $response = [
             'error'    => null,
             'messages' => [

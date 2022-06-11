@@ -4,6 +4,7 @@ namespace Amauchar\Core\Config;
 
 
 use Amauchar\Core\Validation\ExpressRules as ExpressRules;
+use Amauchar\Core\Collectors\Alerts;
 use Amauchar\Core\Filters\SessionAuthOverride;
 use Amauchar\Core\Filters\CorsFilter;
 use Amauchar\Core\Filters\ThrottleFilter;
@@ -49,6 +50,15 @@ class Registrar
         return [
             'ruleSets' => [
                 ExpressRules::class,
+            ],
+        ];
+    }
+
+    public static function Toolbar(): array
+    {
+        return [
+            'collectors' => [
+                Alerts::class,
             ],
         ];
     }

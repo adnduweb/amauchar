@@ -336,6 +336,14 @@ class SettingsController extends AdminController
         setting('Consent.consentMessage', $this->request->getPost('consentMessage'));
         setting('Consent.consents', $this->request->getPost('consents'));
 
+        setting('Consent.tagManager', $this->request->getPost('tagManager') ?? false);
+        setting('Consent.googleAnalitycs', $this->request->getPost('googleAnalitycs') ?? false);
+        setting('Consent.googleMaps', $this->request->getPost('googleMaps') ?? false);
+        setting('Consent.rgpdYoutube', $this->request->getPost('rgpdYoutube') ?? false);
+        setting('Consent.rgpdFacebook', $this->request->getPost('rgpdFacebook') ?? false);
+        setting('Consent.rgpdTwitter', $this->request->getPost('rgpdTwitter') ?? false);
+        setting('Consent.rgpdStoreCookieConsent', $this->request->getPost('rgpdStoreCookieConsent') ?? false);
+
         $response = [
             'error'    => null,
             'messages' => [
